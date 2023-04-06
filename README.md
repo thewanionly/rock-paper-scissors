@@ -6,7 +6,10 @@ Here are the technologies used for this application:
 
 1. React
 2. TypeScript
-3. Vite
+3. styled-components
+4. Vite
+5. Jest
+6. React Testing Library
 
 ## Running the app
 
