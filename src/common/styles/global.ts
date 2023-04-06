@@ -11,5 +11,9 @@ export const GlobalStyles = createGlobalStyle`
 
   html {
     box-sizing: border-box;
+
+    & * {
+      font-family: 'Barlow Semi Condensed', sans-serif;
+    }
   }
 `
