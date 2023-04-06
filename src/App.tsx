@@ -5,6 +5,7 @@ const S = {
   App: styled.main`
     display: flex;
     justify-content: center;
+    /* background-color: ${({ theme: { colors } }) => colors.primary}; */
   `,
 }
 
