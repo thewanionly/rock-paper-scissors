@@ -11,9 +11,12 @@ export const GlobalStyles = createGlobalStyle`
 
   html {
     box-sizing: border-box;
+    font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
 
     & * {
-      font-family: 'Barlow Semi Condensed', sans-serif;
+      font-family: ${({ theme: { fonts } }) => fonts.primary};
+      font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
+      font-weight: ${({ theme: { fontWeights } }) => fontWeights.semiBold};
     }
   }
 `
