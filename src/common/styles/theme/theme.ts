@@ -1,4 +1,4 @@
-import { COLORS, TYPOGRAPHY } from 'common/styles/variables'
+import { BREAKPOINTS, COLORS, TYPOGRAPHY } from 'common/styles/variables'
 
 export const theme = {
   colors: {
@@ -25,5 +25,12 @@ export const theme = {
   fontWeights: {
     semiBold: TYPOGRAPHY.fontWeightSemiBold,
     bold: TYPOGRAPHY.fontWeightBold,
+  },
+  breakPoints: {
+    mobile: BREAKPOINTS.mobile,
+    tabletPortrait: BREAKPOINTS.tabletPortrait,
+    tabletLandscape: BREAKPOINTS.tabletLandscape,
+    desktop: BREAKPOINTS.desktop,
+    desktopLarge: BREAKPOINTS.desktopLarge,
   },
 }

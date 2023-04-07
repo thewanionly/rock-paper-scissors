@@ -25,5 +25,12 @@ declare module 'styled-components' {
       semiBold: number
       bold: number
     }
+    breakPoints: {
+      mobile: string
+      tabletPortrait: string
+      tabletLandscape: string
+      desktop: string
+      desktopLarge: string
+    }
   }
 }
