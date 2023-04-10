@@ -1,4 +1,4 @@
-import { BREAKPOINTS, COLORS, TYPOGRAPHY } from 'common/styles/variables'
+import { BREAKPOINTS, COLORS, TYPOGRAPHY } from 'styles/variables'
 
 export const theme = {
   colors: {
