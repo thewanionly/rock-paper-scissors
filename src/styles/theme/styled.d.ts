@@ -3,8 +3,9 @@ import 'styled-components'
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
-      primary: string
-      primaryLight: string
+      bgPrimary: string
+      bgPrimaryLight: string
+      textPrimary: string
     }
     fonts: {
       primary: string

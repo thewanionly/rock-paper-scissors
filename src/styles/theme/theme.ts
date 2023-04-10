@@ -2,9 +2,10 @@ import { BREAKPOINTS, COLORS, TYPOGRAPHY } from 'styles/variables'
 
 export const theme = {
   colors: {
-    primary: COLORS.haiti,
-    primaryLight: COLORS.nileBlue,
+    bgPrimary: COLORS.haiti,
+    bgPrimaryLight: COLORS.nileBlue,
 
+    textPrimary: COLORS.white,
     // TODO: Add more colors here
   },
   fonts: {

@@ -10,6 +10,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   html {
+    background: ${({ theme: { colors } }) =>
+      `radial-gradient(134.34% 134.34% at 50% 0%, ${colors.bgPrimaryLight} 0%, ${colors.bgPrimary} 100%)`};
+    background-attachment: fixed;
+    color: ${({ theme: { colors } }) => colors.textPrimary};
     box-sizing: border-box;
     font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
 
