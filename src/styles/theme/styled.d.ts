@@ -7,7 +7,11 @@ declare module 'styled-components' {
       bgPrimaryLight: string
       textPrimary: string
       headerBorder: string
-      headerTextShadow: string
+      boxShadowPrimary: string
+      scoreCardBg: string
+      scoreCardBgLight: string
+      scoreLabelText: string
+      scoreValueText: string
     }
     fonts: {
       primary: string

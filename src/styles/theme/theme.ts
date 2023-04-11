@@ -9,7 +9,12 @@ export const theme = {
     textPrimary: COLORS.white,
     headerBorder: rgba(COLORS.white, 0.289199),
 
-    headerTextShadow: rgba(COLORS.black, 0.196),
+    boxShadowPrimary: rgba(COLORS.black, 0.196706),
+
+    scoreCardBg: COLORS.aquaHaze,
+    scoreCardBgLight: COLORS.white,
+    scoreLabelText: COLORS.ceruleanBlue,
+    scoreValueText: COLORS.davyGrey,
     // TODO: Add more colors here
   },
   fonts: {

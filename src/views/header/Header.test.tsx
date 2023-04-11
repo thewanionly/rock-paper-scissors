@@ -11,4 +11,20 @@ describe('Header', () => {
     expect(headingText).toBeInTheDocument()
     expect(headingText).toHaveTextContent(/rock paper scissors/i)
   })
+
+  it('displays Score label', () => {
+    render(<Header />)
+
+    const scoreLabel = screen.getByText(/score/i)
+
+    expect(scoreLabel).toBeInTheDocument()
+  })
+
+  it('displays Score value', () => {
+    render(<Header />)
+
+    const scoreValue = screen.getByTestId('score-value')
+
+    expect(scoreValue.textContent).toBe('0')
+  })
 })
