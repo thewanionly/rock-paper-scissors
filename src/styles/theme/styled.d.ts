@@ -6,6 +6,8 @@ declare module 'styled-components' {
       bgPrimary: string
       bgPrimaryLight: string
       textPrimary: string
+      headerBorder: string
+      headerTextShadow: string
     }
     fonts: {
       primary: string

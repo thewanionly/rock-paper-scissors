@@ -1,3 +1,4 @@
+import { rgba } from 'polished'
 import { BREAKPOINTS, COLORS, TYPOGRAPHY } from 'styles/variables'
 
 export const theme = {
@@ -6,6 +7,9 @@ export const theme = {
     bgPrimaryLight: COLORS.nileBlue,
 
     textPrimary: COLORS.white,
+    headerBorder: rgba(COLORS.white, 0.289199),
+
+    headerTextShadow: rgba(COLORS.black, 0.196),
     // TODO: Add more colors here
   },
   fonts: {

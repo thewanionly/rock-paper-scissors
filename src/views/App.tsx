@@ -1,6 +1,8 @@
 import type { ReactElement } from 'react'
 import styled from 'styled-components'
 
+import { Header } from 'views/header'
+
 const S = {
   App: styled.main`
     display: flex;
@@ -11,7 +13,7 @@ const S = {
 const App = (): ReactElement => {
   return (
     <S.App>
-      <h1>Rock Paper Scissors</h1>
+      <Header />
     </S.App>
   )
 }
