@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 import styled from 'styled-components'
 
-import { Header } from 'views/header'
+import { Header } from 'views/Header'
 
 const S = {
   App: styled.main`
