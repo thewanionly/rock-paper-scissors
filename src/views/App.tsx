@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Header } from 'views/Header'
 
 const S = {
-  App: styled.main`
+  App: styled.div`
     display: flex;
     justify-content: center;
   `,
