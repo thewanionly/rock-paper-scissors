@@ -12,14 +12,18 @@ declare module 'styled-components' {
       scoreCardBgLight: string
       scoreLabelText: string
       scoreValueText: string
+      optionChipOuterCircleOverlay1: string
+      optionChipOuterCircleOverlay2: string
       optionChipInnerCircleShadow: string
       optionChipInnerCircleBg1: string
       optionChipInnerCircleBg2: string
+      optionChipIcon: string
+      rockChipShadow: string
+      rockChipBg: string
       paperChipShadow: string
       paperChipBg: string
-      paperChipBgOverlay1: string
-      paperChipBgOverlay2: string
-      optionIcon: string
+      scissorsChipShadow: string
+      scissorsChipBg: string
     }
     fonts: {
       primary: string

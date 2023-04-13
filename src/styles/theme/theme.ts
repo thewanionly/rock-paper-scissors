@@ -16,16 +16,21 @@ export const theme = {
     scoreLabelText: COLORS.ceruleanBlue,
     scoreValueText: COLORS.davyGrey,
 
+    optionChipOuterCircleOverlay1: rgba(COLORS.white, 0.0966455),
+    optionChipOuterCircleOverlay2: rgba(COLORS.white, 0.0001),
     optionChipInnerCircleShadow: COLORS.blueHaze,
     optionChipInnerCircleBg1: COLORS.aquaHaze,
     optionChipInnerCircleBg2: COLORS.lightGrey,
+    optionChipIcon: COLORS.gunPowder,
+
+    rockChipShadow: COLORS.vividBurgundy,
+    rockChipBg: COLORS.amaranth,
 
     paperChipShadow: COLORS.ceruleanBlue,
     paperChipBg: COLORS.ultramarineBlue,
-    paperChipBgOverlay1: rgba(COLORS.white, 0.0966455),
-    paperChipBgOverlay2: rgba(COLORS.white, 0.0001),
 
-    optionIcon: COLORS.gunPowder,
+    scissorsChipShadow: COLORS.cocoaBrown,
+    scissorsChipBg: COLORS.schoolBusYellow,
     // TODO: Add more colors here
   },
   fonts: {

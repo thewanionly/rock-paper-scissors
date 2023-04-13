@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { DefaultTheme, css } from 'styled-components'
 
 import { Icon, IconName } from 'components/Icon'
 import { Option } from 'types'
@@ -12,6 +12,19 @@ const outerCircle = css`
   border-radius: 50%;
 `
 
+const outerCircleBg = (theme: DefaultTheme, option: Option, isShadow?: boolean) =>
+  ({
+    [Option.Paper]: css`
+      background-color: ${isShadow ? theme.colors.paperChipShadow : theme.colors.paperChipBg};
+    `,
+    [Option.Rock]: css`
+      background-color: ${isShadow ? theme.colors.rockChipShadow : theme.colors.rockChipBg};
+    `,
+    [Option.Scissors]: css`
+      background-color: ${isShadow ? theme.colors.scissorsChipShadow : theme.colors.scissorsChipBg};
+    `,
+  }[option])
+
 const S = {
   OptionChip: styled.div`
     width: 13rem;
@@ -22,21 +35,23 @@ const S = {
     justify-content: center;
     align-items: center;
   `,
-  OptionChipOuterCircleShadow: styled.span`
+  OptionChipOuterCircleShadow: styled.span<OptionChipOuterCircleProps>`
     ${outerCircle}
-    background-color: ${({ theme: { colors } }) => colors.paperChipShadow};
+
     box-shadow: 0px 3px 3px ${({ theme: { colors } }) => colors.boxShadowPrimary};
+    ${({ theme, option }) => outerCircleBg(theme, option, true)}
   `,
-  OptionChipOuterCircle: styled.span`
+  OptionChipOuterCircle: styled.span<OptionChipOuterCircleProps>`
     ${outerCircle}
+
     height: 95%;
-    background-color: ${({ theme: { colors } }) => colors.paperChipBg};
+    ${({ theme, option }) => outerCircleBg(theme, option)}
   `,
   OptionChipOuterCircleOverlay: styled.span`
     ${outerCircle}
     height: 95%;
     background: ${({ theme: { colors } }) =>
-      `linear-gradient(180deg, ${colors.paperChipBgOverlay1} 0%, ${colors.paperChipBgOverlay2} 100%)`};
+      `linear-gradient(180deg, ${colors.optionChipOuterCircleOverlay1} 0%, ${colors.optionChipOuterCircleOverlay2} 100%)`};
   `,
   OptionChipInnerCircle: styled.span`
     z-index: 1;
@@ -52,7 +67,7 @@ const S = {
       ${({ theme: { colors } }) => colors.optionChipInnerCircleShadow};
   `,
   OptionChipIcon: styled(Icon)`
-    color: ${({ theme: { colors } }) => colors.optionIcon};
+    color: ${({ theme: { colors } }) => colors.optionChipIcon};
     width: 4.8rem;
     height: 5.6rem;
   `,
@@ -68,10 +83,14 @@ type OptionChipProps = {
   option: Option
 }
 
+type OptionChipOuterCircleProps = {
+  option: Option
+}
+
 export const OptionChip = ({ option }: OptionChipProps) => (
   <S.OptionChip>
-    <S.OptionChipOuterCircleShadow />
-    <S.OptionChipOuterCircle />
+    <S.OptionChipOuterCircleShadow option={option} />
+    <S.OptionChipOuterCircle option={option} />
     <S.OptionChipOuterCircleOverlay />
     <S.OptionChipInnerCircle>
       <S.OptionChipIcon name={OptionIconmap[option]} />
