@@ -30,6 +30,8 @@ All source codes live in the `src` folder. Here's how I structured the different
   - Global styles and theme are stored here.
 - `test`
   - Test mocks and setups are stored here.
+- `types`
+  - Types that are shared across components are stored here.
 - `views`
   - This can also be called "pages". The main entry point or container component for each of your view or page lives here. The `App.tsx` file also lives here.
 

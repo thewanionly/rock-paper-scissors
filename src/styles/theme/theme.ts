@@ -15,6 +15,17 @@ export const theme = {
     scoreCardBgLight: COLORS.white,
     scoreLabelText: COLORS.ceruleanBlue,
     scoreValueText: COLORS.davyGrey,
+
+    optionChipInnerCircleShadow: COLORS.blueHaze,
+    optionChipInnerCircleBg1: COLORS.aquaHaze,
+    optionChipInnerCircleBg2: COLORS.lightGrey,
+
+    paperChipShadow: COLORS.ceruleanBlue,
+    paperChipBg: COLORS.ultramarineBlue,
+    paperChipBgOverlay1: rgba(COLORS.white, 0.0966455),
+    paperChipBgOverlay2: rgba(COLORS.white, 0.0001),
+
+    optionIcon: COLORS.gunPowder,
     // TODO: Add more colors here
   },
   fonts: {
