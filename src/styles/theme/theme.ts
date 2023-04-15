@@ -31,6 +31,8 @@ export const theme = {
 
     scissorsChipShadow: COLORS.cocoaBrown,
     scissorsChipBg: COLORS.schoolBusYellow,
+
+    optionPickerItemHover: rgba(COLORS.white, 0.05),
     // TODO: Add more colors here
   },
   fonts: {
