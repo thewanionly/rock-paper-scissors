@@ -34,6 +34,11 @@ const S = {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
+      width: 19.8rem;
+      height: 20.3rem;
+    }
   `,
   OptionChipOuterCircleShadow: styled.span<OptionChipOuterCircleProps>`
     ${outerCircle}
@@ -70,6 +75,11 @@ const S = {
     color: ${({ theme: { colors } }) => colors.optionChipIcon};
     width: 4.8rem;
     height: 5.6rem;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
+      width: 7.6rem;
+      height: 7.6rem;
+    }
   `,
 }
 

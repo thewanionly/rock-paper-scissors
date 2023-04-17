@@ -31,6 +31,11 @@ const S = {
     column-gap: 5.23rem;
     row-gap: 1.63rem;
     justify-items: center;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
+      column-gap: 8rem;
+      row-gap: 2.4rem;
+    }
   `,
   OptionPickerItemRadioInput: styled.input`
     position: absolute;
