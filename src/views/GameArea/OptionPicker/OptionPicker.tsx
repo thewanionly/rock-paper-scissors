@@ -13,6 +13,7 @@ const optionChipHover = css`
 `
 
 const StyledOptionChip = styled(OptionChip)`
+  cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover,
@@ -24,11 +25,15 @@ const StyledOptionChip = styled(OptionChip)`
 const S = {
   OptionPicker: styled.fieldset`
     border: none;
-  `,
-  OptionPickerItem: styled.label`
-    cursor: pointer;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    column-gap: 5.23rem;
+    row-gap: 1.63rem;
+    justify-items: center;
   `,
   OptionPickerItemRadioInput: styled.input`
+    position: absolute;
     /* hide native radio input while still keeping it technically accessible */
     appearance: none;
     margin: 0;
@@ -38,6 +43,18 @@ const S = {
         ${optionChipHover}
       }
     }
+  `,
+  PaperOptionContainer: styled.label`
+    grid-column: 1;
+    grid-row: 1;
+  `,
+  ScissorsOptionContainer: styled.label`
+    grid-column: 2;
+    grid-row: 1;
+  `,
+  RockOptionContainer: styled.label`
+    grid-column: 1 / span 2;
+    grid-row: 2;
   `,
 }
 
@@ -54,7 +71,7 @@ export const OptionPicker = ({ onOptionPicked }: OptionPickerProps) => {
 
   return (
     <S.OptionPicker onChange={handleOptionPicked}>
-      <S.OptionPickerItem htmlFor={Option.Paper}>
+      <S.PaperOptionContainer htmlFor={Option.Paper}>
         <S.OptionPickerItemRadioInput
           type="radio"
           id={Option.Paper}
@@ -63,18 +80,8 @@ export const OptionPicker = ({ onOptionPicked }: OptionPickerProps) => {
           aria-label={Option.Paper}
         />
         <StyledOptionChip option={Option.Paper} />
-      </S.OptionPickerItem>
-      <S.OptionPickerItem htmlFor={Option.Rock}>
-        <S.OptionPickerItemRadioInput
-          type="radio"
-          id={Option.Rock}
-          name="option"
-          value={Option.Rock}
-          aria-label={Option.Rock}
-        />
-        <StyledOptionChip option={Option.Rock} />
-      </S.OptionPickerItem>
-      <S.OptionPickerItem htmlFor={Option.Scissors}>
+      </S.PaperOptionContainer>
+      <S.ScissorsOptionContainer htmlFor={Option.Scissors}>
         <S.OptionPickerItemRadioInput
           type="radio"
           id={Option.Scissors}
@@ -83,7 +90,17 @@ export const OptionPicker = ({ onOptionPicked }: OptionPickerProps) => {
           aria-label={Option.Scissors}
         />
         <StyledOptionChip option={Option.Scissors} />
-      </S.OptionPickerItem>
+      </S.ScissorsOptionContainer>
+      <S.RockOptionContainer htmlFor={Option.Rock}>
+        <S.OptionPickerItemRadioInput
+          type="radio"
+          id={Option.Rock}
+          name="option"
+          value={Option.Rock}
+          aria-label={Option.Rock}
+        />
+        <StyledOptionChip option={Option.Rock} />
+      </S.RockOptionContainer>
     </S.OptionPicker>
   )
 }
