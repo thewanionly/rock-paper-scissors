@@ -35,6 +35,7 @@ export const theme = {
     optionPickerItemHover: rgba(COLORS.white, 0.05),
 
     resultsOptionChipPlaceholderBg: rgba(COLORS.black, 0.1),
+    resultsPickedText: COLORS.white,
     // TODO: Add more colors here
   },
   fonts: {

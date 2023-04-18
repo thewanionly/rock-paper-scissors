@@ -19,4 +19,20 @@ describe('ResultsArea', () => {
 
     expect(pickedOptionChip).toBeInTheDocument()
   })
+
+  it(`displays "You picked" text`, () => {
+    render(<ResultsArea />)
+
+    const userPickedText = screen.getByText(/you picked/i)
+
+    expect(userPickedText).toBeInTheDocument()
+  })
+
+  it(`displays "The house picked" text`, () => {
+    render(<ResultsArea />)
+
+    const housePickedText = screen.getByText(/the house picked/i)
+
+    expect(housePickedText).toBeInTheDocument()
+  })
 })
