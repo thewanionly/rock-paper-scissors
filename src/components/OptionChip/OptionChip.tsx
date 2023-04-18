@@ -77,8 +77,8 @@ const S = {
     height: 5.6rem;
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
-      width: 7.6rem;
-      height: 7.6rem;
+      width: 7.2rem;
+      height: 8.6rem;
     }
   `,
 }

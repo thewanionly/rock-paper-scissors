@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { OptionChip } from 'components'
 import { Option } from 'types'
+import invertedTriangle from 'assets/images/inverted_triangle.svg'
 
 const optionChipHover = css`
   box-shadow: 0 0 0 20px ${({ theme: { colors } }) => colors.optionPickerItemHover};
@@ -31,10 +32,12 @@ const S = {
     column-gap: 5.23rem;
     row-gap: 1.63rem;
     justify-items: center;
+    background: url(${invertedTriangle}) no-repeat 50% 60%;
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
       column-gap: 8rem;
       row-gap: 2.4rem;
+      background: url(${invertedTriangle}) no-repeat 50% 70%/70%;
     }
   `,
   OptionPickerItemRadioInput: styled.input`
