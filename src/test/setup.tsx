@@ -2,7 +2,6 @@ import { ReactElement } from 'react'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
 
 import { GlobalStyles, Theme } from 'styles'
-import { GameProvider } from 'context'
 
 type RootWrapperProps = {
   children?: React.ReactNode
@@ -12,7 +11,7 @@ const RootWrapper = ({ children }: RootWrapperProps) => {
   return (
     <Theme>
       <GlobalStyles />
-      <GameProvider>{children}</GameProvider>
+      {children}
     </Theme>
   )
 }
