@@ -25,6 +25,7 @@ declare module 'styled-components' {
       scissorsChipShadow: string
       scissorsChipBg: string
       optionPickerItemHover: string
+      resultsOptionChipPlaceholderBg: string
     }
     fonts: {
       primary: string

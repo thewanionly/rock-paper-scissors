@@ -13,6 +13,7 @@ const S = {
     margin-top: 3.2rem;
     width: 83%;
     max-width: 40rem;
+    min-width: 30rem;
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
       border-radius: 15px;

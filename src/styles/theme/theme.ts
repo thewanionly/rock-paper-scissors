@@ -33,6 +33,8 @@ export const theme = {
     scissorsChipBg: COLORS.schoolBusYellow,
 
     optionPickerItemHover: rgba(COLORS.white, 0.05),
+
+    resultsOptionChipPlaceholderBg: rgba(COLORS.black, 0.1),
     // TODO: Add more colors here
   },
   fonts: {

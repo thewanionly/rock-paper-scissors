@@ -21,6 +21,13 @@ const StyledOptionChip = styled(OptionChip)`
   :focus {
     ${optionChipHover}
   }
+
+  .option-chip-icon {
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
+      width: 7.2rem;
+      height: 8.6rem;
+    }
+  }
 `
 
 const S = {

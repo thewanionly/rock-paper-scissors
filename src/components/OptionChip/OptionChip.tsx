@@ -28,7 +28,7 @@ const outerCircleBg = (theme: DefaultTheme, option: Option, isShadow?: boolean) 
 const S = {
   OptionChip: styled.div`
     width: 13rem;
-    height: 13.2rem;
+    height: 13.3rem;
     border-radius: 50%;
     position: relative;
     display: flex;
@@ -75,11 +75,6 @@ const S = {
     color: ${({ theme: { colors } }) => colors.optionChipIcon};
     width: 4.8rem;
     height: 5.6rem;
-
-    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
-      width: 7.2rem;
-      height: 8.6rem;
-    }
   `,
 }
 
@@ -104,7 +99,7 @@ export const OptionChip = ({ className = '', option }: OptionChipProps) => (
     <S.OptionChipOuterCircle option={option} data-testid="outer circle" />
     <S.OptionChipOuterCircleOverlay />
     <S.OptionChipInnerCircle>
-      <S.OptionChipIcon name={OptionIconmap[option]} />
+      <S.OptionChipIcon className="option-chip-icon" name={OptionIconmap[option]} />
     </S.OptionChipInnerCircle>
   </S.OptionChip>
 )
