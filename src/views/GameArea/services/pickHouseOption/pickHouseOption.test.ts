@@ -1,10 +1,10 @@
 import { Option } from 'types'
-import { housePick } from './housePick'
+import { pickHouseOption } from './pickHouseOption'
 
 const options = Object.values(Option)
 
-describe('housePick', () => {
-  it.each(Array.from({ length: 10 }, () => [housePick()]))(
+describe('pickHouseOption', () => {
+  it.each(Array.from({ length: 10 }, () => [pickHouseOption()]))(
     'returns any of the options randomly (returned option: %s)',
     (housePick) => {
       expect(options).toContain(housePick)
