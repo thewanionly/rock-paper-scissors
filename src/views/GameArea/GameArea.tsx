@@ -6,7 +6,7 @@ import { useGameContext } from 'context'
 
 import { OptionPicker } from './OptionPicker'
 import { ResultsArea } from './ResultsArea'
-import { playGame, pickHouseOption } from './services'
+import { pickHouseOption } from './services'
 
 const S = {
   GameArea: styled.div`
@@ -22,7 +22,7 @@ enum GameAreaViews {
   ResultsArea = 'results_area',
 }
 
-const HOUSE_PICK_DELAY = 2000
+export const HOUSE_PICK_DELAY = 1500
 
 export const GameArea = () => {
   const { playerPick, setPlayerPick, setHousePick } = useGameContext()

@@ -3,11 +3,15 @@ import { Option } from 'types'
 
 import { ResultsArea } from './ResultsArea'
 
-const mockedPlayerPick = Option.Paper
+const mockGameContextValue = {
+  playerPick: Option.Paper,
+  housePick: Option.Rock,
+}
 
 jest.mock('context', () => ({
   useGameContext: () => ({
-    playerPick: mockedPlayerPick,
+    playerPick: mockGameContextValue.playerPick,
+    housePick: mockGameContextValue.housePick,
   }),
 }))
 
@@ -15,7 +19,7 @@ describe('ResultsArea', () => {
   it(`displays user's picked option`, () => {
     render(<ResultsArea />)
 
-    const pickedOptionChip = screen.getByTestId(`${mockedPlayerPick} option chip`)
+    const pickedOptionChip = screen.getByTestId(`${mockGameContextValue.playerPick} option chip`)
 
     expect(pickedOptionChip).toBeInTheDocument()
   })
@@ -26,6 +30,14 @@ describe('ResultsArea', () => {
     const userPickedText = screen.getByText(/you picked/i)
 
     expect(userPickedText).toBeInTheDocument()
+  })
+
+  it(`displays house picked option`, () => {
+    render(<ResultsArea />)
+
+    const pickedOptionChip = screen.getByTestId(`${mockGameContextValue.housePick} option chip`)
+
+    expect(pickedOptionChip).toBeInTheDocument()
   })
 
   it(`displays "The house picked" text`, () => {
