@@ -9,7 +9,7 @@ import { ResultsArea } from './ResultsArea'
 import { pickHouseOption, playGame } from './services'
 
 const S = {
-  GameArea: styled.div`
+  GameArea: styled.main`
     margin: 10.4rem auto 0;
     display: flex;
     justify-content: center;
