@@ -30,9 +30,9 @@ describe('OptionChip', () => {
     ({ option, bgColor, boxShadowColor }) => {
       render(<OptionChip option={option} />)
 
-      const optionChip = screen.getByTestId(`${option} option chip`)
-      const optionChipOuterCircle = within(optionChip).getByTestId('outer circle')
-      const optionChipOuterCircleShadow = within(optionChip).getByTestId('outer circle shadow')
+      const optionChip = screen.getByTestId(`${option}-option-chip`)
+      const optionChipOuterCircle = within(optionChip).getByTestId('outer-circle')
+      const optionChipOuterCircleShadow = within(optionChip).getByTestId('outer-circle-shadow')
 
       expect(optionChipOuterCircle).toHaveStyle(`background-color: ${bgColor}`)
       expect(optionChipOuterCircleShadow).toHaveStyle(`background-color: ${boxShadowColor}`)

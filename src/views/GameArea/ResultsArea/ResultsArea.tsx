@@ -176,7 +176,7 @@ export const ResultsArea = () => {
       </S.HousePickContainer>
       {result && (
         <S.ResultsAndPlayAgainContainer>
-          <S.ResultsText data-testid="results text">{ResultTextMap[result]}</S.ResultsText>
+          <S.ResultsText data-testid="results-text">{ResultTextMap[result]}</S.ResultsText>
           {showPlayAgainBtn && (
             <S.PlayAgainButton onClick={playAgain}>Play again</S.PlayAgainButton>
           )}

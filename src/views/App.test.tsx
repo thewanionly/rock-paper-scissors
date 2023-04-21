@@ -34,7 +34,7 @@ describe('App', () => {
   it('displays game area', () => {
     setup()
 
-    const gameArea = screen.getByTestId('game area')
+    const gameArea = screen.getByTestId('game-area')
     expect(gameArea).toBeInTheDocument()
   })
 

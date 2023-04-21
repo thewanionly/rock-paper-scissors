@@ -94,9 +94,9 @@ type OptionChipOuterCircleProps = {
 }
 
 export const OptionChip = ({ className = '', option }: OptionChipProps) => (
-  <S.OptionChip className={className} data-testid={`${option} option chip`}>
-    <S.OptionChipOuterCircleShadow option={option} data-testid="outer circle shadow" />
-    <S.OptionChipOuterCircle option={option} data-testid="outer circle" />
+  <S.OptionChip className={className} data-testid={`${option}-option-chip`}>
+    <S.OptionChipOuterCircleShadow option={option} data-testid="outer-circle-shadow" />
+    <S.OptionChipOuterCircle option={option} data-testid="outer-circle" />
     <S.OptionChipOuterCircleOverlay />
     <S.OptionChipInnerCircle>
       <S.OptionChipIcon className="option-chip-icon" name={OptionIconmap[option]} />

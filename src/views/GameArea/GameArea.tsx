@@ -66,7 +66,7 @@ export const GameArea = () => {
   }, [housePick, playerPick, setResult, incrementScore])
 
   return (
-    <S.GameArea data-testid="game area">
+    <S.GameArea data-testid="game-area">
       {view === Views.OptionPicker && <OptionPicker onOptionPicked={handleOptionPicked} />}
       {view === Views.ResultsArea && <ResultsArea />}
     </S.GameArea>

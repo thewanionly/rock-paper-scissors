@@ -34,7 +34,7 @@ describe('GameArea', () => {
 
     await userEvent.click(optionPickedEl)
 
-    expect(screen.getByTestId(`${optionPicked} option chip`)).toBeInTheDocument()
+    expect(screen.getByTestId(`${optionPicked}-option-chip`)).toBeInTheDocument()
   })
 
   it(`displays house's picked option in results area view ${HOUSE_PICK_DELAY} ms after user picked an option`, async () => {
@@ -47,13 +47,13 @@ describe('GameArea', () => {
     const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
     await ue.click(optionPickedEl)
 
-    expect(screen.getAllByTestId(/option chip/i)).toHaveLength(1)
+    expect(screen.getAllByTestId(/option-chip/i)).toHaveLength(1)
 
     act(() => {
       jest.runAllTimers()
     })
 
-    expect(screen.getAllByTestId(/option chip/i)).toHaveLength(2)
+    expect(screen.getAllByTestId(/option-chip/i)).toHaveLength(2)
 
     jest.useRealTimers()
   })
@@ -70,23 +70,23 @@ describe('GameArea', () => {
     const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
     await ue.click(optionPickedEl)
 
-    expect(screen.getAllByTestId(/option chip/i)).toHaveLength(1)
-    expect(screen.queryByTestId(/results text/i)).not.toBeInTheDocument()
+    expect(screen.getAllByTestId(/option-chip/i)).toHaveLength(1)
+    expect(screen.queryByTestId(/results-text/i)).not.toBeInTheDocument()
 
     // Run first setTimeout that shows the house pick
     act(() => {
       jest.runAllTimers()
     })
 
-    expect(screen.queryByTestId(/results text/i)).not.toBeInTheDocument()
-    expect(screen.getAllByTestId(/option chip/i)).toHaveLength(2)
+    expect(screen.queryByTestId(/results-text/i)).not.toBeInTheDocument()
+    expect(screen.getAllByTestId(/option-chip/i)).toHaveLength(2)
 
     // Run second setTimeout that shows the results
     act(() => {
       jest.runAllTimers()
     })
 
-    expect(screen.getByTestId(/results text/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/results-text/i)).toBeInTheDocument()
 
     jest.useRealTimers()
   })
@@ -210,10 +210,10 @@ describe('GameArea', () => {
     await ue.click(screen.getByRole('radio', { name: new RegExp(chosenOption) }))
 
     // Check if chosen option is displayed
-    expect(screen.getByTestId(`${chosenOption} option chip`)).toBeInTheDocument()
+    expect(screen.getByTestId(`${chosenOption}-option-chip`)).toBeInTheDocument()
     // Check if house pick, results text, and play again is not yet displayed. This would mean previous state was cleared
-    expect(screen.getAllByTestId(/option chip/i)).toHaveLength(1)
-    expect(screen.queryByTestId(/results text/i)).not.toBeInTheDocument()
+    expect(screen.getAllByTestId(/option-chip/i)).toHaveLength(1)
+    expect(screen.queryByTestId(/results-text/i)).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /play again/i })).not.toBeInTheDocument()
 
     jest.useRealTimers()

@@ -23,7 +23,7 @@ describe('ResultsArea', () => {
   it(`displays user's picked option`, () => {
     render(<ResultsArea />)
 
-    const pickedOptionChip = screen.getByTestId(`${mockGameContextValue.playerPick} option chip`)
+    const pickedOptionChip = screen.getByTestId(`${mockGameContextValue.playerPick}-option-chip`)
 
     expect(pickedOptionChip).toBeInTheDocument()
   })
@@ -39,7 +39,7 @@ describe('ResultsArea', () => {
   it(`displays house picked option`, () => {
     render(<ResultsArea />)
 
-    const pickedOptionChip = screen.getByTestId(`${mockGameContextValue.housePick} option chip`)
+    const pickedOptionChip = screen.getByTestId(`${mockGameContextValue.housePick}-option-chip`)
 
     expect(pickedOptionChip).toBeInTheDocument()
   })
