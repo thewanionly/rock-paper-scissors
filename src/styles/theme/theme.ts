@@ -37,6 +37,14 @@ export const theme = {
     resultsOptionChipPlaceholderBg: rgba(COLORS.black, 0.1),
     resultsPickedText: COLORS.white,
     resultsGameResultsText: COLORS.white,
+
+    buttonContainedText: COLORS.gunPowder,
+    buttonContainedTextHover: COLORS.amaranth,
+    buttonContainedBg1: COLORS.aquaHaze,
+    buttonContainedBg2: COLORS.white,
+    buttonOutlinedText: COLORS.white,
+    buttonOutlinedTextHover: COLORS.gunPowder,
+    buttonOutlinedBorder: COLORS.white,
     // TODO: Add more colors here
   },
   fonts: {

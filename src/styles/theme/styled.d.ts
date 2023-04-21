@@ -28,6 +28,13 @@ declare module 'styled-components' {
       resultsOptionChipPlaceholderBg: string
       resultsPickedText: string
       resultsGameResultsText: string
+      buttonContainedText: string
+      buttonContainedTextHover: string
+      buttonContainedBg1: string
+      buttonContainedBg2: string
+      buttonOutlinedText: string
+      buttonOutlinedTextHover: string
+      buttonOutlinedBorder: string
     }
     fonts: {
       primary: string
