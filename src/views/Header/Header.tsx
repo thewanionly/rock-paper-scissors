@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+import { useGameContext } from 'context'
 import { ScoreCard } from './ScoreCard'
 
 const S = {
@@ -42,6 +43,8 @@ const S = {
 }
 
 export const Header = () => {
+  const { score } = useGameContext()
+
   return (
     <S.Header>
       <S.HeaderTitle>
@@ -49,7 +52,7 @@ export const Header = () => {
         Paper{'\n'}
         Scissors
       </S.HeaderTitle>
-      <S.HeaderScoreCard />
+      <S.HeaderScoreCard score={score} />
     </S.Header>
   )
 }
