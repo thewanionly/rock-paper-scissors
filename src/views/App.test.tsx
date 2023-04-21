@@ -68,4 +68,97 @@ describe('App', () => {
 
     jest.useRealTimers()
   })
+
+  it(`retains previous score after clicking on Play Again button`, async () => {
+    jest.useFakeTimers()
+    setup()
+
+    const optionPicked = mockPlayerPick
+    const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+    await ue.click(optionPickedEl)
+
+    // Run first setTimeout that shows the house pick
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    // Run second setTimeout that shows the results
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+    // Run third setTimeout that shows the play again button
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    await ue.click(screen.getByRole('button', { name: /play again/i }))
+
+    expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+    jest.useRealTimers()
+  })
+
+  it(`increments to the current score after clicking on Play Again button then clicked on a new option and won`, async () => {
+    jest.useFakeTimers()
+    setup()
+
+    const optionPicked = mockPlayerPick
+    const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+    await ue.click(optionPickedEl)
+
+    // Run first setTimeout that shows the house pick
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    // Run second setTimeout that shows the results
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+    // Run third setTimeout that shows the play again button
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    await ue.click(screen.getByRole('button', { name: /play again/i }))
+
+    expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+    // Click on an option again
+    await ue.click(screen.getByRole('radio', { name: new RegExp(optionPicked) }))
+
+    // Run  first setTimeout that shows the house pick
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+    // Run second setTimeout that shows the results
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('2')
+
+    jest.useRealTimers()
+  })
 })

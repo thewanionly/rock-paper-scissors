@@ -16,6 +16,7 @@ interface GameContextValue {
   setPlayerPick: (option: Option | null) => void
   setHousePick: (option: Option | null) => void
   setResult: (result: Result | null) => void
+  playAgain: () => void
 }
 
 const initialGameContext = {
@@ -29,6 +30,7 @@ const initialGameContext = {
   setPlayerPick: () => null,
   setHousePick: () => null,
   setResult: () => null,
+  playAgain: () => null,
 }
 
 const GameContext = createContext<GameContextValue>(initialGameContext)
@@ -36,13 +38,20 @@ const GameContext = createContext<GameContextValue>(initialGameContext)
 export const useGameContext = () => useContext(GameContext)
 
 export const GameProvider = ({ children }: GameProviderProps) => {
-  const [view, setView] = useState<Views>(Views.OptionPicker)
+  const [view, setView] = useState<Views>(initialGameContext.view)
   const [score, setScore] = useState(initialGameContext.score)
   const [playerPick, setPlayerPick] = useState<Option | null>(initialGameContext.playerPick)
   const [housePick, setHousePick] = useState<Option | null>(initialGameContext.housePick)
   const [result, setResult] = useState<Result | null>(initialGameContext.result)
 
   const incrementScore = useCallback(() => setScore((prevScore) => prevScore + 1), [])
+
+  const playAgain = useCallback(() => {
+    setView(initialGameContext.view)
+    setPlayerPick(initialGameContext.playerPick)
+    setHousePick(initialGameContext.housePick)
+    setResult(initialGameContext.result)
+  }, [])
 
   const value = useMemo(
     () => ({
@@ -56,8 +65,9 @@ export const GameProvider = ({ children }: GameProviderProps) => {
       setPlayerPick,
       setHousePick,
       setResult,
+      playAgain,
     }),
-    [view, score, playerPick, housePick, result, incrementScore]
+    [view, score, playerPick, housePick, result, incrementScore, playAgain]
   )
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>

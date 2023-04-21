@@ -149,7 +149,7 @@ export const ResultTextMap = {
 } as const
 
 export const ResultsArea = () => {
-  const { playerPick, housePick, result } = useGameContext()
+  const { playerPick, housePick, result, playAgain } = useGameContext()
   const [showPlayAgainBtn, setShowPlayAgainBtn] = useState(false)
 
   useEffect(() => {
@@ -177,7 +177,9 @@ export const ResultsArea = () => {
       {result && (
         <S.ResultsAndPlayAgainContainer>
           <S.ResultsText data-testid="results text">{ResultTextMap[result]}</S.ResultsText>
-          {showPlayAgainBtn && <S.PlayAgainButton>Play again</S.PlayAgainButton>}
+          {showPlayAgainBtn && (
+            <S.PlayAgainButton onClick={playAgain}>Play again</S.PlayAgainButton>
+          )}
         </S.ResultsAndPlayAgainContainer>
       )}
     </S.ResultsArea>
