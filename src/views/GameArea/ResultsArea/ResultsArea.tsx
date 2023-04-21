@@ -1,33 +1,59 @@
-import { useGameContext } from 'context'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { OptionChip } from 'components'
+import { useGameContext } from 'context'
+import { Result } from 'types'
+
+const pickContainer = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.7rem;
+
+  @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
+    gap: 6.3rem;
+  }
+`
 
 const S = {
   ResultsArea: styled.div`
-    display: flex;
+    display: grid;
+    grid-template-areas:
+      'player-picked house-picked'
+      'results results';
+    column-gap: 4rem;
+    row-gap: 6rem;
     justify-content: space-between;
-    gap: 4rem;
+
     max-width: 40rem;
-    min-width: 30rem;
+    min-width: 32rem;
     width: 80%;
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
+      row-gap: 8rem;
+
       min-width: 70rem;
       max-width: none;
       width: max-content;
     }
-  `,
-  ResultsAreaPickedContainer: styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1.7rem;
 
-    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
-      gap: 6.3rem;
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.desktop} {
+      grid-template-areas: 'player-picked results house-picked';
+      column-gap: 5rem;
+      align-items: center;
     }
   `,
-  ResultsAreaOptionChipContainer: styled.div`
+  PlayerPickContainer: styled.div`
+    ${pickContainer}
+
+    grid-area: player-picked;
+  `,
+  HousePickContainer: styled.div`
+    ${pickContainer}
+
+    grid-area: house-picked;
+  `,
+  OptionChipContainer: styled.div`
     width: 13rem;
     height: 13.3rem;
     display: grid;
@@ -54,7 +80,7 @@ const S = {
       }
     }
   `,
-  ResultsAreaOptionChip: styled(OptionChip)`
+  OptionChip: styled(OptionChip)`
     grid-column: 1;
     grid-row: 1;
 
@@ -70,7 +96,7 @@ const S = {
       }
     }
   `,
-  ResultsAreaPickedText: styled.span`
+  PickedText: styled.span`
     line-height: 3.2rem;
     font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
@@ -86,25 +112,52 @@ const S = {
       order: -1;
     }
   `,
+  ResultsAndPlayAgainContainer: styled.div`
+    grid-area: results;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+  `,
+  ResultsText: styled.span`
+    line-height: 6.7rem;
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.xl};
+    font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
+    text-align: center;
+    text-transform: uppercase;
+    color: ${({ theme: { colors } }) => colors.resultsGameResultsText};
+    text-shadow: 0px 3px 3px ${({ theme: { colors } }) => colors.boxShadowPrimary};
+  `,
 }
 
+export const ResultTextMap = {
+  [Result.UserWins]: 'You win',
+  [Result.UserLoses]: 'You lose',
+  [Result.Draw]: 'Draw',
+} as const
+
 export const ResultsArea = () => {
-  const { playerPick, housePick } = useGameContext()
+  const { playerPick, housePick, result } = useGameContext()
 
   return (
     <S.ResultsArea>
-      <S.ResultsAreaPickedContainer>
-        <S.ResultsAreaOptionChipContainer>
-          {playerPick && <S.ResultsAreaOptionChip option={playerPick} />}
-        </S.ResultsAreaOptionChipContainer>
-        <S.ResultsAreaPickedText>You picked</S.ResultsAreaPickedText>
-      </S.ResultsAreaPickedContainer>
-      <S.ResultsAreaPickedContainer>
-        <S.ResultsAreaOptionChipContainer>
-          {housePick && <S.ResultsAreaOptionChip option={housePick} />}
-        </S.ResultsAreaOptionChipContainer>
-        <S.ResultsAreaPickedText>The house picked</S.ResultsAreaPickedText>
-      </S.ResultsAreaPickedContainer>
+      <S.PlayerPickContainer>
+        <S.OptionChipContainer>
+          {playerPick && <S.OptionChip option={playerPick} />}
+        </S.OptionChipContainer>
+        <S.PickedText>You picked</S.PickedText>
+      </S.PlayerPickContainer>
+      <S.HousePickContainer>
+        <S.OptionChipContainer>
+          {housePick && <S.OptionChip option={housePick} />}
+        </S.OptionChipContainer>
+        <S.PickedText>The house picked</S.PickedText>
+      </S.HousePickContainer>
+      {result && (
+        <S.ResultsAndPlayAgainContainer>
+          <S.ResultsText data-testid="results text">{ResultTextMap[result]}</S.ResultsText>
+        </S.ResultsAndPlayAgainContainer>
+      )}
     </S.ResultsArea>
   )
 }

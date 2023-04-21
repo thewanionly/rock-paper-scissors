@@ -1,17 +1,19 @@
 import { render, screen } from 'test'
-import { Option } from 'types'
+import { Option, Result } from 'types'
 
-import { ResultsArea } from './ResultsArea'
+import { ResultTextMap, ResultsArea } from './ResultsArea'
 
 const mockGameContextValue = {
   playerPick: Option.Paper,
   housePick: Option.Rock,
+  result: Result.Draw,
 }
 
 jest.mock('context', () => ({
   useGameContext: () => ({
     playerPick: mockGameContextValue.playerPick,
     housePick: mockGameContextValue.housePick,
+    result: mockGameContextValue.result,
   }),
 }))
 
@@ -46,5 +48,13 @@ describe('ResultsArea', () => {
     const housePickedText = screen.getByText(/the house picked/i)
 
     expect(housePickedText).toBeInTheDocument()
+  })
+
+  it(`displays the results`, () => {
+    render(<ResultsArea />)
+
+    const resultsText = screen.getByText(ResultTextMap[mockGameContextValue.result])
+
+    expect(resultsText).toBeInTheDocument()
   })
 })

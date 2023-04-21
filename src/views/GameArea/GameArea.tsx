@@ -6,7 +6,7 @@ import { useGameContext } from 'context'
 
 import { OptionPicker } from './OptionPicker'
 import { ResultsArea } from './ResultsArea'
-import { pickHouseOption } from './services'
+import { pickHouseOption, playGame } from './services'
 
 const S = {
   GameArea: styled.div`
@@ -23,9 +23,10 @@ enum GameAreaViews {
 }
 
 export const HOUSE_PICK_DELAY = 1500
+export const RESULTS_DELAY = 500
 
 export const GameArea = () => {
-  const { playerPick, setPlayerPick, setHousePick } = useGameContext()
+  const { playerPick, housePick, setPlayerPick, setHousePick, setResult } = useGameContext()
   const [view, setView] = useState<GameAreaViews>(GameAreaViews.OptionPicker)
 
   const handleOptionPicked = (option: Option) => {
@@ -45,6 +46,14 @@ export const GameArea = () => {
       }, HOUSE_PICK_DELAY)
     }
   }, [view, setHousePick])
+
+  useEffect(() => {
+    if (playerPick && housePick) {
+      setTimeout(() => {
+        setResult(playGame(playerPick, housePick))
+      }, RESULTS_DELAY)
+    }
+  }, [housePick, playerPick, setResult])
 
   return (
     <S.GameArea>

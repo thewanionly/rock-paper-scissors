@@ -5,7 +5,7 @@ import { render, screen } from 'test'
 import { Option } from 'types'
 import { GameProvider } from 'context'
 
-import { GameArea, HOUSE_PICK_DELAY } from './GameArea'
+import { GameArea, HOUSE_PICK_DELAY, RESULTS_DELAY } from './GameArea'
 
 const setup = () => {
   render(
@@ -54,6 +54,39 @@ describe('GameArea', () => {
     })
 
     expect(screen.getAllByTestId(/option chip/i)).toHaveLength(2)
+
+    jest.useRealTimers()
+  })
+
+  it(`displays the results in results area view ${
+    HOUSE_PICK_DELAY + RESULTS_DELAY
+  } ms after user picked an option`, async () => {
+    jest.useFakeTimers()
+    setup()
+
+    const optionPicked = Option.Rock
+    const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
+
+    const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+    await ue.click(optionPickedEl)
+
+    expect(screen.getAllByTestId(/option chip/i)).toHaveLength(1)
+    expect(screen.queryByTestId(/results text/i)).not.toBeInTheDocument()
+
+    // Run first setTimeout that shows the house pick
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.queryByTestId(/results text/i)).not.toBeInTheDocument()
+    expect(screen.getAllByTestId(/option chip/i)).toHaveLength(2)
+
+    // Run second setTimeout that shows the results
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId(/results text/i)).toBeInTheDocument()
 
     jest.useRealTimers()
   })

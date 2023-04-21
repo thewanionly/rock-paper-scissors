@@ -36,6 +36,7 @@ export const theme = {
 
     resultsOptionChipPlaceholderBg: rgba(COLORS.black, 0.1),
     resultsPickedText: COLORS.white,
+    resultsGameResultsText: COLORS.white,
     // TODO: Add more colors here
   },
   fonts: {

@@ -27,6 +27,7 @@ declare module 'styled-components' {
       optionPickerItemHover: string
       resultsOptionChipPlaceholderBg: string
       resultsPickedText: string
+      resultsGameResultsText: string
     }
     fonts: {
       primary: string
