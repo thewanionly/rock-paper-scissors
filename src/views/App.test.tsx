@@ -161,4 +161,11 @@ describe('App', () => {
 
     jest.useRealTimers()
   })
+
+  it('displays footer', () => {
+    setup()
+
+    const footer = screen.getByRole('contentinfo')
+    expect(footer).toBeInTheDocument()
+  })
 })
