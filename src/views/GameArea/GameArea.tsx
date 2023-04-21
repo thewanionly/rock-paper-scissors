@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 
-import { Option, Result } from 'types'
+import { Option, Result, Views } from 'types'
 import { useGameContext } from 'context'
 
 import { OptionPicker } from './OptionPicker'
@@ -17,18 +17,20 @@ const S = {
   `,
 }
 
-enum GameAreaViews {
-  OptionPicker = 'option_picker',
-  ResultsArea = 'results_area',
-}
-
 export const HOUSE_PICK_DELAY = 1500
 export const RESULTS_DELAY = 500
 
 export const GameArea = () => {
-  const { playerPick, housePick, incrementScore, setPlayerPick, setHousePick, setResult } =
-    useGameContext()
-  const [view, setView] = useState<GameAreaViews>(GameAreaViews.OptionPicker)
+  const {
+    view,
+    playerPick,
+    housePick,
+    incrementScore,
+    setPlayerPick,
+    setHousePick,
+    setResult,
+    setView,
+  } = useGameContext()
 
   const handleOptionPicked = (option: Option) => {
     setPlayerPick(option)
@@ -36,12 +38,12 @@ export const GameArea = () => {
 
   useEffect(() => {
     if (playerPick) {
-      setView(GameAreaViews.ResultsArea)
+      setView(Views.ResultsArea)
     }
-  }, [playerPick])
+  }, [playerPick, setView])
 
   useEffect(() => {
-    if (view === GameAreaViews.ResultsArea) {
+    if (view === Views.ResultsArea) {
       setTimeout(() => {
         setHousePick(pickHouseOption())
       }, HOUSE_PICK_DELAY)
@@ -64,8 +66,8 @@ export const GameArea = () => {
 
   return (
     <S.GameArea data-testid="game area">
-      {view === GameAreaViews.OptionPicker && <OptionPicker onOptionPicked={handleOptionPicked} />}
-      {view === GameAreaViews.ResultsArea && <ResultsArea />}
+      {view === Views.OptionPicker && <OptionPicker onOptionPicked={handleOptionPicked} />}
+      {view === Views.ResultsArea && <ResultsArea />}
     </S.GameArea>
   )
 }

@@ -1,15 +1,17 @@
 import { createContext, useCallback, useContext, useMemo, useState } from 'react'
-import { Option, Result } from 'types'
+import { Option, Result, Views } from 'types'
 
 type GameProviderProps = {
   children: React.ReactNode
 }
 
 interface GameContextValue {
+  view: Views
   score: number
   playerPick: Option | null
   housePick: Option | null
   result: Result | null
+  setView: (view: Views) => void
   incrementScore: () => void
   setPlayerPick: (option: Option | null) => void
   setHousePick: (option: Option | null) => void
@@ -17,10 +19,12 @@ interface GameContextValue {
 }
 
 const initialGameContext = {
+  view: Views.OptionPicker,
   score: 0,
   playerPick: null,
   housePick: null,
   result: null,
+  setView: () => null,
   incrementScore: () => null,
   setPlayerPick: () => null,
   setHousePick: () => null,
@@ -32,6 +36,7 @@ const GameContext = createContext<GameContextValue>(initialGameContext)
 export const useGameContext = () => useContext(GameContext)
 
 export const GameProvider = ({ children }: GameProviderProps) => {
+  const [view, setView] = useState<Views>(Views.OptionPicker)
   const [score, setScore] = useState(initialGameContext.score)
   const [playerPick, setPlayerPick] = useState<Option | null>(initialGameContext.playerPick)
   const [housePick, setHousePick] = useState<Option | null>(initialGameContext.housePick)
@@ -41,16 +46,18 @@ export const GameProvider = ({ children }: GameProviderProps) => {
 
   const value = useMemo(
     () => ({
+      view,
       score,
       playerPick,
       housePick,
       result,
+      setView,
       incrementScore,
       setPlayerPick,
       setHousePick,
       setResult,
     }),
-    [score, playerPick, housePick, result, incrementScore]
+    [view, score, playerPick, housePick, result, incrementScore]
   )
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>
