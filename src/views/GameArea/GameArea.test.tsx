@@ -5,7 +5,7 @@ import { render, screen } from 'test'
 import { Option } from 'types'
 import { GameProvider } from 'context'
 
-import { GameArea, HOUSE_PICK_DELAY, RESULTS_DELAY } from './GameArea'
+import { GameArea, HOUSE_PICK_DELAY, RESULTS_TEXT_DELAY } from './GameArea'
 
 const setup = () => {
   render(
@@ -58,8 +58,8 @@ describe('GameArea', () => {
     jest.useRealTimers()
   })
 
-  it(`displays the results in results area view ${
-    HOUSE_PICK_DELAY + RESULTS_DELAY
+  it(`displays  results text in results area view ${
+    HOUSE_PICK_DELAY + RESULTS_TEXT_DELAY
   } ms after user picked an option`, async () => {
     jest.useFakeTimers()
     setup()

@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components'
 import { Button, OptionChip } from 'components'
 import { useGameContext } from 'context'
 import { Result } from 'types'
+import { useEffect, useState } from 'react'
+import { PLAY_AGAIN_BUTTON_DELAY } from '../GameArea'
 
 const pickContainer = css`
   display: flex;
@@ -148,6 +150,15 @@ export const ResultTextMap = {
 
 export const ResultsArea = () => {
   const { playerPick, housePick, result } = useGameContext()
+  const [showPlayAgainBtn, setShowPlayAgainBtn] = useState(false)
+
+  useEffect(() => {
+    if (result) {
+      setTimeout(() => {
+        setShowPlayAgainBtn(true)
+      }, PLAY_AGAIN_BUTTON_DELAY)
+    }
+  }, [result])
 
   return (
     <S.ResultsArea>
@@ -166,7 +177,7 @@ export const ResultsArea = () => {
       {result && (
         <S.ResultsAndPlayAgainContainer>
           <S.ResultsText data-testid="results text">{ResultTextMap[result]}</S.ResultsText>
-          <S.PlayAgainButton>Play again</S.PlayAgainButton>
+          {showPlayAgainBtn && <S.PlayAgainButton>Play again</S.PlayAgainButton>}
         </S.ResultsAndPlayAgainContainer>
       )}
     </S.ResultsArea>

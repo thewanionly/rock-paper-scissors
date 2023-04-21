@@ -6,7 +6,7 @@ import { Option } from 'types'
 import { GameProvider } from 'context'
 
 import App from './App'
-import { HOUSE_PICK_DELAY, RESULTS_DELAY } from './GameArea'
+import { HOUSE_PICK_DELAY, RESULTS_TEXT_DELAY } from './GameArea'
 
 const mockPlayerPick = Option.Paper
 
@@ -39,7 +39,7 @@ describe('App', () => {
   })
 
   it(`displays updated score ${
-    HOUSE_PICK_DELAY + RESULTS_DELAY
+    HOUSE_PICK_DELAY + RESULTS_TEXT_DELAY
   } ms after user picked an option`, async () => {
     jest.useFakeTimers()
     setup()
