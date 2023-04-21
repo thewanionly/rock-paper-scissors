@@ -37,9 +37,13 @@ type ButtonStyleProps = {
 export const StyledButton = styled.button<ButtonStyleProps>`
   cursor: pointer;
   border: none;
-
   border-radius: 0.8rem;
   padding: 1.5rem 3rem;
+  text-transform: uppercase;
+  line-height: 1.9rem;
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
+  font-weight: ${({ theme: { fontWeights } }) => fontWeights.semiBold};
+  letter-spacing: 0.25rem;
 
   transition: all 0.2s;
 

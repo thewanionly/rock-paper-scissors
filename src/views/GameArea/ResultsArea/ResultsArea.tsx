@@ -32,8 +32,6 @@ const S = {
     width: 80%;
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
-      row-gap: 8rem;
-
       min-width: 70rem;
       max-width: none;
       width: max-content;
@@ -133,12 +131,6 @@ const S = {
   PlayAgainButton: styled(Button)`
     padding: 1.5rem 6rem;
     box-shadow: 0px 3px 3px ${({ theme: { colors } }) => colors.boxShadowPrimary};
-
-    text-transform: uppercase;
-    line-height: 1.9rem;
-    font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
-    font-weight: ${({ theme: { fontWeights } }) => fontWeights.semiBold};
-    letter-spacing: 0.25rem;
   `,
 }
 

@@ -11,9 +11,14 @@ import { pickHouseOption, playGame } from './services'
 const S = {
   GameArea: styled.main`
     margin: 10.4rem auto 0;
+    min-height: 37.5rem;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
+      min-height: 58.7rem;
+    }
   `,
 }
 
