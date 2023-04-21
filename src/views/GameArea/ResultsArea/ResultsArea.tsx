@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { OptionChip } from 'components'
+import { Button, OptionChip } from 'components'
 import { useGameContext } from 'context'
 import { Result } from 'types'
 
@@ -39,7 +39,7 @@ const S = {
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.desktop} {
       grid-template-areas: 'player-picked results house-picked';
-      column-gap: 5rem;
+      column-gap: 8rem;
       align-items: center;
     }
   `,
@@ -128,6 +128,16 @@ const S = {
     color: ${({ theme: { colors } }) => colors.resultsGameResultsText};
     text-shadow: 0px 3px 3px ${({ theme: { colors } }) => colors.boxShadowPrimary};
   `,
+  PlayAgainButton: styled(Button)`
+    padding: 1.5rem 6rem;
+    box-shadow: 0px 3px 3px ${({ theme: { colors } }) => colors.boxShadowPrimary};
+
+    text-transform: uppercase;
+    line-height: 1.9rem;
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
+    font-weight: ${({ theme: { fontWeights } }) => fontWeights.semiBold};
+    letter-spacing: 0.25rem;
+  `,
 }
 
 export const ResultTextMap = {
@@ -156,6 +166,7 @@ export const ResultsArea = () => {
       {result && (
         <S.ResultsAndPlayAgainContainer>
           <S.ResultsText data-testid="results text">{ResultTextMap[result]}</S.ResultsText>
+          <S.PlayAgainButton>Play again</S.PlayAgainButton>
         </S.ResultsAndPlayAgainContainer>
       )}
     </S.ResultsArea>

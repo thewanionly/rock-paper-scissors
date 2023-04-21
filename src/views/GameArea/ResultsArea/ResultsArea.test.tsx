@@ -50,11 +50,18 @@ describe('ResultsArea', () => {
     expect(housePickedText).toBeInTheDocument()
   })
 
-  it(`displays the results`, () => {
+  it(`displays  results text`, () => {
     render(<ResultsArea />)
 
     const resultsText = screen.getByText(ResultTextMap[mockGameContextValue.result])
 
     expect(resultsText).toBeInTheDocument()
+  })
+
+  it('displays Play Again button', () => {
+    render(<ResultsArea />)
+
+    const playAgainButton = screen.getByRole('button', { name: /play again/i })
+    expect(playAgainButton).toBeInTheDocument()
   })
 })
