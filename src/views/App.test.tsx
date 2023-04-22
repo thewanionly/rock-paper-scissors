@@ -3,10 +3,11 @@ import userEvent from '@testing-library/user-event'
 
 import { render, screen } from 'test'
 import { Option } from 'types'
-import { GameProvider } from 'context'
+import { GameProvider, ModalProvider } from 'context'
 
 import App from './App'
 import { HOUSE_PICK_DELAY, RESULTS_TEXT_DELAY } from './GameArea'
+import { IconName } from 'components'
 
 const mockPlayerPick = Option.Paper
 
@@ -18,7 +19,9 @@ jest.mock('views/GameArea/services/pickHouseOption', () => ({
 const setup = () => {
   render(
     <GameProvider>
-      <App />
+      <ModalProvider>
+        <App />
+      </ModalProvider>
     </GameProvider>
   )
 }
@@ -167,5 +170,28 @@ describe('App', () => {
 
     const footer = screen.getByRole('contentinfo')
     expect(footer).toBeInTheDocument()
+  })
+
+  it('opens Rules modal when Rules button is clicked', async () => {
+    setup()
+
+    const rulesButton = screen.getByRole('button', { name: /rules/i })
+    await userEvent.click(rulesButton)
+
+    expect(screen.getByRole('heading', { name: /rules/i })).toBeInTheDocument()
+  })
+
+  it('closes Rules modal when close button in Rules modal is clicked', async () => {
+    setup()
+
+    const rulesButton = screen.getByRole('button', { name: /rules/i })
+    await userEvent.click(rulesButton)
+
+    expect(screen.getByRole('heading', { name: /rules/i })).toBeInTheDocument()
+
+    const closeIcon = screen.getByLabelText(`${IconName.CLOSE} icon`)
+    await userEvent.click(closeIcon)
+
+    expect(screen.queryByRole('heading', { name: /rules/i })).not.toBeInTheDocument()
   })
 })

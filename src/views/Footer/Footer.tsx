@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { Button, ButtonVariant } from 'components'
+import { ModalName, useModalContext } from 'context'
 
 const S = {
   Footer: styled.footer`
@@ -21,9 +22,17 @@ const S = {
 }
 
 export const Footer = () => {
+  const { showModal } = useModalContext()
+
+  const handleButtonClick = () => {
+    showModal(ModalName.Rules)
+  }
+
   return (
     <S.Footer>
-      <S.RulesButton variant={ButtonVariant.OUTLINED}>Rules</S.RulesButton>
+      <S.RulesButton variant={ButtonVariant.OUTLINED} onClick={handleButtonClick}>
+        Rules
+      </S.RulesButton>
     </S.Footer>
   )
 }
