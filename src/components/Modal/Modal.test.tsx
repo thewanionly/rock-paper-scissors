@@ -43,7 +43,17 @@ describe('Modal', () => {
     await waitFor(() => expect(onCloseHandler).toHaveBeenCalled())
   })
 
-  // it('displays Modal content', () => {
-  //   render(<Modal />)
-  // })
+  it('displays Modal content', () => {
+    const modalContent = 'Modal content'
+    render(
+      <Modal title="Title" onClose={() => ''}>
+        {modalContent}
+      </Modal>
+    )
+
+    const modalContentContainer = screen.getByTestId('modal-content')
+    const modalContentEl = screen.getByText(modalContent)
+
+    expect(modalContentContainer).toContainElement(modalContentEl)
+  })
 })

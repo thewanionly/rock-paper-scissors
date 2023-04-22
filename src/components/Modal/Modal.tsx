@@ -19,11 +19,12 @@ const S = {
       'body'
       'close';
     grid-template-rows: max-content 1fr max-content;
-    gap: 5rem;
+    gap: 11.3rem;
     justify-items: center;
+    align-items: flex-start;
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
-      border-radius: 2.8rem;
+      border-radius: 0.8rem;
     }
   `,
   ModalTitle: styled.h1`
@@ -49,6 +50,7 @@ const S = {
       color: ${({ theme: { colors } }) => colors.modalCloseButtonHover};
     }
   `,
+  ModalContent: styled.div``,
 }
 
 type ModalProps = {
@@ -62,6 +64,7 @@ export const Modal = ({ title, children, onClose }: ModalProps) => {
     <S.Modal>
       <S.ModalTitle>{title}</S.ModalTitle>
       <S.ModalCloseButton name={IconName.CLOSE} aria-label="close icon" onClick={onClose} />
+      <S.ModalContent data-testid="modal-content">{children}</S.ModalContent>
     </S.Modal>
   )
 }
