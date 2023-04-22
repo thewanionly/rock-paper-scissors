@@ -45,6 +45,11 @@ export const theme = {
     buttonOutlinedText: COLORS.white,
     buttonOutlinedTextHover: COLORS.gunPowder,
     buttonOutlinedBorder: COLORS.white,
+
+    modalBg: COLORS.white,
+    modalTitle: COLORS.gunPowder,
+    modalCloseButton: rgba(COLORS.gunPowder, 0.25),
+    modalCloseButtonHover: COLORS.gunPowder,
     // TODO: Add more colors here
   },
   fonts: {

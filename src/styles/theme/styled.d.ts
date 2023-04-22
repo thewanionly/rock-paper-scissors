@@ -35,6 +35,10 @@ declare module 'styled-components' {
       buttonOutlinedText: string
       buttonOutlinedTextHover: string
       buttonOutlinedBorder: string
+      modalBg: string
+      modalTitle: string
+      modalCloseButton: string
+      modalCloseButtonHover: string
     }
     fonts: {
       primary: string
