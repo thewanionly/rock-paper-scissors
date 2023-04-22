@@ -8,11 +8,22 @@ const S = {
     top: 0;
     right: 0;
     z-index: 100;
-    background-color: ${({ theme: { colors } }) => colors.modalBg};
-    box-shadow: 0px 3px 3px ${({ theme: { colors } }) => colors.boxShadowPrimary};
+
     width: 100%;
     height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${({ theme: { colors } }) => colors.modalOverlay};
+  `,
+  ModalContent: styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: ${({ theme: { colors } }) => colors.modalBg};
+    box-shadow: 0px 3px 3px ${({ theme: { colors } }) => colors.boxShadowPrimary};
     padding: 9.5rem 5rem 7rem;
+
     display: grid;
     grid-template-areas:
       'title'
@@ -25,6 +36,14 @@ const S = {
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
       border-radius: 0.8rem;
+      width: max-content;
+      height: max-content;
+      padding: 3.2rem;
+      grid-template-areas:
+        'title close'
+        'body body';
+      grid-template-rows: max-content 1fr;
+      row-gap: 4.8rem;
     }
   `,
   ModalTitle: styled.h1`
@@ -35,6 +54,10 @@ const S = {
     font-size: ${({ theme: { fontSizes } }) => fontSizes.med3};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
     color: ${({ theme: { colors } }) => colors.modalTitle};
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      justify-self: flex-start;
+    }
   `,
   ModalCloseButton: styled(Icon)`
     grid-area: close;
@@ -49,8 +72,19 @@ const S = {
     &:hover {
       color: ${({ theme: { colors } }) => colors.modalCloseButtonHover};
     }
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      justify-self: flex-end;
+    }
   `,
-  ModalContent: styled.div``,
+  ModalBody: styled.div`
+    grid-area: body;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
+      justify-self: flex-end;
+      padding: 0 1.8rem;
+    }
+  `,
 }
 
 type ModalProps = {
@@ -62,9 +96,11 @@ type ModalProps = {
 export const Modal = ({ title, children, onClose }: ModalProps) => {
   return (
     <S.Modal>
-      <S.ModalTitle>{title}</S.ModalTitle>
-      <S.ModalCloseButton name={IconName.CLOSE} aria-label="close icon" onClick={onClose} />
-      <S.ModalContent data-testid="modal-content">{children}</S.ModalContent>
+      <S.ModalContent>
+        <S.ModalTitle>{title}</S.ModalTitle>
+        <S.ModalCloseButton name={IconName.CLOSE} aria-label="close icon" onClick={onClose} />
+        <S.ModalBody data-testid="modal-content">{children}</S.ModalBody>
+      </S.ModalContent>
     </S.Modal>
   )
 }

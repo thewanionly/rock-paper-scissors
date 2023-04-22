@@ -50,6 +50,7 @@ export const theme = {
     modalTitle: COLORS.gunPowder,
     modalCloseButton: rgba(COLORS.gunPowder, 0.25),
     modalCloseButtonHover: COLORS.gunPowder,
+    modalOverlay: rgba(COLORS.black, 0.5),
     // TODO: Add more colors here
   },
   fonts: {
