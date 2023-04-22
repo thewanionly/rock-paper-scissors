@@ -39,7 +39,6 @@ const S = {
       font-size: ${({ theme: { fontSizes } }) => fontSizes.lg};
     }
   `,
-  HeaderScoreCard: styled(ScoreCard)``,
 }
 
 export const Header = () => {
@@ -52,7 +51,7 @@ export const Header = () => {
         Paper{'\n'}
         Scissors
       </S.HeaderTitle>
-      <S.HeaderScoreCard score={score} />
+      <ScoreCard score={score} />
     </S.Header>
   )
 }
