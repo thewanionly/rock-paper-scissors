@@ -29,7 +29,7 @@ const S = {
       'title'
       'body'
       'close';
-    grid-template-rows: max-content 1fr max-content;
+    grid-template-rows: repeat(3, max-content);
     gap: 11.3rem;
     justify-items: center;
     align-items: flex-start;
