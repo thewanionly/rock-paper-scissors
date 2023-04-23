@@ -40,7 +40,6 @@ const S = {
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.desktop} {
       grid-template-areas: 'player-picked results house-picked';
       column-gap: 8rem;
-      align-items: center;
     }
   `,
   PlayerPickContainer: styled.div`
@@ -132,6 +131,11 @@ const S = {
     flex-direction: column;
     align-items: center;
     gap: 1.6rem;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.desktop} {
+      align-self: flex-end;
+      margin-bottom: 10.4rem;
+    }
   `,
   ResultsText: styled.span`
     line-height: 6.7rem;
@@ -141,6 +145,12 @@ const S = {
     text-transform: uppercase;
     color: ${({ theme: { colors } }) => colors.resultsGameResultsText};
     text-shadow: 0px 3px 3px ${({ theme: { colors } }) => colors.boxShadowPrimary};
+  `,
+  PlayAgainButtonContainer: styled.div`
+    height: 4.8rem;
+    width: 25rem;
+    display: flex;
+    justify-content: center;
   `,
   PlayAgainButton: styled(Button)`
     padding: 1.5rem 6rem;
@@ -187,9 +197,11 @@ export const ResultsArea = () => {
       {result && (
         <S.ResultsAndPlayAgainContainer>
           <S.ResultsText data-testid="results-text">{ResultTextMap[result]}</S.ResultsText>
-          {showPlayAgainBtn && (
-            <S.PlayAgainButton onClick={playAgain}>Play again</S.PlayAgainButton>
-          )}
+          <S.PlayAgainButtonContainer>
+            {showPlayAgainBtn && (
+              <S.PlayAgainButton onClick={playAgain}>Play again</S.PlayAgainButton>
+            )}
+          </S.PlayAgainButtonContainer>
         </S.ResultsAndPlayAgainContainer>
       )}
     </S.ResultsArea>
