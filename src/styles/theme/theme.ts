@@ -35,6 +35,9 @@ export const theme = {
     optionPickerItemHover: rgba(COLORS.white, 0.05),
 
     resultsOptionChipPlaceholderBg: rgba(COLORS.black, 0.1),
+    resultsOptionChipRingBg1: rgba(COLORS.white, 0.12),
+    resultsOptionChipRingBg2: rgba(COLORS.white, 0.08),
+    resultsOptionChipRingBg3: rgba(COLORS.white, 0.05),
     resultsPickedText: COLORS.white,
     resultsGameResultsText: COLORS.white,
 

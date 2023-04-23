@@ -53,12 +53,13 @@ const S = {
 
     grid-area: house-picked;
   `,
-  OptionChipContainer: styled.div`
+  OptionChipContainer: styled.div<OptionChipContainerProps>`
     width: 13rem;
     height: 13.3rem;
     display: grid;
     align-items: center;
     justify-items: center;
+    position: relative;
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
       width: 29.3rem;
@@ -78,6 +79,19 @@ const S = {
         width: 22.5rem;
         height: 22.5rem;
       }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      background: ${({ theme: { colors } }) =>
+        `radial-gradient(circle, ${colors.resultsOptionChipRingBg1} 0 43%, ${colors.resultsOptionChipRingBg2} 43% 56%, ${colors.resultsOptionChipRingBg3} 56% 100%)`};
+      opacity: 0.5;
+      border-radius: 50%;
+      width: 221.5%;
+      height: 221.5%;
+      visibility: ${({ showRings }) => (showRings ? 'visible' : 'hidden')};
     }
   `,
   OptionChip: styled(OptionChip)`
@@ -134,6 +148,10 @@ const S = {
   `,
 }
 
+type OptionChipContainerProps = {
+  showRings?: boolean
+}
+
 export const ResultTextMap = {
   [Result.UserWins]: 'You win',
   [Result.UserLoses]: 'You lose',
@@ -155,13 +173,13 @@ export const ResultsArea = () => {
   return (
     <S.ResultsArea>
       <S.PlayerPickContainer>
-        <S.OptionChipContainer>
+        <S.OptionChipContainer showRings={result === Result.UserWins}>
           {playerPick && <S.OptionChip option={playerPick} />}
         </S.OptionChipContainer>
         <S.PickedText>You picked</S.PickedText>
       </S.PlayerPickContainer>
       <S.HousePickContainer>
-        <S.OptionChipContainer>
+        <S.OptionChipContainer showRings={result === Result.UserLoses}>
           {housePick && <S.OptionChip option={housePick} />}
         </S.OptionChipContainer>
         <S.PickedText>The house picked</S.PickedText>
