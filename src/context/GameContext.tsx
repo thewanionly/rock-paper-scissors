@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { Option, Result, Views } from 'types'
 
 type GameProviderProps = {
@@ -52,6 +52,20 @@ export const GameProvider = ({ children }: GameProviderProps) => {
     setHousePick(initialGameContext.housePick)
     setResult(initialGameContext.result)
   }, [])
+
+  useEffect(() => {
+    if (score > 0) {
+      localStorage.setItem('score', JSON.stringify(score))
+    }
+  }, [score])
+
+  useEffect(() => {
+    const localScore = localStorage.getItem('score')
+
+    if (localScore) {
+      setScore(JSON.parse(localScore))
+    }
+  }, [setScore])
 
   const value = useMemo(
     () => ({

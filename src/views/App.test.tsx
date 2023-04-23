@@ -17,7 +17,7 @@ jest.mock('views/GameArea/services/pickHouseOption', () => ({
 }))
 
 const setup = () => {
-  render(
+  return render(
     <GameProvider>
       <ModalProvider>
         <App />
@@ -25,6 +25,10 @@ const setup = () => {
     </GameProvider>
   )
 }
+
+beforeEach(() => {
+  localStorage.clear()
+})
 
 describe('App', () => {
   it('displays header', () => {
@@ -105,6 +109,44 @@ describe('App', () => {
 
     await ue.click(screen.getByRole('button', { name: /play again/i }))
 
+    expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+    jest.useRealTimers()
+  })
+
+  it(`retains previous score even after remounting the application`, async () => {
+    jest.useFakeTimers()
+    const { unmount } = setup()
+
+    const optionPicked = mockPlayerPick
+    const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+    await ue.click(optionPickedEl)
+
+    // Run first setTimeout that shows the house pick
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    // Run second setTimeout that shows the results
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+    // Unmount component
+    unmount()
+
+    // Re-mount component
+    setup()
+
+    // Check if score is persisted
     expect(screen.getByTestId('score-value').textContent).toBe('1')
 
     jest.useRealTimers()
