@@ -31,12 +31,11 @@ const S = {
       'close';
     grid-template-rows: repeat(3, max-content);
     gap: 11.3rem;
-    justify-items: center;
-    align-items: flex-start;
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
       border-radius: 0.8rem;
       width: max-content;
+      min-width: 40rem;
       height: max-content;
       padding: 3.2rem;
       grid-template-areas:
@@ -48,6 +47,8 @@ const S = {
   `,
   ModalTitle: styled.h1`
     grid-area: title;
+    justify-self: center;
+    align-self: flex-start;
 
     text-transform: uppercase;
     line-height: 3.2rem;
@@ -62,6 +63,7 @@ const S = {
   ModalCloseButton: styled(Icon)`
     grid-area: close;
     align-self: flex-end;
+    justify-self: center;
 
     color: ${({ theme: { colors } }) => colors.modalCloseButton};
     width: 2rem;
@@ -79,27 +81,25 @@ const S = {
   `,
   ModalBody: styled.div`
     grid-area: body;
-
-    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
-      justify-self: flex-end;
-      padding: 0 1.8rem;
-    }
   `,
 }
 
 type ModalProps = {
+  className?: string
   title: string
   children: React.ReactNode
   onClose: () => void
 }
 
-export const Modal = ({ title, children, onClose }: ModalProps) => {
+export const Modal = ({ className = '', title, children, onClose }: ModalProps) => {
   return (
-    <S.Modal>
+    <S.Modal className={className}>
       <S.ModalContent>
         <S.ModalTitle>{title}</S.ModalTitle>
         <S.ModalCloseButton name={IconName.CLOSE} aria-label="close icon" onClick={onClose} />
-        <S.ModalBody data-testid="modal-content">{children}</S.ModalBody>
+        <S.ModalBody className="modal-body" data-testid="modal-content">
+          {children}
+        </S.ModalBody>
       </S.ModalContent>
     </S.Modal>
   )
