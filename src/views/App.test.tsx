@@ -246,17 +246,17 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
   })
 
-  // it('closes Rules modal when close button in Rules modal is clicked', async () => {
-  //   setup()
+  it('closes Settings modal when close button in Settings modal is clicked', async () => {
+    setup()
 
-  //   const rulesButton = screen.getByRole('button', { name: /rules/i })
-  //   await userEvent.click(rulesButton)
+    const settingsIcon = screen.getByLabelText('settings icon')
+    await userEvent.click(settingsIcon)
 
-  //   expect(screen.getByRole('heading', { name: /rules/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
 
-  //   const closeIcon = screen.getByLabelText(`${IconName.CLOSE} icon`)
-  //   await userEvent.click(closeIcon)
+    const closeIcon = screen.getByLabelText(`${IconName.CLOSE} icon`)
+    await userEvent.click(closeIcon)
 
-  //   expect(screen.queryByRole('heading', { name: /rules/i })).not.toBeInTheDocument()
-  // })
+    expect(screen.queryByRole('heading', { name: /settings/i })).not.toBeInTheDocument()
+  })
 })
