@@ -6,6 +6,7 @@ type ModalProviderProps = {
 
 export enum ModalName {
   Rules = 'rules',
+  Settings = 'settings',
 }
 
 interface ModalContextValue {

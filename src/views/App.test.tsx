@@ -236,4 +236,27 @@ describe('App', () => {
 
     expect(screen.queryByRole('heading', { name: /rules/i })).not.toBeInTheDocument()
   })
+
+  it('opens Settings modal when Settings icon is clicked', async () => {
+    setup()
+
+    const settingsIcon = screen.getByLabelText('settings icon')
+    await userEvent.click(settingsIcon)
+
+    expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
+  })
+
+  // it('closes Rules modal when close button in Rules modal is clicked', async () => {
+  //   setup()
+
+  //   const rulesButton = screen.getByRole('button', { name: /rules/i })
+  //   await userEvent.click(rulesButton)
+
+  //   expect(screen.getByRole('heading', { name: /rules/i })).toBeInTheDocument()
+
+  //   const closeIcon = screen.getByLabelText(`${IconName.CLOSE} icon`)
+  //   await userEvent.click(closeIcon)
+
+  //   expect(screen.queryByRole('heading', { name: /rules/i })).not.toBeInTheDocument()
+  // })
 })

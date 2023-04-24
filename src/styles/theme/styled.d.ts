@@ -43,6 +43,8 @@ declare module 'styled-components' {
       modalCloseButton: string
       modalCloseButtonHover: string
       modalOverlay: string
+      settingsIcon: string
+      settingsIconHover: string
     }
     fonts: {
       primary: string

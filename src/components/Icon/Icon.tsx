@@ -4,12 +4,14 @@ import { ReactComponent as RockIcon } from 'assets/icons/rock.svg'
 import { ReactComponent as PaperIcon } from 'assets/icons/paper.svg'
 import { ReactComponent as ScissorsIcon } from 'assets/icons/scissors.svg'
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
+import { ReactComponent as SettingsIcon } from 'assets/icons/settings.svg'
 
 const IconMap = {
   rock: RockIcon,
   paper: PaperIcon,
   scissors: ScissorsIcon,
   close: CloseIcon,
+  settings: SettingsIcon,
 } as const
 
 export enum IconName {
@@ -17,6 +19,7 @@ export enum IconName {
   PAPER = 'paper',
   SCISSORS = 'scissors',
   CLOSE = 'close',
+  SETTINGS = 'settings',
 }
 
 type IconProps = {
