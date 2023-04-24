@@ -57,6 +57,8 @@ export const theme = {
 
     settingsIcon: COLORS.white,
     settingsIconHover: rgba(COLORS.white, 0.6),
+    settingsLabelText: COLORS.regentGrey,
+    settingsLabelDescription: COLORS.cadetBlue,
   },
   fonts: {
     primary: TYPOGRAPHY.barlow_semi_condensed,

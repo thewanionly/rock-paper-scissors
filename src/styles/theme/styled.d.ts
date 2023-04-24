@@ -45,6 +45,8 @@ declare module 'styled-components' {
       modalOverlay: string
       settingsIcon: string
       settingsIconHover: string
+      settingsLabelText: string
+      settingsLabelDescription: string
     }
     fonts: {
       primary: string
