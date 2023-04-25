@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { useModalContext } from 'context'
+import { useGameContext, useModalContext } from 'context'
 import { Button, ButtonColor, Modal } from 'components'
 
 const S = {
@@ -48,9 +48,20 @@ const S = {
 
 export const SettingsModal = () => {
   const { closeModal } = useModalContext()
+  const { resetScore } = useGameContext()
+
+  const handleCloseModal = () => {
+    closeModal()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleResetButtonClick = () => {
+    resetScore()
+    handleCloseModal()
+  }
 
   return (
-    <Modal title="Settings" onClose={closeModal}>
+    <Modal title="Settings" onClose={handleCloseModal}>
       <S.SettingsList>
         <li>
           <S.SettingsItem>
@@ -61,7 +72,9 @@ export const SettingsModal = () => {
               </S.SettingsItemDescription>
             </S.SettingsItemLabelContainer>
             <S.SettingsItemActionContainer>
-              <S.ResetButton color={ButtonColor.DANGER}>Reset</S.ResetButton>
+              <S.ResetButton color={ButtonColor.DANGER} onClick={handleResetButtonClick}>
+                Reset
+              </S.ResetButton>
             </S.SettingsItemActionContainer>
           </S.SettingsItem>
         </li>

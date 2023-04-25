@@ -13,6 +13,7 @@ interface GameContextValue {
   result: Result | null
   setView: (view: Views) => void
   incrementScore: () => void
+  resetScore: () => void
   setPlayerPick: (option: Option | null) => void
   setHousePick: (option: Option | null) => void
   setResult: (result: Result | null) => void
@@ -27,6 +28,7 @@ const initialGameContext = {
   result: null,
   setView: () => null,
   incrementScore: () => null,
+  resetScore: () => null,
   setPlayerPick: () => null,
   setHousePick: () => null,
   setResult: () => null,
@@ -45,6 +47,11 @@ export const GameProvider = ({ children }: GameProviderProps) => {
   const [result, setResult] = useState<Result | null>(initialGameContext.result)
 
   const incrementScore = useCallback(() => setScore((prevScore) => prevScore + 1), [])
+
+  const resetScore = useCallback(() => {
+    setScore(initialGameContext.score)
+    localStorage.clear()
+  }, [])
 
   const playAgain = useCallback(() => {
     setView(initialGameContext.view)
@@ -76,12 +83,13 @@ export const GameProvider = ({ children }: GameProviderProps) => {
       result,
       setView,
       incrementScore,
+      resetScore,
       setPlayerPick,
       setHousePick,
       setResult,
       playAgain,
     }),
-    [view, score, playerPick, housePick, result, incrementScore, playAgain]
+    [view, score, playerPick, housePick, result, incrementScore, resetScore, playAgain]
   )
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>

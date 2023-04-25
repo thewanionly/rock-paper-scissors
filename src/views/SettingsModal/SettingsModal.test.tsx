@@ -30,12 +30,4 @@ describe('SettingsModal', () => {
     const resetButton = screen.getByRole('button', { name: /reset/i })
     expect(resetButton).toBeInTheDocument()
   })
-
-  // it('resets the score to 0 when Reset score button is clicked', () => {
-  //   render(<SettingsModal />)
-  // })
-
-  // it('disables Reset score button after clicking Reset score button', () => {
-  //   render(<SettingsModal />)
-  // })
 })

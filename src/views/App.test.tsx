@@ -28,6 +28,7 @@ const setup = () => {
 
 beforeEach(() => {
   localStorage.clear()
+  window.scrollTo = jest.fn()
 })
 
 describe('App', () => {
@@ -258,5 +259,58 @@ describe('App', () => {
     await userEvent.click(closeIcon)
 
     expect(screen.queryByRole('heading', { name: /settings/i })).not.toBeInTheDocument()
+  })
+
+  it('closes Settings modal when Reset score button is clicked', async () => {
+    setup()
+
+    const settingsIcon = screen.getByLabelText('settings icon')
+    await userEvent.click(settingsIcon)
+
+    expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
+
+    const resetButton = screen.getByRole('button', { name: /reset/i })
+    await userEvent.click(resetButton)
+
+    expect(screen.queryByRole('heading', { name: /settings/i })).not.toBeInTheDocument()
+  })
+
+  it('resets the score to 0 when Reset score button is clicked', async () => {
+    jest.useFakeTimers()
+    setup()
+
+    const optionPicked = mockPlayerPick
+    const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+    await ue.click(optionPickedEl)
+
+    // Run first setTimeout that shows the house pick
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    // Run second setTimeout that shows the results
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+    const settingsIcon = screen.getByLabelText('settings icon')
+    await ue.click(settingsIcon)
+
+    expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
+
+    const resetButton = screen.getByRole('button', { name: /reset/i })
+    await ue.click(resetButton)
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    jest.useRealTimers()
   })
 })
