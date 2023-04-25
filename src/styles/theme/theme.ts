@@ -49,6 +49,15 @@ export const theme = {
     buttonOutlinedTextHover: COLORS.gunPowder,
     buttonOutlinedBorder: COLORS.white,
 
+    buttonDangerContainedText: COLORS.white,
+    buttonDangerContainedTextHover: COLORS.lightGrey,
+    buttonDangerContainedBg: COLORS.amaranth,
+    buttonDangerContainedBgHover: COLORS.vividBurgundy,
+    buttonDangerOutlinedText: COLORS.amaranth,
+    buttonDangerOutlinedTextHover: COLORS.white,
+    buttonDangerOutlinedBgHover: COLORS.amaranth,
+    buttonDangerOutlinedBorder: COLORS.amaranth,
+
     modalBg: COLORS.white,
     modalTitle: COLORS.gunPowder,
     modalCloseButton: rgba(COLORS.gunPowder, 0.25),

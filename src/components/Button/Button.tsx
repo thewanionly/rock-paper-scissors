@@ -1,9 +1,10 @@
 import { StyledButton } from './Button.styles'
-import { ButtonVariant } from './Button.types'
+import { ButtonColor, ButtonVariant } from './Button.types'
 
 interface CommonProps {
   className?: string
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  color?: ButtonColor
   variant?: ButtonVariant
 }
 
@@ -23,11 +24,18 @@ export const Button = ({
   className = '',
   label,
   children,
+  color = ButtonColor.PRIMARY,
   variant = ButtonVariant.CONTAINED,
   onClick,
 }: ButtonProps) => {
   return (
-    <StyledButton className={className} type="button" onClick={onClick} variant={variant}>
+    <StyledButton
+      className={className}
+      type="button"
+      onClick={onClick}
+      color={color}
+      variant={variant}
+    >
       {label || children}
     </StyledButton>
   )

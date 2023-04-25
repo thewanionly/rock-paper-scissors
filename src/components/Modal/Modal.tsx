@@ -35,7 +35,7 @@ const S = {
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
       border-radius: 0.8rem;
       width: max-content;
-      min-width: 40rem;
+      min-width: 45rem;
       height: max-content;
       padding: 3.2rem;
       grid-template-areas:

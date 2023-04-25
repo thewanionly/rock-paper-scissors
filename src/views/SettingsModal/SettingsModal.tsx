@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { useModalContext } from 'context'
-import { Button, Modal } from 'components'
+import { Button, ButtonColor, Modal } from 'components'
 
 const S = {
   SettingsList: styled.ul`
@@ -15,14 +15,14 @@ const S = {
     gap: 3rem;
   `,
   SettingsItemLabelContainer: styled.div`
-    flex-basis: 70%;
+    flex-basis: 60%;
   `,
   SettingsItemLabel: styled.span`
     display: block;
     color: ${({ theme: { colors } }) => colors.settingsLabelText};
     text-transform: uppercase;
-    line-height: 1.3rem;
-    font-size: ${({ theme: { fontSizes } }) => fontSizes.med1};
+    line-height: 1.6rem;
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.reg};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
     margin-bottom: 1rem;
   `,
@@ -30,14 +30,19 @@ const S = {
     display: block;
     color: ${({ theme: { colors } }) => colors.settingsLabelDescription};
     line-height: 1.3rem;
-    font-size: ${({ theme: { fontSizes } }) => fontSizes.sm2};
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.semiBold};
   `,
   SettingsItemActionContainer: styled.div`
-    flex-basis: 25%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   `,
   ResetButton: styled(Button)`
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.3rem;
+    line-height: 1.3rem;
+    font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
+    letter-spacing: 0.1rem;
   `,
 }
 
@@ -56,7 +61,7 @@ export const SettingsModal = () => {
               </S.SettingsItemDescription>
             </S.SettingsItemLabelContainer>
             <S.SettingsItemActionContainer>
-              <S.ResetButton>Reset</S.ResetButton>
+              <S.ResetButton color={ButtonColor.DANGER}>Reset</S.ResetButton>
             </S.SettingsItemActionContainer>
           </S.SettingsItem>
         </li>

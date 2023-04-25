@@ -4,7 +4,7 @@ import { render, screen, waitFor } from 'test'
 
 import { Button } from './Button'
 import { theme } from 'styles'
-import { ButtonVariant } from './Button.types'
+import { ButtonColor, ButtonVariant } from './Button.types'
 
 describe('Button', () => {
   describe('Layout', () => {
@@ -29,8 +29,24 @@ describe('Button', () => {
     })
 
     it.each`
+      color                  | property              | value
+      ${ButtonColor.PRIMARY} | ${'background'}       | ${`linear-gradient( 0deg, ${theme.colors.buttonContainedBg1} 0%, ${theme.colors.buttonContainedBg2} 100% )`}
+      ${ButtonColor.DANGER}  | ${'background-color'} | ${theme.colors.buttonDangerContainedBg}
+    `(
+      'sets appropriate styles to button when `color` prop is $color',
+      ({ color, property, value }) => {
+        const buttonLabel = 'Click me'
+        render(<Button label={buttonLabel} color={color} />)
+
+        const button = screen.getByRole('button', { name: buttonLabel })
+
+        expect(button).toHaveStyleRule(property, value)
+      }
+    )
+
+    it.each`
       variant                    | property          | value
-      ${ButtonVariant.CONTAINED} | ${'background'}   | ${`linear-gradient(0deg,${theme.colors.buttonContainedBg1} 0%,${theme.colors.buttonContainedBg2} 100%)`}
+      ${ButtonVariant.CONTAINED} | ${'background'}   | ${`linear-gradient( 0deg, ${theme.colors.buttonContainedBg1} 0%, ${theme.colors.buttonContainedBg2} 100% )`}
       ${ButtonVariant.OUTLINED}  | ${'border-color'} | ${theme.colors.buttonOutlinedBorder}
     `(
       `sets appropriate styles to button when \`variant\` prop is $variant`,

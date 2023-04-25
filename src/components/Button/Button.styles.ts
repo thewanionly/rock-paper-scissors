@@ -1,36 +1,68 @@
 import styled, { DefaultTheme, css } from 'styled-components'
-import { ButtonVariant } from './Button.types'
+import { ButtonColor, ButtonVariant } from './Button.types'
 
 // Generates button styles depending on `variant`
 const colorVariantStyles = (
   theme: DefaultTheme,
+  color: ButtonColor = ButtonColor.PRIMARY,
   variant: ButtonVariant = ButtonVariant.CONTAINED
 ) =>
   ({
-    [ButtonVariant.CONTAINED]: css`
-      background: ${({ theme: { colors } }) =>
-        `linear-gradient(0deg, ${colors.buttonContainedBg1} 0%, ${colors.buttonContainedBg2} 100%)`};
-      color: ${theme.colors.buttonContainedText};
+    [ButtonColor.PRIMARY]: {
+      [ButtonVariant.CONTAINED]: css`
+        background: linear-gradient(
+          0deg,
+          ${theme.colors.buttonContainedBg1} 0%,
+          ${theme.colors.buttonContainedBg2} 100%
+        );
+        color: ${theme.colors.buttonContainedText};
 
-      &:hover {
-        color: ${theme.colors.buttonContainedTextHover};
-      }
-    `,
-    [ButtonVariant.OUTLINED]: css`
-      background-color: transparent;
-      border: 0.1rem solid;
-      border-color: ${theme.colors.buttonOutlinedBorder};
-      color: ${theme.colors.buttonOutlinedText};
+        &:hover {
+          color: ${theme.colors.buttonContainedTextHover};
+        }
+      `,
+      [ButtonVariant.OUTLINED]: css`
+        background-color: transparent;
+        border: 0.1rem solid;
+        border-color: ${theme.colors.buttonOutlinedBorder};
+        color: ${theme.colors.buttonOutlinedText};
 
-      &:hover {
-        background: ${({ theme: { colors } }) =>
-          `linear-gradient(0deg, ${colors.buttonContainedBg1} 0%, ${colors.buttonContainedBg2} 100%)`};
-        color: ${theme.colors.buttonOutlinedTextHover};
-      }
-    `,
-  }[variant])
+        &:hover {
+          background: linear-gradient(
+            0deg,
+            ${theme.colors.buttonContainedBg1} 0%,
+            ${theme.colors.buttonContainedBg2} 100%
+          );
+          color: ${theme.colors.buttonOutlinedTextHover};
+        }
+      `,
+    },
+    [ButtonColor.DANGER]: {
+      [ButtonVariant.CONTAINED]: css`
+        background-color: ${theme.colors.buttonDangerContainedBg};
+        color: ${theme.colors.buttonDangerContainedText};
+
+        &:hover {
+          background-color: ${theme.colors.buttonDangerContainedBgHover};
+          color: ${theme.colors.buttonDangerContainedTextHover};
+        }
+      `,
+      [ButtonVariant.OUTLINED]: css`
+        background-color: transparent;
+        border: 0.1rem solid;
+        border-color: ${theme.colors.buttonDangerOutlinedBorder};
+        color: ${theme.colors.buttonDangerOutlinedText};
+
+        &:hover {
+          background-color: ${theme.colors.buttonDangerOutlinedBgHover};
+          color: ${theme.colors.buttonDangerOutlinedTextHover};
+        }
+      `,
+    },
+  }[color][variant])
 
 type ButtonStyleProps = {
+  color: ButtonColor
   variant: ButtonVariant
 }
 
@@ -47,5 +79,5 @@ export const StyledButton = styled.button<ButtonStyleProps>`
 
   transition: all 0.2s;
 
-  ${({ theme, variant }) => colorVariantStyles(theme, variant)}
+  ${({ theme, color, variant }) => colorVariantStyles(theme, color, variant)}
 `

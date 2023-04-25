@@ -38,6 +38,14 @@ declare module 'styled-components' {
       buttonOutlinedText: string
       buttonOutlinedTextHover: string
       buttonOutlinedBorder: string
+      buttonDangerContainedText: string
+      buttonDangerContainedTextHover: string
+      buttonDangerContainedBg: string
+      buttonDangerContainedBgHover: string
+      buttonDangerOutlinedText: string
+      buttonDangerOutlinedTextHover: string
+      buttonDangerOutlinedBgHover: string
+      buttonDangerOutlinedBorder: string
       modalBg: string
       modalTitle: string
       modalCloseButton: string
