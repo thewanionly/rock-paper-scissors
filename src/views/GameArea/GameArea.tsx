@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
 
-import { Option, Result, Views } from 'types'
+import { Option, Result, View } from 'types'
 import { useGameContext } from 'context'
 
 import { OptionPicker } from './OptionPicker'
@@ -44,12 +44,12 @@ export const GameArea = () => {
 
   useEffect(() => {
     if (playerPick) {
-      setView(Views.ResultsArea)
+      setView(View.ResultsArea)
     }
   }, [playerPick, setView])
 
   useEffect(() => {
-    if (view === Views.ResultsArea) {
+    if (view === View.ResultsArea) {
       setTimeout(() => {
         setHousePick(pickHouseOption())
       }, HOUSE_PICK_DELAY)
@@ -72,8 +72,8 @@ export const GameArea = () => {
 
   return (
     <S.GameArea data-testid="game-area">
-      {view === Views.OptionPicker && <OptionPicker onOptionPicked={handleOptionPicked} />}
-      {view === Views.ResultsArea && <ResultsArea />}
+      {view === View.OptionPicker && <OptionPicker onOptionPicked={handleOptionPicked} />}
+      {view === View.ResultsArea && <ResultsArea />}
     </S.GameArea>
   )
 }
