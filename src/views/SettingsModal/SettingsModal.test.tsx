@@ -30,4 +30,28 @@ describe('SettingsModal', () => {
     const resetButton = screen.getByRole('button', { name: /reset/i })
     expect(resetButton).toBeInTheDocument()
   })
+
+  it('displays Lizard-Spock mode label', () => {
+    render(<SettingsModal />)
+
+    const lizardSpockMode = screen.getByText(/enable "lizard-spock" mode/i)
+    expect(lizardSpockMode).toBeInTheDocument()
+  })
+
+  it('displays Lizard-Spock mode description', () => {
+    render(<SettingsModal />)
+
+    const lizardSpockModeDescription = screen.getByText(
+      /This will change the game mode to "lizard-spock". Take note that this will reset your score in your current game mode./i
+    )
+    expect(lizardSpockModeDescription).toBeInTheDocument()
+  })
+
+  // TODO:
+  // it('displays Lizard-Spock mode toggle switch', () => {
+  //   render(<SettingsModal />)
+
+  //   const resetButton = screen.getByRole('button', { name: /reset/i })
+  //   expect(resetButton).toBeInTheDocument()
+  // })
 })

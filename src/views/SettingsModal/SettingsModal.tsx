@@ -2,12 +2,16 @@ import styled from 'styled-components'
 
 import { useGameContext, useModalContext } from 'context'
 import { Button, ButtonColor, Modal } from 'components'
+import React from 'react'
 
 const S = {
   SettingsList: styled.ul`
     width: 100%;
     color: black;
     list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
   `,
   SettingsItem: styled.div`
     display: flex;
@@ -29,7 +33,7 @@ const S = {
   SettingsItemDescription: styled.span`
     display: block;
     color: ${({ theme: { colors } }) => colors.settingsLabelDescription};
-    line-height: 1.3rem;
+    line-height: 1.4rem;
     font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.semiBold};
   `,
@@ -44,6 +48,24 @@ const S = {
     font-size: ${({ theme: { fontSizes } }) => fontSizes.sm1};
     letter-spacing: 0.1rem;
   `,
+}
+
+type SettingsItemProps = {
+  label: string
+  description: string
+  actionComponent: React.ReactElement
+}
+
+const SettingsItem = ({ label, description, actionComponent }: SettingsItemProps) => {
+  return (
+    <S.SettingsItem>
+      <S.SettingsItemLabelContainer>
+        <S.SettingsItemLabel>{label}</S.SettingsItemLabel>
+        <S.SettingsItemDescription>{description}</S.SettingsItemDescription>
+      </S.SettingsItemLabelContainer>
+      <S.SettingsItemActionContainer>{actionComponent}</S.SettingsItemActionContainer>
+    </S.SettingsItem>
+  )
 }
 
 export const SettingsModal = () => {
@@ -64,19 +86,22 @@ export const SettingsModal = () => {
     <Modal title="Settings" onClose={handleCloseModal}>
       <S.SettingsList>
         <li>
-          <S.SettingsItem>
-            <S.SettingsItemLabelContainer>
-              <S.SettingsItemLabel>Reset score</S.SettingsItemLabel>
-              <S.SettingsItemDescription>
-                This will reset your score back to zero.
-              </S.SettingsItemDescription>
-            </S.SettingsItemLabelContainer>
-            <S.SettingsItemActionContainer>
+          <SettingsItem
+            label="Reset score"
+            description="This will reset your score back to zero."
+            actionComponent={
               <S.ResetButton color={ButtonColor.DANGER} onClick={handleResetButtonClick}>
                 Reset
               </S.ResetButton>
-            </S.SettingsItemActionContainer>
-          </S.SettingsItem>
+            }
+          />
+        </li>
+        <li>
+          <SettingsItem
+            label={`Enable "Lizard-Spock" mode`}
+            description={`This will change the game mode to "lizard-spock". Take note that this will reset your score in your current game mode.`}
+            actionComponent={<span>Enable</span>}
+          />
         </li>
       </S.SettingsList>
     </Modal>

@@ -35,14 +35,14 @@ const S = {
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletPortrait} {
       border-radius: 0.8rem;
       width: max-content;
-      min-width: 45rem;
+      max-width: 45rem;
       height: max-content;
       padding: 3.2rem;
       grid-template-areas:
         'title close'
         'body body';
       grid-template-rows: max-content 1fr;
-      row-gap: 4.8rem;
+      row-gap: 6rem;
     }
   `,
   ModalTitle: styled.h1`

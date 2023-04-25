@@ -313,4 +313,9 @@ describe('App', () => {
 
     jest.useRealTimers()
   })
+
+  // TODO:
+  // it('resets the score to 0 when Lizard-Spock mode switch is enabled', () => {
+
+  // })
 })
