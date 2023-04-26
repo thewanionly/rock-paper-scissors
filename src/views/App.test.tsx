@@ -314,8 +314,66 @@ describe('App', () => {
     jest.useRealTimers()
   })
 
-  // TODO:
-  // it('resets the score to 0 when Lizard-Spock mode switch is enabled', () => {
+  it('resets the score to 0 when Lizard-Spock mode switch is enabled', async () => {
+    jest.useFakeTimers()
+    setup()
 
-  // })
+    const optionPicked = mockPlayerPick
+    const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+    await ue.click(optionPickedEl)
+
+    // Run first setTimeout that shows the house pick
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    // Run second setTimeout that shows the results
+    act(() => {
+      jest.runAllTimers()
+    })
+
+    expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+    const settingsIcon = screen.getByLabelText('settings icon')
+    await ue.click(settingsIcon)
+
+    expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
+
+    const lizardSpockModeSwitch = screen.getByTestId('lizard-spock-switch')
+    await ue.click(lizardSpockModeSwitch)
+
+    expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+    jest.useRealTimers()
+  })
+
+  it('persists the Lizard-spock mode switch state after closing Settings modal modal', async () => {
+    setup()
+
+    // Open Settings modal
+    await userEvent.click(screen.getByLabelText('settings icon'))
+
+    expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
+    expect(screen.getByRole('checkbox')).not.toBeChecked()
+
+    // Enable Lizard-Spock mode
+    await userEvent.click(screen.getByTestId('lizard-spock-switch'))
+
+    expect(screen.getByRole('checkbox')).toBeChecked()
+
+    // Close Settings modal
+    await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+
+    // Open Settings modal again
+    await userEvent.click(screen.getByLabelText('settings icon'))
+
+    expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
+    expect(screen.getByRole('checkbox')).toBeChecked()
+  })
 })

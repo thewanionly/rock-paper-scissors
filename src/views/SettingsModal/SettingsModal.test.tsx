@@ -47,11 +47,10 @@ describe('SettingsModal', () => {
     expect(lizardSpockModeDescription).toBeInTheDocument()
   })
 
-  // TODO:
-  // it('displays Lizard-Spock mode toggle switch', () => {
-  //   render(<SettingsModal />)
+  it('displays Lizard-Spock mode toggle switch', () => {
+    render(<SettingsModal />)
 
-  //   const resetButton = screen.getByRole('button', { name: /reset/i })
-  //   expect(resetButton).toBeInTheDocument()
-  // })
+    const lizardSpockModeSwitch = screen.getByTestId('lizard-spock-switch')
+    expect(lizardSpockModeSwitch).toBeInTheDocument()
+  })
 })

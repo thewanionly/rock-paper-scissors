@@ -39,12 +39,13 @@ type SwitchStylesProps = {
 }
 
 type SwitchProps = {
+  id?: string
   className?: string
   checked?: boolean
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Switch = ({ className = '', checked = false, onChange }: SwitchProps) => {
+export const Switch = ({ id, className = '', checked = false, onChange }: SwitchProps) => {
   const [isTicked, setIsTicked] = useState(checked)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +54,12 @@ export const Switch = ({ className = '', checked = false, onChange }: SwitchProp
   }
 
   return (
-    <StyledSwitch htmlFor="checkbox" checked={isTicked} className={className} data-testid="switch">
+    <StyledSwitch
+      htmlFor="checkbox"
+      checked={isTicked}
+      className={className}
+      data-testid={id ? `${id}-switch` : 'switch'}
+    >
       <S.SwitchCheckbox
         id="checkbox"
         type="checkbox"

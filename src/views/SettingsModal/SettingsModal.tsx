@@ -1,8 +1,9 @@
+import React, { ChangeEvent } from 'react'
 import styled from 'styled-components'
 
 import { useGameContext, useModalContext } from 'context'
-import { Button, ButtonColor, Modal } from 'components'
-import React from 'react'
+import { Button, ButtonColor, Modal, Switch } from 'components'
+import { Mode } from 'types'
 
 const S = {
   SettingsList: styled.ul`
@@ -70,7 +71,7 @@ const SettingsItem = ({ label, description, actionComponent }: SettingsItemProps
 
 export const SettingsModal = () => {
   const { closeModal } = useModalContext()
-  const { resetScore } = useGameContext()
+  const { mode, resetScore, setMode } = useGameContext()
 
   const handleCloseModal = () => {
     closeModal()
@@ -80,6 +81,11 @@ export const SettingsModal = () => {
   const handleResetButtonClick = () => {
     resetScore()
     handleCloseModal()
+  }
+
+  const handleLizardSpockSwitchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    resetScore()
+    setMode(e.target.checked ? Mode.RockPaperScissorsLizardSpock : Mode.RockPaperScissors)
   }
 
   return (
@@ -100,7 +106,13 @@ export const SettingsModal = () => {
           <SettingsItem
             label={`Enable "Lizard-Spock" mode`}
             description={`This will change the game mode to "lizard-spock". Take note that this will reset your score in your current game mode.`}
-            actionComponent={<span>Enable</span>}
+            actionComponent={
+              <Switch
+                id="lizard-spock"
+                checked={mode === Mode.RockPaperScissorsLizardSpock}
+                onChange={handleLizardSpockSwitchChange}
+              />
+            }
           />
         </li>
       </S.SettingsList>
