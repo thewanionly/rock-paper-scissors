@@ -68,6 +68,10 @@ export const theme = {
     settingsIconHover: rgba(COLORS.white, 0.6),
     settingsLabelText: COLORS.gunPowder,
     settingsLabelDescription: COLORS.regentGrey,
+
+    switchOnBg: COLORS.gunPowder,
+    switchOffBg: COLORS.lightGrey,
+    switchCircleBg: COLORS.white,
   },
   fonts: {
     primary: TYPOGRAPHY.barlow_semi_condensed,

@@ -55,6 +55,9 @@ declare module 'styled-components' {
       settingsIconHover: string
       settingsLabelText: string
       settingsLabelDescription: string
+      switchOnBg: string
+      switchOffBg: string
+      switchCircleBg: string
     }
     fonts: {
       primary: string
