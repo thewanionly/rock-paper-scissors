@@ -1,16 +1,18 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { Option, Result, View } from 'types'
+import { Mode, Option, Result, View } from 'types'
 
 type GameProviderProps = {
   children: React.ReactNode
 }
 
 interface GameContextValue {
+  mode: Mode
   view: View
   score: number
   playerPick: Option | null
   housePick: Option | null
   result: Result | null
+  setMode: (mode: Mode) => void
   setView: (view: View) => void
   incrementScore: () => void
   resetScore: () => void
@@ -21,11 +23,13 @@ interface GameContextValue {
 }
 
 const initialGameContext = {
+  mode: Mode.RockPaperScissors,
   view: View.OptionPicker,
   score: 0,
   playerPick: null,
   housePick: null,
   result: null,
+  setMode: () => null,
   setView: () => null,
   incrementScore: () => null,
   resetScore: () => null,
@@ -40,6 +44,7 @@ const GameContext = createContext<GameContextValue>(initialGameContext)
 export const useGameContext = () => useContext(GameContext)
 
 export const GameProvider = ({ children }: GameProviderProps) => {
+  const [mode, setMode] = useState<Mode>(initialGameContext.mode)
   const [view, setView] = useState<View>(initialGameContext.view)
   const [score, setScore] = useState(initialGameContext.score)
   const [playerPick, setPlayerPick] = useState<Option | null>(initialGameContext.playerPick)
@@ -76,11 +81,13 @@ export const GameProvider = ({ children }: GameProviderProps) => {
 
   const value = useMemo(
     () => ({
+      mode,
       view,
       score,
       playerPick,
       housePick,
       result,
+      setMode,
       setView,
       incrementScore,
       resetScore,
@@ -89,7 +96,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
       setResult,
       playAgain,
     }),
-    [view, score, playerPick, housePick, result, incrementScore, resetScore, playAgain]
+    [mode, view, score, playerPick, housePick, result, incrementScore, resetScore, playAgain]
   )
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>
