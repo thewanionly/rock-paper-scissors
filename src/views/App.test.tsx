@@ -377,7 +377,7 @@ describe('App', () => {
     expect(screen.getByRole('checkbox')).toBeChecked()
   })
 
-  it('changes header text to "rock paper scissors lizard spock" after enabling "lizard-spock" mode', async () => {
+  it('updates header text to "rock paper scissors lizard spock" after enabling "lizard-spock" mode', async () => {
     setup()
 
     // Assert on default header text
@@ -396,5 +396,33 @@ describe('App', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
       /rock paper scissors lizard spock/i
     )
+  })
+
+  it('updates game rules in rules modal to include lizard and spock after enabling "lizard-spock" mode', async () => {
+    setup()
+
+    // Open Rules modal
+    await userEvent.click(screen.getByRole('button', { name: /rules/i }))
+
+    // Assert on default rules image
+    expect(screen.getByLabelText('rps-rules-image')).toBeInTheDocument()
+
+    // Close Rules modal
+    await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+
+    // Open Settings modal
+    await userEvent.click(screen.getByLabelText('settings icon'))
+
+    // Enable Lizard-Spock mode
+    await userEvent.click(screen.getByTestId('lizard-spock-switch'))
+
+    // Close Settings modal
+    await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+
+    // Open Rules modal
+    await userEvent.click(screen.getByRole('button', { name: /rules/i }))
+
+    // Assert on new rules image
+    expect(screen.getByLabelText('rpsls-rules-image')).toBeInTheDocument()
   })
 })
