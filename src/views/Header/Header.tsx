@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 import { useGameContext } from 'context'
+import { Mode } from 'types'
+
 import { ScoreCard } from './ScoreCard'
 
 const S = {
@@ -23,10 +25,11 @@ const S = {
       max-width: 70rem;
     }
   `,
-  HeaderTitle: styled.h1`
+  HeaderTitle: styled.h1<HeaderTitleProps>`
     padding: 1.2rem;
-    line-height: 1.6rem;
-    font-size: ${({ theme: { fontSizes } }) => fontSizes.med1};
+    line-height: ${({ isLizardSpockMode }) => (!isLizardSpockMode ? '1.6rem' : '1rem')};
+    font-size: ${({ theme: { fontSizes }, isLizardSpockMode }) =>
+      !isLizardSpockMode ? fontSizes.med1 : fontSizes.sm1};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
     white-space: pre-line;
     text-transform: uppercase;
@@ -35,21 +38,47 @@ const S = {
 
     @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
       padding: 0.6rem 0.8rem;
-      line-height: 3.2rem;
-      font-size: ${({ theme: { fontSizes } }) => fontSizes.lg};
+      line-height: ${({ isLizardSpockMode }) => (!isLizardSpockMode ? '3.2rem' : '2rem')};
+      font-size: ${({ theme: { fontSizes }, isLizardSpockMode }) =>
+        !isLizardSpockMode ? fontSizes.lg : fontSizes.med2};
     }
   `,
 }
 
+type HeaderTitleProps = {
+  isLizardSpockMode: boolean
+}
+
+const RPSModeTitle = () => (
+  <>
+    Rock{'\n'}
+    Paper{'\n'}
+    Scissors{'\n'}
+  </>
+)
+
+const RPSLSModeTitle = () => (
+  <>
+    <RPSModeTitle />
+    Lizard{'\n'}
+    Spock{'\n'}
+  </>
+)
+
+const HeaderTitleMap = {
+  [Mode.RockPaperScissors]: RPSModeTitle,
+  [Mode.RockPaperScissorsLizardSpock]: RPSLSModeTitle,
+}
+
 export const Header = () => {
-  const { score } = useGameContext()
+  const { mode, score } = useGameContext()
+
+  const HeaderTitleComponent = HeaderTitleMap[mode]
 
   return (
     <S.Header>
-      <S.HeaderTitle>
-        Rock{'\n'}
-        Paper{'\n'}
-        Scissors
+      <S.HeaderTitle isLizardSpockMode={mode === Mode.RockPaperScissorsLizardSpock}>
+        <HeaderTitleComponent />
       </S.HeaderTitle>
       <ScoreCard score={score} />
     </S.Header>

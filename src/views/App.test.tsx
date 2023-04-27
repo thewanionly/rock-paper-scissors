@@ -376,4 +376,25 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
     expect(screen.getByRole('checkbox')).toBeChecked()
   })
+
+  it('changes header text to "rock paper scissors lizard spock" after enabling "lizard-spock" mode', async () => {
+    setup()
+
+    // Assert on default header text
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/rock paper scissors/i)
+
+    // Open Settings modal
+    await userEvent.click(screen.getByLabelText('settings icon'))
+
+    // Enable Lizard-Spock mode
+    await userEvent.click(screen.getByTestId('lizard-spock-switch'))
+
+    // Close Settings modal
+    await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+
+    // Assert on new header text
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      /rock paper scissors lizard spock/i
+    )
+  })
 })
