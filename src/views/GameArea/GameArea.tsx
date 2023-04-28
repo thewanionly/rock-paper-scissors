@@ -28,6 +28,7 @@ export const PLAY_AGAIN_BUTTON_DELAY = 500
 
 export const GameArea = () => {
   const {
+    mode,
     view,
     playerPick,
     housePick,
@@ -72,7 +73,9 @@ export const GameArea = () => {
 
   return (
     <S.GameArea data-testid="game-area">
-      {view === View.OptionPicker && <OptionPicker onOptionPicked={handleOptionPicked} />}
+      {view === View.OptionPicker && (
+        <OptionPicker onOptionPicked={handleOptionPicked} mode={mode} />
+      )}
       {view === View.ResultsArea && <ResultsArea />}
     </S.GameArea>
   )
