@@ -24,6 +24,10 @@ declare module 'styled-components' {
       paperChipBg: string
       scissorsChipShadow: string
       scissorsChipBg: string
+      lizardChipShadow: string
+      lizardChipBg: string
+      spockChipShadow: string
+      spockChipBg: string
       optionPickerItemHover: string
       resultsOptionChipPlaceholderBg: string
       resultsOptionChipRingBg1: string
