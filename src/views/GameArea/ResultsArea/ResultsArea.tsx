@@ -1,10 +1,11 @@
+import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
 import { Button, OptionChip } from 'components'
 import { useGameContext } from 'context'
 import { Result } from 'types'
 import { useEffect, useState } from 'react'
-import { PLAY_AGAIN_BUTTON_DELAY } from '../GameArea'
+import { HOUSE_PICK_DELAY, PLAY_AGAIN_BUTTON_DELAY } from '../GameArea'
 
 const pickContainer = css`
   display: flex;
@@ -65,21 +66,6 @@ const S = {
       height: 30rem;
     }
 
-    &::before {
-      content: '';
-      grid-column: 1;
-      grid-row: 1;
-      background-color: ${({ theme: { colors } }) => colors.resultsOptionChipPlaceholderBg};
-      border-radius: 50%;
-      width: 11rem;
-      height: 11rem;
-
-      @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
-        width: 22.5rem;
-        height: 22.5rem;
-      }
-    }
-
     &::after {
       content: '';
       position: absolute;
@@ -91,6 +77,20 @@ const S = {
       width: 221.5%;
       height: 221.5%;
       visibility: ${({ showRings }) => (showRings ? 'visible' : 'hidden')};
+    }
+  `,
+  OptionChipContainerPlaceholder: styled(motion.div)`
+    content: '';
+    grid-column: 1;
+    grid-row: 1;
+    background-color: ${({ theme: { colors } }) => colors.resultsOptionChipPlaceholderBg};
+    border-radius: 50%;
+    width: 11rem;
+    height: 11rem;
+
+    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
+      width: 22.5rem;
+      height: 22.5rem;
     }
   `,
   OptionChip: styled(OptionChip)`
@@ -190,6 +190,15 @@ export const ResultsArea = () => {
       </S.PlayerPickContainer>
       <S.HousePickContainer>
         <S.OptionChipContainer showRings={result === Result.UserLoses}>
+          <S.OptionChipContainerPlaceholder
+            animate={{
+              scale: [1, 1.25, 1, 1.25, 1],
+              opacity: [1, 0.4, 1, 0.4, 1],
+            }}
+            transition={{
+              duration: HOUSE_PICK_DELAY / 1000,
+            }}
+          />
           {housePick && <S.OptionChip option={housePick} />}
         </S.OptionChipContainer>
         <S.PickedText>The house picked</S.PickedText>

@@ -23,7 +23,7 @@ const S = {
   `,
 }
 
-export const HOUSE_PICK_DELAY = 1500
+export const HOUSE_PICK_DELAY = 3000
 export const RESULTS_TEXT_DELAY = 600
 export const PLAY_AGAIN_BUTTON_DELAY = 500
 
