@@ -96,7 +96,7 @@ export const Modal = ({ className = '', title, children, onClose }: ModalProps) 
     <S.Modal className={className}>
       <S.ModalContent>
         <S.ModalTitle>{title}</S.ModalTitle>
-        <S.ModalCloseButton name={IconName.CLOSE} aria-label="close icon" onClick={onClose} />
+        <S.ModalCloseButton name={IconName.Close} aria-label="close icon" onClick={onClose} />
         <S.ModalBody className="modal-body" data-testid="modal-content">
           {children}
         </S.ModalBody>

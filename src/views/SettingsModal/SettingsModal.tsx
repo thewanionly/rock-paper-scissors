@@ -95,7 +95,7 @@ export const SettingsModal = () => {
             label="Reset score"
             description="This will reset your current mode's score back to zero."
             actionComponent={
-              <S.ResetButton color={ButtonColor.DANGER} onClick={handleResetButtonClick}>
+              <S.ResetButton color={ButtonColor.Danger} onClick={handleResetButtonClick}>
                 Reset
               </S.ResetButton>
             }

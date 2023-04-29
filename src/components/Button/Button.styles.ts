@@ -4,12 +4,12 @@ import { ButtonColor, ButtonVariant } from './Button.types'
 // Generates button styles depending on `variant`
 const colorVariantStyles = (
   theme: DefaultTheme,
-  color: ButtonColor = ButtonColor.PRIMARY,
-  variant: ButtonVariant = ButtonVariant.CONTAINED
+  color: ButtonColor = ButtonColor.Primary,
+  variant: ButtonVariant = ButtonVariant.Contained
 ) =>
   ({
-    [ButtonColor.PRIMARY]: {
-      [ButtonVariant.CONTAINED]: css`
+    [ButtonColor.Primary]: {
+      [ButtonVariant.Contained]: css`
         background: linear-gradient(
           0deg,
           ${theme.colors.buttonContainedBg1} 0%,
@@ -21,7 +21,7 @@ const colorVariantStyles = (
           color: ${theme.colors.buttonContainedTextHover};
         }
       `,
-      [ButtonVariant.OUTLINED]: css`
+      [ButtonVariant.Outlined]: css`
         background-color: transparent;
         border: 0.1rem solid;
         border-color: ${theme.colors.buttonOutlinedBorder};
@@ -37,8 +37,8 @@ const colorVariantStyles = (
         }
       `,
     },
-    [ButtonColor.DANGER]: {
-      [ButtonVariant.CONTAINED]: css`
+    [ButtonColor.Danger]: {
+      [ButtonVariant.Contained]: css`
         background-color: ${theme.colors.buttonDangerContainedBg};
         color: ${theme.colors.buttonDangerContainedText};
 
@@ -47,7 +47,7 @@ const colorVariantStyles = (
           color: ${theme.colors.buttonDangerContainedTextHover};
         }
       `,
-      [ButtonVariant.OUTLINED]: css`
+      [ButtonVariant.Outlined]: css`
         background-color: transparent;
         border: 0.1rem solid;
         border-color: ${theme.colors.buttonDangerOutlinedBorder};

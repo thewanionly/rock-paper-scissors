@@ -237,7 +237,7 @@ describe('App', () => {
 
       expect(screen.getByRole('heading', { name: /rules/i })).toBeInTheDocument()
 
-      const closeIcon = screen.getByLabelText(`${IconName.CLOSE} icon`)
+      const closeIcon = screen.getByLabelText(`${IconName.Close} icon`)
       await userEvent.click(closeIcon)
 
       expect(screen.queryByRole('heading', { name: /rules/i })).not.toBeInTheDocument()
@@ -262,7 +262,7 @@ describe('App', () => {
 
       expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
 
-      const closeIcon = screen.getByLabelText(`${IconName.CLOSE} icon`)
+      const closeIcon = screen.getByLabelText(`${IconName.Close} icon`)
       await userEvent.click(closeIcon)
 
       expect(screen.queryByRole('heading', { name: /settings/i })).not.toBeInTheDocument()
@@ -338,7 +338,7 @@ describe('App', () => {
       await userEvent.click(screen.getByTestId('lizard-spock-switch'))
 
       // Close Settings modal
-      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      await userEvent.click(screen.getByLabelText(`${IconName.Close} icon`))
 
       // Assert on new header text
       expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
@@ -361,7 +361,7 @@ describe('App', () => {
       await userEvent.click(screen.getByTestId('lizard-spock-switch'))
 
       // Close Settings modal
-      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      await userEvent.click(screen.getByLabelText(`${IconName.Close} icon`))
 
       // Assert on new options (rock, paper, scissors, lizard, spock)
       Object.values(MoveOption).forEach((option) => {
@@ -393,7 +393,7 @@ describe('App', () => {
       await ue.click(screen.getByTestId('lizard-spock-switch'))
 
       // Close Settings modal
-      await ue.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      await ue.click(screen.getByLabelText(`${IconName.Close} icon`))
 
       // Assert that results area is not shown anymore
       expect(screen.queryByText('You picked')).not.toBeInTheDocument()
@@ -416,7 +416,7 @@ describe('App', () => {
       expect(screen.getByLabelText('rps-rules-image')).toBeInTheDocument()
 
       // Close Rules modal
-      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      await userEvent.click(screen.getByLabelText(`${IconName.Close} icon`))
 
       // Open Settings modal
       await userEvent.click(screen.getByLabelText('settings icon'))
@@ -425,7 +425,7 @@ describe('App', () => {
       await userEvent.click(screen.getByTestId('lizard-spock-switch'))
 
       // Close Settings modal
-      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      await userEvent.click(screen.getByLabelText(`${IconName.Close} icon`))
 
       // Open Rules modal
       await userEvent.click(screen.getByRole('button', { name: /rules/i }))
@@ -468,7 +468,7 @@ describe('App', () => {
       await ue.click(screen.getByTestId('lizard-spock-switch'))
 
       // Close Settings modal
-      await ue.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      await ue.click(screen.getByLabelText(`${IconName.Close} icon`))
 
       // RPSLS mode initial score is 0
       expect(screen.getByTestId('score-value').textContent).toBe('0')
@@ -542,7 +542,7 @@ describe('App', () => {
       expect(screen.getByRole('checkbox')).toBeChecked()
 
       // Close Settings modal
-      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      await userEvent.click(screen.getByLabelText(`${IconName.Close} icon`))
 
       // Open Settings modal again
       await userEvent.click(screen.getByLabelText('settings icon'))
@@ -561,7 +561,7 @@ describe('App', () => {
       await userEvent.click(screen.getByTestId('lizard-spock-switch'))
 
       // Close Settings modal
-      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      await userEvent.click(screen.getByLabelText(`${IconName.Close} icon`))
 
       // Assert on new header text
       expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(

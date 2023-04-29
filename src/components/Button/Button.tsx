@@ -24,8 +24,8 @@ export const Button = ({
   className = '',
   label,
   children,
-  color = ButtonColor.PRIMARY,
-  variant = ButtonVariant.CONTAINED,
+  color = ButtonColor.Primary,
+  variant = ButtonVariant.Contained,
   onClick,
 }: ButtonProps) => {
   return (

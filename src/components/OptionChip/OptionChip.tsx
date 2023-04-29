@@ -85,11 +85,11 @@ const S = {
 }
 
 const OptionIconmap = {
-  [MoveOption.Rock]: IconName.ROCK,
-  [MoveOption.Paper]: IconName.PAPER,
-  [MoveOption.Scissors]: IconName.SCISSORS,
-  [MoveOption.Lizard]: IconName.LIZARD,
-  [MoveOption.Spock]: IconName.SPOCK,
+  [MoveOption.Rock]: IconName.Rock,
+  [MoveOption.Paper]: IconName.Paper,
+  [MoveOption.Scissors]: IconName.Scissors,
+  [MoveOption.Lizard]: IconName.Lizard,
+  [MoveOption.Spock]: IconName.Spock,
 } as const
 
 type OptionChipProps = {

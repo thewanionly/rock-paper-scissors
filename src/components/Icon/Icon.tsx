@@ -8,25 +8,25 @@ import { ReactComponent as SpockIcon } from 'assets/icons/spock.svg'
 import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
 import { ReactComponent as SettingsIcon } from 'assets/icons/settings.svg'
 
-const IconMap = {
-  rock: RockIcon,
-  paper: PaperIcon,
-  scissors: ScissorsIcon,
-  lizard: LizardIcon,
-  spock: SpockIcon,
-  close: CloseIcon,
-  settings: SettingsIcon,
-} as const
-
 export enum IconName {
-  ROCK = 'rock',
-  PAPER = 'paper',
-  SCISSORS = 'scissors',
-  LIZARD = 'lizard',
-  SPOCK = 'spock',
-  CLOSE = 'close',
-  SETTINGS = 'settings',
+  Rock = 'rock',
+  Paper = 'paper',
+  Scissors = 'scissors',
+  Lizard = 'lizard',
+  Spock = 'spock',
+  Close = 'close',
+  Settings = 'settings',
 }
+
+const IconMap = {
+  [IconName.Rock]: RockIcon,
+  [IconName.Paper]: PaperIcon,
+  [IconName.Scissors]: ScissorsIcon,
+  [IconName.Lizard]: LizardIcon,
+  [IconName.Spock]: SpockIcon,
+  [IconName.Close]: CloseIcon,
+  [IconName.Settings]: SettingsIcon,
+} as const
 
 type IconProps = {
   className?: string

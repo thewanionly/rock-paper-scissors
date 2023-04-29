@@ -48,10 +48,10 @@ export const Footer = () => {
 
   return (
     <S.Footer>
-      <S.RulesButton variant={ButtonVariant.OUTLINED} onClick={handleOpenRulesModal}>
+      <S.RulesButton variant={ButtonVariant.Outlined} onClick={handleOpenRulesModal}>
         Rules
       </S.RulesButton>
-      <S.SettingsIcon name={IconName.SETTINGS} onClick={handleOpenSettingsModal} />
+      <S.SettingsIcon name={IconName.Settings} onClick={handleOpenSettingsModal} />
     </S.Footer>
   )
 }

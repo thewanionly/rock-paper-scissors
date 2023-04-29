@@ -1,9 +1,9 @@
 export enum ButtonColor {
-  PRIMARY = 'primary',
-  DANGER = 'danger',
+  Primary = 'primary',
+  Danger = 'danger',
 }
 
 export enum ButtonVariant {
-  CONTAINED = 'contained',
-  OUTLINED = 'outlined',
+  Contained = 'contained',
+  Outlined = 'outlined',
 }

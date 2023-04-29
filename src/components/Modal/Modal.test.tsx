@@ -25,7 +25,7 @@ describe('Modal', () => {
       </Modal>
     )
 
-    const closeIcon = screen.getByLabelText(`${IconName.CLOSE} icon`)
+    const closeIcon = screen.getByLabelText(`${IconName.Close} icon`)
     expect(closeIcon).toBeInTheDocument()
   })
 
@@ -37,7 +37,7 @@ describe('Modal', () => {
       </Modal>
     )
 
-    const closeIcon = screen.getByLabelText(`${IconName.CLOSE} icon`)
+    const closeIcon = screen.getByLabelText(`${IconName.Close} icon`)
     userEvent.click(closeIcon)
 
     await waitFor(() => expect(onCloseHandler).toHaveBeenCalled())

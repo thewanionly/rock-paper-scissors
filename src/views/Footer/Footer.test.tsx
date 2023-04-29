@@ -12,7 +12,7 @@ describe('Footer', () => {
   })
 
   it('displays Settings icon', () => {
-    const iconName = IconName.SETTINGS
+    const iconName = IconName.Settings
     render(<Footer />)
 
     const settingsIcon = screen.getByLabelText(`${iconName} icon`)
