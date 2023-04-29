@@ -1,7 +1,7 @@
-import { Option } from 'types'
+import { NewOption } from 'types'
 import { pickHouseOption } from './pickHouseOption'
 
-const options = Object.values(Option)
+const options = Object.values(NewOption)
 
 describe('pickHouseOption', () => {
   it.each(Array.from({ length: 10 }, () => [pickHouseOption()]))(
