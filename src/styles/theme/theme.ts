@@ -32,11 +32,11 @@ export const theme = {
     scissorsChipShadow: COLORS.cocoaBrown,
     scissorsChipBg: COLORS.schoolBusYellow,
 
-    lizardChipShadow: COLORS.glacialBlueIce,
-    lizardChipBg: COLORS.macawBlueGreen,
+    lizardChipShadow: COLORS.purpleHeart,
+    lizardChipBg: COLORS.lavenderIndigo,
 
-    spockChipShadow: COLORS.purpleHeart,
-    spockChipBg: COLORS.lavenderIndigo,
+    spockChipShadow: COLORS.glacialBlueIce,
+    spockChipBg: COLORS.macawBlueGreen,
 
     optionPickerItemHover: rgba(COLORS.white, 0.05),
 

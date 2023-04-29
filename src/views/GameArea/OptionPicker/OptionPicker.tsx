@@ -160,7 +160,7 @@ export const OptionPicker = ({
           value={NewOption.Paper}
           aria-label={NewOption.Paper}
         />
-        <StyledOptionChip option={Option.Paper} />
+        <StyledOptionChip option={NewOption.Paper} />
       </SM.PaperOptionContainer>
       <SM.ScissorsOptionContainer htmlFor={NewOption.Scissors}>
         <S.OptionPickerItemRadioInput
@@ -170,7 +170,7 @@ export const OptionPicker = ({
           value={NewOption.Scissors}
           aria-label={NewOption.Scissors}
         />
-        <StyledOptionChip option={Option.Scissors} />
+        <StyledOptionChip option={NewOption.Scissors} />
       </SM.ScissorsOptionContainer>
       <SM.RockOptionContainer htmlFor={NewOption.Rock}>
         <S.OptionPickerItemRadioInput
@@ -180,7 +180,7 @@ export const OptionPicker = ({
           value={NewOption.Rock}
           aria-label={NewOption.Rock}
         />
-        <StyledOptionChip option={Option.Rock} />
+        <StyledOptionChip option={NewOption.Rock} />
       </SM.RockOptionContainer>
       {mode === Mode.RockPaperScissorsLizardSpock && (
         <>
@@ -192,7 +192,7 @@ export const OptionPicker = ({
               value={NewOption.Lizard}
               aria-label={NewOption.Lizard}
             />
-            <StyledOptionChip option={Option.Scissors} />
+            <StyledOptionChip option={NewOption.Lizard} />
           </SM.LizardOptionContainer>
           <SM.SpockOptionContainer htmlFor={NewOption.Spock}>
             <S.OptionPickerItemRadioInput
@@ -202,7 +202,7 @@ export const OptionPicker = ({
               value={NewOption.Spock}
               aria-label={NewOption.Spock}
             />
-            <StyledOptionChip option={Option.Rock} />
+            <StyledOptionChip option={NewOption.Spock} />
           </SM.SpockOptionContainer>
         </>
       )}

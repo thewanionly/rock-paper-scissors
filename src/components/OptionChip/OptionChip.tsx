@@ -1,7 +1,7 @@
 import styled, { DefaultTheme, css } from 'styled-components'
 
 import { Icon, IconName } from 'components/Icon'
-import { Option } from 'types'
+import { NewOption } from 'types'
 
 const outerCircle = css`
   position: absolute;
@@ -12,16 +12,22 @@ const outerCircle = css`
   border-radius: 50%;
 `
 
-const outerCircleBg = (theme: DefaultTheme, option: Option, isShadow?: boolean) =>
+const outerCircleBg = (theme: DefaultTheme, option: NewOption, isShadow?: boolean) =>
   ({
-    [Option.Paper]: css`
+    [NewOption.Paper]: css`
       background-color: ${isShadow ? theme.colors.paperChipShadow : theme.colors.paperChipBg};
     `,
-    [Option.Rock]: css`
+    [NewOption.Rock]: css`
       background-color: ${isShadow ? theme.colors.rockChipShadow : theme.colors.rockChipBg};
     `,
-    [Option.Scissors]: css`
+    [NewOption.Scissors]: css`
       background-color: ${isShadow ? theme.colors.scissorsChipShadow : theme.colors.scissorsChipBg};
+    `,
+    [NewOption.Lizard]: css`
+      background-color: ${isShadow ? theme.colors.lizardChipShadow : theme.colors.lizardChipBg};
+    `,
+    [NewOption.Spock]: css`
+      background-color: ${isShadow ? theme.colors.spockChipShadow : theme.colors.spockChipBg};
     `,
   }[option])
 
@@ -79,18 +85,20 @@ const S = {
 }
 
 const OptionIconmap = {
-  [Option.Rock]: IconName.ROCK,
-  [Option.Paper]: IconName.PAPER,
-  [Option.Scissors]: IconName.SCISSORS,
+  [NewOption.Rock]: IconName.ROCK,
+  [NewOption.Paper]: IconName.PAPER,
+  [NewOption.Scissors]: IconName.SCISSORS,
+  [NewOption.Lizard]: IconName.LIZARD,
+  [NewOption.Spock]: IconName.SPOCK,
 } as const
 
 type OptionChipProps = {
   className?: string
-  option: Option
+  option: NewOption
 }
 
 type OptionChipOuterCircleProps = {
-  option: Option
+  option: NewOption
 }
 
 export const OptionChip = ({ className = '', option }: OptionChipProps) => (
