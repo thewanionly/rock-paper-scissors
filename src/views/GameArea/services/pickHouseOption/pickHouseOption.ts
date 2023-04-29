@@ -1,7 +1,9 @@
-import { MoveOption } from 'types'
+import { Mode, MoveOption, RPSOption } from 'types'
 
-export const pickHouseOption = (): MoveOption => {
-  const randomIndex = Math.floor(Math.random() * 3)
+export const pickHouseOption = (mode: Mode = Mode.RockPaperScissors): MoveOption => {
+  const options =
+    mode === Mode.RockPaperScissors ? Object.values(RPSOption) : Object.values(MoveOption)
+  const randomIndex = Math.floor(Math.random() * options.length)
 
-  return Object.values(MoveOption)[randomIndex]
+  return options[randomIndex]
 }

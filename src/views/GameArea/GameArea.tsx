@@ -52,10 +52,10 @@ export const GameArea = () => {
   useEffect(() => {
     if (view === View.ResultsArea) {
       setTimeout(() => {
-        setHousePick(pickHouseOption())
+        setHousePick(pickHouseOption(mode))
       }, HOUSE_PICK_DELAY)
     }
-  }, [view, setHousePick])
+  }, [view, setHousePick, mode])
 
   useEffect(() => {
     if (playerPick && housePick) {
