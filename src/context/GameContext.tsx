@@ -51,6 +51,13 @@ export const GameProvider = ({ children }: GameProviderProps) => {
   const [housePick, setHousePick] = useState<MoveOption | null>(initialGameContext.housePick)
   const [result, setResult] = useState<Result | null>(initialGameContext.result)
 
+  const resetGameState = () => {
+    setView(initialGameContext.view)
+    setPlayerPick(initialGameContext.playerPick)
+    setHousePick(initialGameContext.housePick)
+    setResult(initialGameContext.result)
+  }
+
   const incrementScore = useCallback(() => setScore((prevScore) => prevScore + 1), [])
 
   const resetScore = useCallback(() => {
@@ -59,10 +66,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
   }, [])
 
   const playAgain = useCallback(() => {
-    setView(initialGameContext.view)
-    setPlayerPick(initialGameContext.playerPick)
-    setHousePick(initialGameContext.housePick)
-    setResult(initialGameContext.result)
+    resetGameState()
   }, [])
 
   useEffect(() => {
@@ -70,6 +74,11 @@ export const GameProvider = ({ children }: GameProviderProps) => {
       localStorage.setItem('score', JSON.stringify(score))
     }
   }, [score])
+
+  useEffect(() => {
+    // Reset game state when mode changes
+    resetGameState()
+  }, [mode])
 
   useEffect(() => {
     const localScore = localStorage.getItem('score')

@@ -2,7 +2,7 @@ import { act } from 'react-dom/test-utils'
 import userEvent from '@testing-library/user-event'
 
 import { render, screen } from 'test'
-import { MoveOption } from 'types'
+import { MoveOption, RPSOption } from 'types'
 import { GameProvider, ModalProvider } from 'context'
 
 import App from './App'
@@ -314,115 +314,177 @@ describe('App', () => {
     jest.useRealTimers()
   })
 
-  it('resets the score to 0 when Lizard-Spock mode switch is enabled', async () => {
-    jest.useFakeTimers()
-    setup()
+  describe('Lizard-Spock mode', () => {
+    it('displays 5 options (rock, paper, scirors, lizard, spock) in option picker when Lizard-Spock mode switch is enabled', async () => {
+      setup()
 
-    const optionPicked = mockPlayerPick
-    const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
+      // Assert on default options (rock, paper, scirrors)
+      Object.values(RPSOption).forEach((option) => {
+        expect(screen.getByRole('radio', { name: new RegExp(option) })).toBeInTheDocument()
+      })
 
-    expect(screen.getByTestId('score-value').textContent).toBe('0')
+      // Open Settings modal
+      await userEvent.click(screen.getByLabelText('settings icon'))
 
-    const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
-    await ue.click(optionPickedEl)
+      // Enable Lizard-Spock mode
+      await userEvent.click(screen.getByTestId('lizard-spock-switch'))
 
-    // Run first setTimeout that shows the house pick
-    act(() => {
-      jest.runAllTimers()
+      // Close Settings modal
+      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+
+      // Assert on new options (rock, paper, scissors, lizard, spock)
+      Object.values(MoveOption).forEach((option) => {
+        expect(screen.getByRole('radio', { name: new RegExp(option) })).toBeInTheDocument()
+      })
     })
 
-    expect(screen.getByTestId('score-value').textContent).toBe('0')
+    it('changes view to option picker view when Lizard-Spock mode switch is enabled', async () => {
+      jest.useFakeTimers()
+      setup()
+      const optionPick = mockPlayerPick
+      const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
 
-    // Run second setTimeout that shows the results
-    act(() => {
-      jest.runAllTimers()
+      // Click on an option
+      await ue.click(screen.getByRole('radio', { name: new RegExp(optionPick) }))
+
+      // Run first setTimeout that shows the house pick
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      // Assert on changing the view to results area
+      expect(screen.getByText('You picked')).toBeInTheDocument()
+
+      // Open Settings modal
+      await ue.click(screen.getByLabelText('settings icon'))
+
+      // Enable Lizard-Spock mode
+      await ue.click(screen.getByTestId('lizard-spock-switch'))
+
+      // Close Settings modal
+      await ue.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+
+      // Assert that results area is not shown anymore
+      expect(screen.queryByText('You picked')).not.toBeInTheDocument()
+
+      // Assert that view has changed back to option picker
+      Object.values(MoveOption).forEach((option) => {
+        expect(screen.getByRole('radio', { name: new RegExp(option) })).toBeInTheDocument()
+      })
+
+      jest.useRealTimers()
     })
 
-    expect(screen.getByTestId('score-value').textContent).toBe('1')
+    it('resets the score to 0 when Lizard-Spock mode switch is enabled', async () => {
+      jest.useFakeTimers()
+      setup()
 
-    const settingsIcon = screen.getByLabelText('settings icon')
-    await ue.click(settingsIcon)
+      const optionPicked = mockPlayerPick
+      const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
 
-    expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
+      expect(screen.getByTestId('score-value').textContent).toBe('0')
 
-    const lizardSpockModeSwitch = screen.getByTestId('lizard-spock-switch')
-    await ue.click(lizardSpockModeSwitch)
+      const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+      await ue.click(optionPickedEl)
 
-    expect(screen.getByTestId('score-value').textContent).toBe('0')
+      // Run first setTimeout that shows the house pick
+      act(() => {
+        jest.runAllTimers()
+      })
 
-    jest.useRealTimers()
-  })
+      expect(screen.getByTestId('score-value').textContent).toBe('0')
 
-  it('persists the Lizard-spock mode switch state after closing Settings modal modal', async () => {
-    setup()
+      // Run second setTimeout that shows the results
+      act(() => {
+        jest.runAllTimers()
+      })
 
-    // Open Settings modal
-    await userEvent.click(screen.getByLabelText('settings icon'))
+      expect(screen.getByTestId('score-value').textContent).toBe('1')
 
-    expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
-    expect(screen.getByRole('checkbox')).not.toBeChecked()
+      const settingsIcon = screen.getByLabelText('settings icon')
+      await ue.click(settingsIcon)
 
-    // Enable Lizard-Spock mode
-    await userEvent.click(screen.getByTestId('lizard-spock-switch'))
+      expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
 
-    expect(screen.getByRole('checkbox')).toBeChecked()
+      const lizardSpockModeSwitch = screen.getByTestId('lizard-spock-switch')
+      await ue.click(lizardSpockModeSwitch)
 
-    // Close Settings modal
-    await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      expect(screen.getByTestId('score-value').textContent).toBe('0')
 
-    // Open Settings modal again
-    await userEvent.click(screen.getByLabelText('settings icon'))
+      jest.useRealTimers()
+    })
 
-    expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
-    expect(screen.getByRole('checkbox')).toBeChecked()
-  })
+    it('persists the Lizard-spock mode switch state after closing Settings modal modal', async () => {
+      setup()
 
-  it('updates header text to "rock paper scissors lizard spock" after enabling "lizard-spock" mode', async () => {
-    setup()
+      // Open Settings modal
+      await userEvent.click(screen.getByLabelText('settings icon'))
 
-    // Assert on default header text
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/rock paper scissors/i)
+      expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
+      expect(screen.getByRole('checkbox')).not.toBeChecked()
 
-    // Open Settings modal
-    await userEvent.click(screen.getByLabelText('settings icon'))
+      // Enable Lizard-Spock mode
+      await userEvent.click(screen.getByTestId('lizard-spock-switch'))
 
-    // Enable Lizard-Spock mode
-    await userEvent.click(screen.getByTestId('lizard-spock-switch'))
+      expect(screen.getByRole('checkbox')).toBeChecked()
 
-    // Close Settings modal
-    await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      // Close Settings modal
+      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
 
-    // Assert on new header text
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      /rock paper scissors lizard spock/i
-    )
-  })
+      // Open Settings modal again
+      await userEvent.click(screen.getByLabelText('settings icon'))
 
-  it('updates game rules in rules modal to include lizard and spock after enabling "lizard-spock" mode', async () => {
-    setup()
+      expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
+      expect(screen.getByRole('checkbox')).toBeChecked()
+    })
 
-    // Open Rules modal
-    await userEvent.click(screen.getByRole('button', { name: /rules/i }))
+    it('updates header text to "rock paper scissors lizard spock" after enabling "lizard-spock" mode', async () => {
+      setup()
 
-    // Assert on default rules image
-    expect(screen.getByLabelText('rps-rules-image')).toBeInTheDocument()
+      // Assert on default header text
+      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/rock paper scissors/i)
 
-    // Close Rules modal
-    await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      // Open Settings modal
+      await userEvent.click(screen.getByLabelText('settings icon'))
 
-    // Open Settings modal
-    await userEvent.click(screen.getByLabelText('settings icon'))
+      // Enable Lizard-Spock mode
+      await userEvent.click(screen.getByTestId('lizard-spock-switch'))
 
-    // Enable Lizard-Spock mode
-    await userEvent.click(screen.getByTestId('lizard-spock-switch'))
+      // Close Settings modal
+      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
 
-    // Close Settings modal
-    await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+      // Assert on new header text
+      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+        /rock paper scissors lizard spock/i
+      )
+    })
 
-    // Open Rules modal
-    await userEvent.click(screen.getByRole('button', { name: /rules/i }))
+    it('updates game rules in rules modal to include lizard and spock after enabling "lizard-spock" mode', async () => {
+      setup()
 
-    // Assert on new rules image
-    expect(screen.getByLabelText('rpsls-rules-image')).toBeInTheDocument()
+      // Open Rules modal
+      await userEvent.click(screen.getByRole('button', { name: /rules/i }))
+
+      // Assert on default rules image
+      expect(screen.getByLabelText('rps-rules-image')).toBeInTheDocument()
+
+      // Close Rules modal
+      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+
+      // Open Settings modal
+      await userEvent.click(screen.getByLabelText('settings icon'))
+
+      // Enable Lizard-Spock mode
+      await userEvent.click(screen.getByTestId('lizard-spock-switch'))
+
+      // Close Settings modal
+      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+
+      // Open Rules modal
+      await userEvent.click(screen.getByRole('button', { name: /rules/i }))
+
+      // Assert on new rules image
+      expect(screen.getByLabelText('rpsls-rules-image')).toBeInTheDocument()
+    })
   })
 })
