@@ -71,7 +71,7 @@ const SettingsItem = ({ label, description, actionComponent }: SettingsItemProps
 
 export const SettingsModal = () => {
   const { closeModal } = useModalContext()
-  const { mode, resetScore, setMode } = useGameContext()
+  const { mode, resetScore, changeMode } = useGameContext()
 
   const handleCloseModal = () => {
     closeModal()
@@ -84,8 +84,7 @@ export const SettingsModal = () => {
   }
 
   const handleLizardSpockSwitchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    resetScore()
-    setMode(e.target.checked ? Mode.RockPaperScissorsLizardSpock : Mode.RockPaperScissors)
+    changeMode(e.target.checked ? Mode.RockPaperScissorsLizardSpock : Mode.RockPaperScissors)
   }
 
   return (

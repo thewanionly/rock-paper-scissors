@@ -80,7 +80,7 @@ export const Header = () => {
       <S.HeaderTitle isLizardSpockMode={mode === Mode.RockPaperScissorsLizardSpock}>
         <HeaderTitleComponent />
       </S.HeaderTitle>
-      <ScoreCard score={score} />
+      <ScoreCard score={score[mode]} />
     </S.Header>
   )
 }

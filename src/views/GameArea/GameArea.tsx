@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { MoveOption, Result, View } from 'types'
 import { useGameContext } from 'context'
+import useEffectOnUpdate from 'hooks/useEffectOnUpdate'
 
 import { OptionPicker } from './OptionPicker'
 import { ResultsArea } from './ResultsArea'
@@ -49,13 +50,13 @@ export const GameArea = () => {
     }
   }, [playerPick, setView])
 
-  useEffect(() => {
+  useEffectOnUpdate(() => {
     if (view === View.ResultsArea) {
       setTimeout(() => {
         setHousePick(pickHouseOption(mode))
       }, HOUSE_PICK_DELAY)
     }
-  }, [view, setHousePick, mode])
+  }, [view, setHousePick])
 
   useEffect(() => {
     if (playerPick && housePick) {
