@@ -20,7 +20,9 @@ describe('SettingsModal', () => {
   it('displays Reset score description', () => {
     render(<SettingsModal />)
 
-    const resetScoreDescription = screen.getByText(/This will reset your score back to zero./i)
+    const resetScoreDescription = screen.getByText(
+      /This will reset your current mode's score back to zero./i
+    )
     expect(resetScoreDescription).toBeInTheDocument()
   })
 
@@ -34,7 +36,7 @@ describe('SettingsModal', () => {
   it('displays Lizard-Spock mode label', () => {
     render(<SettingsModal />)
 
-    const lizardSpockMode = screen.getByText(/enable "lizard-spock" mode/i)
+    const lizardSpockMode = screen.getByText(/"lizard-spock" mode/i)
     expect(lizardSpockMode).toBeInTheDocument()
   })
 
@@ -42,7 +44,7 @@ describe('SettingsModal', () => {
     render(<SettingsModal />)
 
     const lizardSpockModeDescription = screen.getByText(
-      /This will change the game mode to "lizard-spock". Take note that this will reset your score in your current game mode./i
+      /Enabling this will change the game mode to "lizard-spock". This will still persist your scores in all game modes./i
     )
     expect(lizardSpockModeDescription).toBeInTheDocument()
   })

@@ -93,7 +93,7 @@ export const SettingsModal = () => {
         <li>
           <SettingsItem
             label="Reset score"
-            description="This will reset your score back to zero."
+            description="This will reset your current mode's score back to zero."
             actionComponent={
               <S.ResetButton color={ButtonColor.DANGER} onClick={handleResetButtonClick}>
                 Reset
@@ -103,8 +103,8 @@ export const SettingsModal = () => {
         </li>
         <li>
           <SettingsItem
-            label={`Enable "Lizard-Spock" mode`}
-            description={`This will change the game mode to "lizard-spock". Take note that this will reset your score in your current game mode.`}
+            label={`"Lizard-Spock" mode`}
+            description={`Enabling this will change the game mode to "lizard-spock". This will still persist your scores in all game modes.`}
             actionComponent={
               <Switch
                 id="lizard-spock"
