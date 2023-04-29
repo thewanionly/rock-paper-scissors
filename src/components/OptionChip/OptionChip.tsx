@@ -1,7 +1,7 @@
 import styled, { DefaultTheme, css } from 'styled-components'
 
 import { Icon, IconName } from 'components/Icon'
-import { NewOption } from 'types'
+import { MoveOption } from 'types'
 
 const outerCircle = css`
   position: absolute;
@@ -12,21 +12,21 @@ const outerCircle = css`
   border-radius: 50%;
 `
 
-const outerCircleBg = (theme: DefaultTheme, option: NewOption, isShadow?: boolean) =>
+const outerCircleBg = (theme: DefaultTheme, option: MoveOption, isShadow?: boolean) =>
   ({
-    [NewOption.Paper]: css`
+    [MoveOption.Paper]: css`
       background-color: ${isShadow ? theme.colors.paperChipShadow : theme.colors.paperChipBg};
     `,
-    [NewOption.Rock]: css`
+    [MoveOption.Rock]: css`
       background-color: ${isShadow ? theme.colors.rockChipShadow : theme.colors.rockChipBg};
     `,
-    [NewOption.Scissors]: css`
+    [MoveOption.Scissors]: css`
       background-color: ${isShadow ? theme.colors.scissorsChipShadow : theme.colors.scissorsChipBg};
     `,
-    [NewOption.Lizard]: css`
+    [MoveOption.Lizard]: css`
       background-color: ${isShadow ? theme.colors.lizardChipShadow : theme.colors.lizardChipBg};
     `,
-    [NewOption.Spock]: css`
+    [MoveOption.Spock]: css`
       background-color: ${isShadow ? theme.colors.spockChipShadow : theme.colors.spockChipBg};
     `,
   }[option])
@@ -85,20 +85,20 @@ const S = {
 }
 
 const OptionIconmap = {
-  [NewOption.Rock]: IconName.ROCK,
-  [NewOption.Paper]: IconName.PAPER,
-  [NewOption.Scissors]: IconName.SCISSORS,
-  [NewOption.Lizard]: IconName.LIZARD,
-  [NewOption.Spock]: IconName.SPOCK,
+  [MoveOption.Rock]: IconName.ROCK,
+  [MoveOption.Paper]: IconName.PAPER,
+  [MoveOption.Scissors]: IconName.SCISSORS,
+  [MoveOption.Lizard]: IconName.LIZARD,
+  [MoveOption.Spock]: IconName.SPOCK,
 } as const
 
 type OptionChipProps = {
   className?: string
-  option: NewOption
+  option: MoveOption
 }
 
 type OptionChipOuterCircleProps = {
-  option: NewOption
+  option: MoveOption
 }
 
 export const OptionChip = ({ className = '', option }: OptionChipProps) => (

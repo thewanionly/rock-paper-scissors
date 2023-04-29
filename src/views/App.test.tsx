@@ -2,18 +2,18 @@ import { act } from 'react-dom/test-utils'
 import userEvent from '@testing-library/user-event'
 
 import { render, screen } from 'test'
-import { Option } from 'types'
+import { MoveOption } from 'types'
 import { GameProvider, ModalProvider } from 'context'
 
 import App from './App'
 import { HOUSE_PICK_DELAY, RESULTS_TEXT_DELAY } from './GameArea'
 import { IconName } from 'components'
 
-const mockPlayerPick = Option.Paper
+const mockPlayerPick = MoveOption.Paper
 
 // mock house pick to Rock, so result would make player win and will update the score
 jest.mock('views/GameArea/services/pickHouseOption', () => ({
-  pickHouseOption: () => Option.Rock,
+  pickHouseOption: () => MoveOption.Rock,
 }))
 
 const setup = () => {

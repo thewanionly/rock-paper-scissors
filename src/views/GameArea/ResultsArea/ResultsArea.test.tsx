@@ -1,13 +1,13 @@
 import { render, screen } from 'test'
-import { Option, Result } from 'types'
+import { MoveOption, Result } from 'types'
 
 import { ResultTextMap, ResultsArea } from './ResultsArea'
 import { RESULTS_TEXT_DELAY } from '../GameArea'
 import { act } from 'react-dom/test-utils'
 
 const mockGameContextValue = {
-  playerPick: Option.Paper,
-  housePick: Option.Rock,
+  playerPick: MoveOption.Paper,
+  housePick: MoveOption.Rock,
   result: Result.Draw,
 }
 

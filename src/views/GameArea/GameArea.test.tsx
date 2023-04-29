@@ -2,7 +2,7 @@ import { act } from 'react-dom/test-utils'
 import userEvent from '@testing-library/user-event'
 
 import { render, screen } from 'test'
-import { Option } from 'types'
+import { MoveOption, RPSOption } from 'types'
 import { GameProvider } from 'context'
 
 import { GameArea, HOUSE_PICK_DELAY, PLAY_AGAIN_BUTTON_DELAY, RESULTS_TEXT_DELAY } from './GameArea'
@@ -15,13 +15,13 @@ const setup = () => {
   )
 }
 
-const optionArray = Object.values(Option)
+const rpsModeOptions = Object.values(RPSOption)
 
 describe('GameArea', () => {
-  it('displays option picker view by default', () => {
+  it('displays option picker view of RPS mode by default', () => {
     setup()
 
-    optionArray.forEach((option) => {
+    rpsModeOptions.forEach((option) => {
       expect(screen.getByRole('radio', { name: new RegExp(option) })).toBeInTheDocument()
     })
   })
@@ -29,7 +29,7 @@ describe('GameArea', () => {
   it(`displays user's picked option in results area view after user picked an option`, async () => {
     setup()
 
-    const optionPicked = Option.Rock
+    const optionPicked = MoveOption.Rock
     const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
 
     await userEvent.click(optionPickedEl)
@@ -41,7 +41,7 @@ describe('GameArea', () => {
     jest.useFakeTimers()
     setup()
 
-    const optionPicked = Option.Rock
+    const optionPicked = MoveOption.Rock
     const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
 
     const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
@@ -64,7 +64,7 @@ describe('GameArea', () => {
     jest.useFakeTimers()
     setup()
 
-    const optionPicked = Option.Rock
+    const optionPicked = MoveOption.Rock
     const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
 
     const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
@@ -97,7 +97,7 @@ describe('GameArea', () => {
     jest.useFakeTimers()
     setup()
 
-    const optionPicked = Option.Rock
+    const optionPicked = MoveOption.Rock
     const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
 
     const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
@@ -129,11 +129,11 @@ describe('GameArea', () => {
     jest.useRealTimers()
   })
 
-  it(`displays option picker view after clicking Play Again button`, async () => {
+  it(`displays option picker view of RPS mode after clicking Play Again button`, async () => {
     jest.useFakeTimers()
     setup()
 
-    const optionPicked = Option.Rock
+    const optionPicked = MoveOption.Rock
     const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
 
     const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
@@ -165,7 +165,7 @@ describe('GameArea', () => {
 
     await ue.click(playAgainButton)
 
-    optionArray.forEach((option) => {
+    rpsModeOptions.forEach((option) => {
       expect(screen.getByRole('radio', { name: new RegExp(option) })).toBeInTheDocument()
     })
 
@@ -176,7 +176,7 @@ describe('GameArea', () => {
     jest.useFakeTimers()
     setup()
 
-    const optionPicked = Option.Rock
+    const optionPicked = MoveOption.Rock
     const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
 
     const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
@@ -206,7 +206,7 @@ describe('GameArea', () => {
     await ue.click(screen.getByRole('button', { name: /play again/i }))
 
     // Click on chosen option
-    const chosenOption = Option.Paper
+    const chosenOption = MoveOption.Paper
     await ue.click(screen.getByRole('radio', { name: new RegExp(chosenOption) }))
 
     // Check if chosen option is displayed

@@ -2,18 +2,18 @@ import { render, screen, within } from 'test'
 
 import { IconName } from 'components/Icon'
 import { theme } from 'styles'
-import { NewOption } from 'types'
+import { MoveOption } from 'types'
 
 import { OptionChip } from './OptionChip'
 
 describe('OptionChip', () => {
   it.each`
-    option                | iconName
-    ${NewOption.Rock}     | ${IconName.ROCK}
-    ${NewOption.Paper}    | ${IconName.PAPER}
-    ${NewOption.Scissors} | ${IconName.SCISSORS}
-    ${NewOption.Lizard}   | ${IconName.LIZARD}
-    ${NewOption.Spock}    | ${IconName.SPOCK}
+    option                 | iconName
+    ${MoveOption.Rock}     | ${IconName.ROCK}
+    ${MoveOption.Paper}    | ${IconName.PAPER}
+    ${MoveOption.Scissors} | ${IconName.SCISSORS}
+    ${MoveOption.Lizard}   | ${IconName.LIZARD}
+    ${MoveOption.Spock}    | ${IconName.SPOCK}
   `('displays $iconName icon when option is $option', ({ iconName, option }) => {
     render(<OptionChip option={option} />)
 
@@ -23,12 +23,12 @@ describe('OptionChip', () => {
   })
 
   it.each`
-    option                | bgColor                        | boxShadowColor
-    ${NewOption.Rock}     | ${theme.colors.rockChipBg}     | ${theme.colors.rockChipShadow}
-    ${NewOption.Paper}    | ${theme.colors.paperChipBg}    | ${theme.colors.paperChipShadow}
-    ${NewOption.Scissors} | ${theme.colors.scissorsChipBg} | ${theme.colors.scissorsChipShadow}
-    ${NewOption.Lizard}   | ${theme.colors.lizardChipBg}   | ${theme.colors.lizardChipShadow}
-    ${NewOption.Spock}    | ${theme.colors.spockChipBg}    | ${theme.colors.spockChipShadow}
+    option                 | bgColor                        | boxShadowColor
+    ${MoveOption.Rock}     | ${theme.colors.rockChipBg}     | ${theme.colors.rockChipShadow}
+    ${MoveOption.Paper}    | ${theme.colors.paperChipBg}    | ${theme.colors.paperChipShadow}
+    ${MoveOption.Scissors} | ${theme.colors.scissorsChipBg} | ${theme.colors.scissorsChipShadow}
+    ${MoveOption.Lizard}   | ${theme.colors.lizardChipBg}   | ${theme.colors.lizardChipShadow}
+    ${MoveOption.Spock}    | ${theme.colors.spockChipBg}    | ${theme.colors.spockChipShadow}
   `(
     'sets OptionChip outer circle bg color to $bgColor and box shadow color to $boxShadowColor when option is $option',
     ({ option, bgColor, boxShadowColor }) => {

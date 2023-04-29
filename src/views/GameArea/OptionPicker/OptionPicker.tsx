@@ -2,7 +2,7 @@ import { FormEvent } from 'react'
 import styled, { css } from 'styled-components'
 
 import { OptionChip } from 'components'
-import { Mode, NewOption, Option } from 'types'
+import { Mode, MoveOption } from 'types'
 import invertedTriangle from 'assets/images/inverted_triangle.svg'
 import pentagon from 'assets/images/pentagon.svg'
 
@@ -132,7 +132,7 @@ type OptionPickerStyleProps = {
 
 type OptionPickerProps = {
   mode?: Mode
-  onOptionPicked: (option: Option) => void
+  onOptionPicked: (option: MoveOption) => void
 }
 
 export const OptionPicker = ({
@@ -142,7 +142,7 @@ export const OptionPicker = ({
   const handleOptionPicked = (event: FormEvent<HTMLFieldSetElement>) => {
     const { value } = event.target as HTMLInputElement
 
-    onOptionPicked(value as Option)
+    onOptionPicked(value as MoveOption)
   }
 
   const SM = StylesMap[mode]
@@ -152,57 +152,57 @@ export const OptionPicker = ({
       onChange={handleOptionPicked}
       isLizardSpockMode={mode === Mode.RockPaperScissorsLizardSpock}
     >
-      <SM.PaperOptionContainer htmlFor={NewOption.Paper}>
+      <SM.PaperOptionContainer htmlFor={MoveOption.Paper}>
         <S.OptionPickerItemRadioInput
           type="radio"
-          id={NewOption.Paper}
+          id={MoveOption.Paper}
           name="option"
-          value={NewOption.Paper}
-          aria-label={NewOption.Paper}
+          value={MoveOption.Paper}
+          aria-label={MoveOption.Paper}
         />
-        <StyledOptionChip option={NewOption.Paper} />
+        <StyledOptionChip option={MoveOption.Paper} />
       </SM.PaperOptionContainer>
-      <SM.ScissorsOptionContainer htmlFor={NewOption.Scissors}>
+      <SM.ScissorsOptionContainer htmlFor={MoveOption.Scissors}>
         <S.OptionPickerItemRadioInput
           type="radio"
-          id={NewOption.Scissors}
+          id={MoveOption.Scissors}
           name="option"
-          value={NewOption.Scissors}
-          aria-label={NewOption.Scissors}
+          value={MoveOption.Scissors}
+          aria-label={MoveOption.Scissors}
         />
-        <StyledOptionChip option={NewOption.Scissors} />
+        <StyledOptionChip option={MoveOption.Scissors} />
       </SM.ScissorsOptionContainer>
-      <SM.RockOptionContainer htmlFor={NewOption.Rock}>
+      <SM.RockOptionContainer htmlFor={MoveOption.Rock}>
         <S.OptionPickerItemRadioInput
           type="radio"
-          id={NewOption.Rock}
+          id={MoveOption.Rock}
           name="option"
-          value={NewOption.Rock}
-          aria-label={NewOption.Rock}
+          value={MoveOption.Rock}
+          aria-label={MoveOption.Rock}
         />
-        <StyledOptionChip option={NewOption.Rock} />
+        <StyledOptionChip option={MoveOption.Rock} />
       </SM.RockOptionContainer>
       {mode === Mode.RockPaperScissorsLizardSpock && (
         <>
-          <SM.LizardOptionContainer htmlFor={NewOption.Lizard}>
+          <SM.LizardOptionContainer htmlFor={MoveOption.Lizard}>
             <S.OptionPickerItemRadioInput
               type="radio"
-              id={NewOption.Lizard}
+              id={MoveOption.Lizard}
               name="option"
-              value={NewOption.Lizard}
-              aria-label={NewOption.Lizard}
+              value={MoveOption.Lizard}
+              aria-label={MoveOption.Lizard}
             />
-            <StyledOptionChip option={NewOption.Lizard} />
+            <StyledOptionChip option={MoveOption.Lizard} />
           </SM.LizardOptionContainer>
-          <SM.SpockOptionContainer htmlFor={NewOption.Spock}>
+          <SM.SpockOptionContainer htmlFor={MoveOption.Spock}>
             <S.OptionPickerItemRadioInput
               type="radio"
-              id={NewOption.Spock}
+              id={MoveOption.Spock}
               name="option"
-              value={NewOption.Spock}
-              aria-label={NewOption.Spock}
+              value={MoveOption.Spock}
+              aria-label={MoveOption.Spock}
             />
-            <StyledOptionChip option={NewOption.Spock} />
+            <StyledOptionChip option={MoveOption.Spock} />
           </SM.SpockOptionContainer>
         </>
       )}

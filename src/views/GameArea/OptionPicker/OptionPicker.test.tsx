@@ -1,15 +1,15 @@
 import userEvent from '@testing-library/user-event'
 
 import { render, screen, waitFor } from 'test'
-import { Mode, NewOption, Option } from 'types'
+import { Mode, MoveOption, RPSOption } from 'types'
 
 import { OptionPicker } from './OptionPicker'
 
 describe('OptionPicker', () => {
-  it('displays 3 options (rock, paper, and scissors) by default mode', () => {
+  it('displays 3 options (rock, paper, and scissors) by default mode (RPS mode)', () => {
     render(<OptionPicker onOptionPicked={(option) => option} />)
 
-    const optionArray = Object.values(Option)
+    const optionArray = Object.values(RPSOption)
 
     optionArray.forEach((option) => {
       expect(screen.getByRole('radio', { name: new RegExp(option) })).toBeInTheDocument()
@@ -21,7 +21,7 @@ describe('OptionPicker', () => {
       <OptionPicker mode={Mode.RockPaperScissorsLizardSpock} onOptionPicked={(option) => option} />
     )
 
-    const optionArray = Object.values(NewOption)
+    const optionArray = Object.values(MoveOption)
 
     optionArray.forEach((option) => {
       expect(screen.getByRole('radio', { name: new RegExp(option) })).toBeInTheDocument()
@@ -29,7 +29,7 @@ describe('OptionPicker', () => {
   })
 
   it('calls the function passed in the `onOptionPicked` prop when one of the options is clicked', async () => {
-    const optionPicked = Option.Paper
+    const optionPicked = MoveOption.Paper
     const onOptionPickedHandler = jest.fn()
     render(<OptionPicker onOptionPicked={onOptionPickedHandler} />)
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
 
-import { Option, Result, View } from 'types'
+import { MoveOption, Result, View } from 'types'
 import { useGameContext } from 'context'
 
 import { OptionPicker } from './OptionPicker'
@@ -39,7 +39,7 @@ export const GameArea = () => {
     setView,
   } = useGameContext()
 
-  const handleOptionPicked = (option: Option) => {
+  const handleOptionPicked = (option: MoveOption) => {
     setPlayerPick(option)
   }
 

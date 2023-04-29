@@ -1,7 +1,7 @@
-import { NewOption } from 'types'
+import { MoveOption } from 'types'
 
-export const pickHouseOption = (): NewOption => {
+export const pickHouseOption = (): MoveOption => {
   const randomIndex = Math.floor(Math.random() * 3)
 
-  return Object.values(NewOption)[randomIndex]
+  return Object.values(MoveOption)[randomIndex]
 }

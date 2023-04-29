@@ -1,11 +1,11 @@
-import { NewOption, Result } from 'types'
+import { MoveOption, Result } from 'types'
 import { playGame } from './playGame'
 
 describe('playGame', () => {
   describe('Paper beats Rock', () => {
     it.each([
-      { userPick: NewOption.Paper, housePick: NewOption.Rock, expected: Result.UserWins },
-      { userPick: NewOption.Rock, housePick: NewOption.Paper, expected: Result.UserLoses },
+      { userPick: MoveOption.Paper, housePick: MoveOption.Rock, expected: Result.UserWins },
+      { userPick: MoveOption.Rock, housePick: MoveOption.Paper, expected: Result.UserLoses },
     ])(
       'results in user $expected when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick, expected }) => {
@@ -18,8 +18,8 @@ describe('playGame', () => {
 
   describe('Paper beats Spock', () => {
     it.each([
-      { userPick: NewOption.Paper, housePick: NewOption.Spock, expected: Result.UserWins },
-      { userPick: NewOption.Spock, housePick: NewOption.Paper, expected: Result.UserLoses },
+      { userPick: MoveOption.Paper, housePick: MoveOption.Spock, expected: Result.UserWins },
+      { userPick: MoveOption.Spock, housePick: MoveOption.Paper, expected: Result.UserLoses },
     ])(
       'results in user $expected when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick, expected }) => {
@@ -32,8 +32,8 @@ describe('playGame', () => {
 
   describe('Rock beats Scissors', () => {
     it.each([
-      { userPick: NewOption.Rock, housePick: NewOption.Scissors, expected: Result.UserWins },
-      { userPick: NewOption.Scissors, housePick: NewOption.Rock, expected: Result.UserLoses },
+      { userPick: MoveOption.Rock, housePick: MoveOption.Scissors, expected: Result.UserWins },
+      { userPick: MoveOption.Scissors, housePick: MoveOption.Rock, expected: Result.UserLoses },
     ])(
       'results in user $expected when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick, expected }) => {
@@ -46,8 +46,8 @@ describe('playGame', () => {
 
   describe('Rock beats Lizard', () => {
     it.each([
-      { userPick: NewOption.Rock, housePick: NewOption.Lizard, expected: Result.UserWins },
-      { userPick: NewOption.Lizard, housePick: NewOption.Rock, expected: Result.UserLoses },
+      { userPick: MoveOption.Rock, housePick: MoveOption.Lizard, expected: Result.UserWins },
+      { userPick: MoveOption.Lizard, housePick: MoveOption.Rock, expected: Result.UserLoses },
     ])(
       'results in user $expected when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick, expected }) => {
@@ -60,8 +60,8 @@ describe('playGame', () => {
 
   describe('Scissors beats Paper', () => {
     it.each([
-      { userPick: NewOption.Scissors, housePick: NewOption.Paper, expected: Result.UserWins },
-      { userPick: NewOption.Paper, housePick: NewOption.Scissors, expected: Result.UserLoses },
+      { userPick: MoveOption.Scissors, housePick: MoveOption.Paper, expected: Result.UserWins },
+      { userPick: MoveOption.Paper, housePick: MoveOption.Scissors, expected: Result.UserLoses },
     ])(
       'results in user $expected when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick, expected }) => {
@@ -74,8 +74,8 @@ describe('playGame', () => {
 
   describe('Scissors beats Lizard', () => {
     it.each([
-      { userPick: NewOption.Scissors, housePick: NewOption.Lizard, expected: Result.UserWins },
-      { userPick: NewOption.Lizard, housePick: NewOption.Scissors, expected: Result.UserLoses },
+      { userPick: MoveOption.Scissors, housePick: MoveOption.Lizard, expected: Result.UserWins },
+      { userPick: MoveOption.Lizard, housePick: MoveOption.Scissors, expected: Result.UserLoses },
     ])(
       'results in user $expected when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick, expected }) => {
@@ -88,8 +88,8 @@ describe('playGame', () => {
 
   describe('Lizard beats Spock', () => {
     it.each([
-      { userPick: NewOption.Lizard, housePick: NewOption.Spock, expected: Result.UserWins },
-      { userPick: NewOption.Spock, housePick: NewOption.Lizard, expected: Result.UserLoses },
+      { userPick: MoveOption.Lizard, housePick: MoveOption.Spock, expected: Result.UserWins },
+      { userPick: MoveOption.Spock, housePick: MoveOption.Lizard, expected: Result.UserLoses },
     ])(
       'results in user $expected when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick, expected }) => {
@@ -102,8 +102,8 @@ describe('playGame', () => {
 
   describe('Lizard beats Paper', () => {
     it.each([
-      { userPick: NewOption.Lizard, housePick: NewOption.Paper, expected: Result.UserWins },
-      { userPick: NewOption.Paper, housePick: NewOption.Lizard, expected: Result.UserLoses },
+      { userPick: MoveOption.Lizard, housePick: MoveOption.Paper, expected: Result.UserWins },
+      { userPick: MoveOption.Paper, housePick: MoveOption.Lizard, expected: Result.UserLoses },
     ])(
       'results in user $expected when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick, expected }) => {
@@ -116,8 +116,8 @@ describe('playGame', () => {
 
   describe('Spock beats Scissors', () => {
     it.each([
-      { userPick: NewOption.Spock, housePick: NewOption.Scissors, expected: Result.UserWins },
-      { userPick: NewOption.Scissors, housePick: NewOption.Spock, expected: Result.UserLoses },
+      { userPick: MoveOption.Spock, housePick: MoveOption.Scissors, expected: Result.UserWins },
+      { userPick: MoveOption.Scissors, housePick: MoveOption.Spock, expected: Result.UserLoses },
     ])(
       'results in user $expected when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick, expected }) => {
@@ -130,8 +130,8 @@ describe('playGame', () => {
 
   describe('Spock beats Rock', () => {
     it.each([
-      { userPick: NewOption.Spock, housePick: NewOption.Rock, expected: Result.UserWins },
-      { userPick: NewOption.Rock, housePick: NewOption.Spock, expected: Result.UserLoses },
+      { userPick: MoveOption.Spock, housePick: MoveOption.Rock, expected: Result.UserWins },
+      { userPick: MoveOption.Rock, housePick: MoveOption.Spock, expected: Result.UserLoses },
     ])(
       'results in user $expected when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick, expected }) => {
@@ -144,11 +144,11 @@ describe('playGame', () => {
 
   describe('draw', () => {
     it.each([
-      { userPick: NewOption.Paper, housePick: NewOption.Paper },
-      { userPick: NewOption.Rock, housePick: NewOption.Rock },
-      { userPick: NewOption.Scissors, housePick: NewOption.Scissors },
-      { userPick: NewOption.Lizard, housePick: NewOption.Lizard },
-      { userPick: NewOption.Spock, housePick: NewOption.Spock },
+      { userPick: MoveOption.Paper, housePick: MoveOption.Paper },
+      { userPick: MoveOption.Rock, housePick: MoveOption.Rock },
+      { userPick: MoveOption.Scissors, housePick: MoveOption.Scissors },
+      { userPick: MoveOption.Lizard, housePick: MoveOption.Lizard },
+      { userPick: MoveOption.Spock, housePick: MoveOption.Spock },
     ])(
       'results in draw when user picks $userPick and the house picks $housePick',
       ({ userPick, housePick }) => {

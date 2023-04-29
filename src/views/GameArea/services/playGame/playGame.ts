@@ -1,14 +1,14 @@
-import { NewOption, Result } from 'types'
+import { MoveOption, Result } from 'types'
 
-const WinningCondition = {
-  [NewOption.Paper]: [NewOption.Rock, NewOption.Spock],
-  [NewOption.Rock]: [NewOption.Scissors, NewOption.Lizard],
-  [NewOption.Scissors]: [NewOption.Paper, NewOption.Lizard],
-  [NewOption.Lizard]: [NewOption.Spock, NewOption.Paper],
-  [NewOption.Spock]: [NewOption.Scissors, NewOption.Rock],
+const WinningCondition: Record<MoveOption, MoveOption[]> = {
+  [MoveOption.Paper]: [MoveOption.Rock, MoveOption.Spock],
+  [MoveOption.Rock]: [MoveOption.Scissors, MoveOption.Lizard],
+  [MoveOption.Scissors]: [MoveOption.Paper, MoveOption.Lizard],
+  [MoveOption.Lizard]: [MoveOption.Spock, MoveOption.Paper],
+  [MoveOption.Spock]: [MoveOption.Scissors, MoveOption.Rock],
 }
 
-export const playGame = (userPick: NewOption, housePick: NewOption): Result => {
+export const playGame = (userPick: MoveOption, housePick: MoveOption): Result => {
   if (userPick === housePick) return Result.Draw
 
   if (WinningCondition[userPick].includes(housePick)) return Result.UserWins

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { Mode, Option, Result, View } from 'types'
+import { Mode, MoveOption, Result, View } from 'types'
 
 type GameProviderProps = {
   children: React.ReactNode
@@ -9,15 +9,15 @@ interface GameContextValue {
   mode: Mode
   view: View
   score: number
-  playerPick: Option | null
-  housePick: Option | null
+  playerPick: MoveOption | null
+  housePick: MoveOption | null
   result: Result | null
   setMode: (mode: Mode) => void
   setView: (view: View) => void
   incrementScore: () => void
   resetScore: () => void
-  setPlayerPick: (option: Option | null) => void
-  setHousePick: (option: Option | null) => void
+  setPlayerPick: (option: MoveOption | null) => void
+  setHousePick: (option: MoveOption | null) => void
   setResult: (result: Result | null) => void
   playAgain: () => void
 }
@@ -47,8 +47,8 @@ export const GameProvider = ({ children }: GameProviderProps) => {
   const [mode, setMode] = useState<Mode>(initialGameContext.mode)
   const [view, setView] = useState<View>(initialGameContext.view)
   const [score, setScore] = useState(initialGameContext.score)
-  const [playerPick, setPlayerPick] = useState<Option | null>(initialGameContext.playerPick)
-  const [housePick, setHousePick] = useState<Option | null>(initialGameContext.housePick)
+  const [playerPick, setPlayerPick] = useState<MoveOption | null>(initialGameContext.playerPick)
+  const [housePick, setHousePick] = useState<MoveOption | null>(initialGameContext.housePick)
   const [result, setResult] = useState<Result | null>(initialGameContext.result)
 
   const incrementScore = useCallback(() => setScore((prevScore) => prevScore + 1), [])
