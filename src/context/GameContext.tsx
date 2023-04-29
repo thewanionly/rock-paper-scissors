@@ -1,5 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { Mode, MoveOption, Result, View } from 'types'
+import useEffectOnUpdate from 'hooks/useEffectOnUpdate'
+import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import { Mode, MoveOption, Result, StorageKeys, View } from 'types'
 
 type GameProviderProps = {
   children: React.ReactNode
@@ -44,9 +45,15 @@ const GameContext = createContext<GameContextValue>(initialGameContext)
 export const useGameContext = () => useContext(GameContext)
 
 export const GameProvider = ({ children }: GameProviderProps) => {
-  const [mode, setMode] = useState<Mode>(initialGameContext.mode)
+  const [mode, setMode] = useState<Mode>(() => {
+    const savedMode = localStorage.getItem(StorageKeys.Mode)
+    return savedMode ? JSON.parse(savedMode) : initialGameContext.mode
+  })
+  const [score, setScore] = useState<number>(() => {
+    const savedScore = localStorage.getItem(StorageKeys.Score)
+    return savedScore ? JSON.parse(savedScore) : initialGameContext.score
+  })
   const [view, setView] = useState<View>(initialGameContext.view)
-  const [score, setScore] = useState(initialGameContext.score)
   const [playerPick, setPlayerPick] = useState<MoveOption | null>(initialGameContext.playerPick)
   const [housePick, setHousePick] = useState<MoveOption | null>(initialGameContext.housePick)
   const [result, setResult] = useState<Result | null>(initialGameContext.result)
@@ -69,24 +76,20 @@ export const GameProvider = ({ children }: GameProviderProps) => {
     resetGameState()
   }, [])
 
-  useEffect(() => {
+  useEffectOnUpdate(() => {
     if (score > 0) {
-      localStorage.setItem('score', JSON.stringify(score))
+      // Store score in localStorage
+      localStorage.setItem(StorageKeys.Score, JSON.stringify(score))
     }
   }, [score])
 
-  useEffect(() => {
+  useEffectOnUpdate(() => {
+    // Store mode in localStorage
+    localStorage.setItem(StorageKeys.Mode, JSON.stringify(mode))
+
     // Reset game state when mode changes
     resetGameState()
   }, [mode])
-
-  useEffect(() => {
-    const localScore = localStorage.getItem('score')
-
-    if (localScore) {
-      setScore(JSON.parse(localScore))
-    }
-  }, [setScore])
 
   const value = useMemo(
     () => ({

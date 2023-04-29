@@ -448,6 +448,36 @@ describe('App', () => {
       expect(screen.getByRole('checkbox')).toBeChecked()
     })
 
+    it(`persists the Lizard-spock mode switch state after even after remounting the application`, async () => {
+      const { unmount } = setup()
+
+      // Open Settings modal
+      await userEvent.click(screen.getByLabelText('settings icon'))
+
+      // Enable Lizard-Spock mode
+      await userEvent.click(screen.getByTestId('lizard-spock-switch'))
+
+      // Close Settings modal
+      await userEvent.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+
+      // Assert on new header text
+      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+        /rock paper scissors lizard spock/i
+      )
+
+      // Unmount component
+      unmount()
+
+      // Re-mount component
+      setup()
+
+      // Check if mode is persisted
+      // Assert on new header text
+      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+        /rock paper scissors lizard spock/i
+      )
+    })
+
     it('updates header text to "rock paper scissors lizard spock" after enabling "lizard-spock" mode', async () => {
       setup()
 
