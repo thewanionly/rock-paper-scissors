@@ -434,6 +434,99 @@ describe('App', () => {
       expect(screen.getByLabelText('rpsls-rules-image')).toBeInTheDocument()
     })
 
+    it('persists the scores of both modes when Lizard-Spock mode switch is toggled on or off', async () => {
+      jest.useFakeTimers()
+      setup()
+
+      // Play RPS mode
+      const optionPicked = mockPlayerPick
+      const optionPickedEl = screen.getByRole('radio', { name: new RegExp(optionPicked) })
+
+      // RPS mode initial score is 0
+      expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+      const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+      await ue.click(optionPickedEl)
+
+      // Run first setTimeout that shows the house pick
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+      // Run second setTimeout that shows the results
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      // RPS mode updated score is 1
+      expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+      // Switch mode to RPSLS mode
+      await ue.click(screen.getByLabelText('settings icon'))
+      await ue.click(screen.getByTestId('lizard-spock-switch'))
+
+      // Close Settings modal
+      await ue.click(screen.getByLabelText(`${IconName.CLOSE} icon`))
+
+      // RPSLS mode initial score is 0
+      expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+      // Play RPSLS mode
+      await ue.click(screen.getByRole('radio', { name: new RegExp(optionPicked) }))
+
+      // Run first setTimeout that shows the house pick
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      expect(screen.getByTestId('score-value').textContent).toBe('0')
+
+      // Run second setTimeout that shows the results
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      // RPSLS mode updated score is 1
+      expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+      // Run third setTimeout that shows the play again button
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      // Click on play again
+      await ue.click(screen.getByRole('button', { name: /play again/i }))
+
+      // Play RPSLS mode second round
+      await ue.click(screen.getByRole('radio', { name: new RegExp(optionPicked) }))
+
+      // Run first setTimeout that shows the house pick
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+      // Run second setTimeout that shows the results
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      // RPSLS mode updated score is 2
+      expect(screen.getByTestId('score-value').textContent).toBe('2')
+
+      // Switch mode to RPS mode
+      await ue.click(screen.getByLabelText('settings icon'))
+      await ue.click(screen.getByTestId('lizard-spock-switch'))
+
+      // Assert that RPS mode is 1
+      expect(screen.getByTestId('score-value').textContent).toBe('1')
+
+      jest.useRealTimers()
+    })
+
     it('persists the Lizard-spock mode switch state after closing Settings modal modal', async () => {
       setup()
 
