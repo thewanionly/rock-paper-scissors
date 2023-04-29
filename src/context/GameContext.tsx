@@ -79,13 +79,18 @@ export const GameProvider = ({ children }: GameProviderProps) => {
     [mode]
   )
 
+  // Reset score of current mode back to initial score
   const resetScore = useCallback(() => {
+    // Reset game state when newMode changes
+    resetGameState()
+
+    // Update state
     setScore((prevScore) => ({
       ...prevScore,
       [mode]: initialGameContext.score[mode],
     }))
 
-    // Reset score of current mode back to initial score
+    // Update localStorage
     localStorage.setItem(
       StorageKeys.Score,
       JSON.stringify({
@@ -99,6 +104,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
     // Reset game state when newMode changes
     resetGameState()
 
+    // Update state
     setMode(newMode)
 
     // Store newMode in localStorage
