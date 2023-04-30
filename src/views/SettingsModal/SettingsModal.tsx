@@ -6,6 +6,11 @@ import { Button, ButtonColor, Modal, Switch } from 'components'
 import { Mode } from 'types'
 
 const S = {
+  SettingsModal: styled(Modal)`
+    .modal-body {
+      min-height: 27.1rem;
+    }
+  `,
   SettingsList: styled.ul`
     width: 100%;
     color: black;
@@ -88,7 +93,7 @@ export const SettingsModal = () => {
   }
 
   return (
-    <Modal title="Settings" onClose={handleCloseModal}>
+    <S.SettingsModal title="Settings" onClose={handleCloseModal}>
       <S.SettingsList>
         <li>
           <SettingsItem
@@ -115,6 +120,6 @@ export const SettingsModal = () => {
           />
         </li>
       </S.SettingsList>
-    </Modal>
+    </S.SettingsModal>
   )
 }
