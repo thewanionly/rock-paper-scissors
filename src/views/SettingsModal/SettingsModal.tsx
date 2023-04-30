@@ -80,7 +80,6 @@ export const SettingsModal = () => {
 
   const handleCloseModal = () => {
     closeModal()
-    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleResetButtonClick = () => {

@@ -1,9 +1,22 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 import { Icon, IconName } from 'components/Icon'
 
+const modalBackdropMount = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+}
+
+const modalMount = {
+  initial: { opacity: 0, scale: 0.5 },
+  animate: { y: 0, opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.5, transition: { duration: 0.2 } },
+}
+
 const S = {
-  Modal: styled.div`
+  ModalBackdrop: styled(motion.div)`
     position: fixed;
     top: 0;
     right: 0;
@@ -15,9 +28,9 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${({ theme: { colors } }) => colors.modalOverlay};
+    background-color: ${({ theme: { colors } }) => colors.modalBackdrop};
   `,
-  ModalContent: styled.div`
+  Modal: styled(motion.div)`
     width: 100%;
     height: 100%;
     background-color: ${({ theme: { colors } }) => colors.modalBg};
@@ -93,14 +106,14 @@ type ModalProps = {
 
 export const Modal = ({ className = '', title, children, onClose }: ModalProps) => {
   return (
-    <S.Modal className={className}>
-      <S.ModalContent>
+    <S.ModalBackdrop className={className} {...modalBackdropMount}>
+      <S.Modal {...modalMount}>
         <S.ModalTitle>{title}</S.ModalTitle>
         <S.ModalCloseButton name={IconName.Close} aria-label="close icon" onClick={onClose} />
         <S.ModalBody className="modal-body" data-testid="modal-content">
           {children}
         </S.ModalBody>
-      </S.ModalContent>
-    </S.Modal>
+      </S.Modal>
+    </S.ModalBackdrop>
   )
 }

@@ -241,7 +241,7 @@ describe('App', () => {
       const closeIcon = screen.getByLabelText(`${IconName.Close} icon`)
       await userEvent.click(closeIcon)
 
-      expect(screen.queryByRole('heading', { name: /rules/i })).not.toBeInTheDocument()
+      expect(screen.queryByTestId('rules-modal-open-indicator')).not.toBeInTheDocument()
     })
   })
 
@@ -266,7 +266,7 @@ describe('App', () => {
       const closeIcon = screen.getByLabelText(`${IconName.Close} icon`)
       await userEvent.click(closeIcon)
 
-      expect(screen.queryByRole('heading', { name: /settings/i })).not.toBeInTheDocument()
+      expect(screen.queryByTestId('settings-modal-open-indicator')).not.toBeInTheDocument()
     })
   })
 
@@ -282,7 +282,7 @@ describe('App', () => {
       const resetButton = screen.getByRole('button', { name: /reset/i })
       await userEvent.click(resetButton)
 
-      expect(screen.queryByRole('heading', { name: /settings/i })).not.toBeInTheDocument()
+      expect(screen.queryByTestId('settings-modal-open-indicator')).not.toBeInTheDocument()
     })
 
     it('resets the score to 0 when Reset score button is clicked', async () => {
@@ -342,8 +342,8 @@ describe('App', () => {
       await userEvent.click(screen.getByLabelText(`${IconName.Close} icon`))
 
       // Assert on new header text
-      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-        /rock paper scissors lizard spock/i
+      expect(screen.getAllByRole('heading', { level: 1 })).toContain(
+        screen.getByText(/rock paper scissors lizard spock/i)
       )
     })
 
@@ -565,8 +565,8 @@ describe('App', () => {
       await userEvent.click(screen.getByLabelText(`${IconName.Close} icon`))
 
       // Assert on new header text
-      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-        /rock paper scissors lizard spock/i
+      expect(screen.getAllByRole('heading', { level: 1 })).toContain(
+        screen.getByText(/rock paper scissors lizard spock/i)
       )
 
       // Unmount component
@@ -577,8 +577,8 @@ describe('App', () => {
 
       // Check if mode is persisted
       // Assert on new header text
-      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-        /rock paper scissors lizard spock/i
+      expect(screen.getAllByRole('heading', { level: 1 })).toContain(
+        screen.getByText(/rock paper scissors lizard spock/i)
       )
     })
   })

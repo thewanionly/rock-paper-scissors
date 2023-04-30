@@ -54,7 +54,7 @@ declare module 'styled-components' {
       modalTitle: string
       modalCloseButton: string
       modalCloseButtonHover: string
-      modalOverlay: string
+      modalBackdrop: string
       settingsIcon: string
       settingsIconHover: string
       settingsLabelText: string
