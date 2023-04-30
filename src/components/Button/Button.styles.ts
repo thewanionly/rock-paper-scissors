@@ -10,7 +10,7 @@ const colorVariantStyles = (
   ({
     [ButtonColor.Primary]: {
       [ButtonVariant.Contained]: css`
-        background: linear-gradient(
+        background-image: linear-gradient(
           0deg,
           ${theme.colors.buttonContainedBg1} 0%,
           ${theme.colors.buttonContainedBg2} 100%
@@ -28,7 +28,7 @@ const colorVariantStyles = (
         color: ${theme.colors.buttonOutlinedText};
 
         &:hover {
-          background: linear-gradient(
+          background-image: linear-gradient(
             0deg,
             ${theme.colors.buttonContainedBg1} 0%,
             ${theme.colors.buttonContainedBg2} 100%
@@ -77,7 +77,8 @@ export const StyledButton = styled.button<ButtonStyleProps>`
   font-weight: ${({ theme: { fontWeights } }) => fontWeights.semiBold};
   letter-spacing: 0.25rem;
 
-  transition: all 0.2s;
+  transition-duration: 0.3s;
+  transition-property: color, background-color, background-image;
 
   ${({ theme, color, variant }) => colorVariantStyles(theme, color, variant)}
 `

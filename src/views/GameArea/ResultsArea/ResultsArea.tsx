@@ -7,6 +7,12 @@ import { Result } from 'types'
 import { useEffect, useState } from 'react'
 import { HOUSE_PICK_DELAY, PLAY_AGAIN_BUTTON_DELAY } from '../GameArea'
 
+const buttonTap = {
+  whileHover: { scale: 1.1 },
+  whileTap: { scale: 0.9 },
+  transition: { type: 'spring', stiffness: 400, damping: 25 },
+}
+
 const pickContainer = css`
   display: flex;
   flex-direction: column;
@@ -152,7 +158,7 @@ const S = {
     display: flex;
     justify-content: center;
   `,
-  PlayAgainButton: styled(Button)`
+  PlayAgainButton: styled(motion(Button))`
     padding: 1.5rem 6rem;
     box-shadow: 0px 3px 3px ${({ theme: { colors } }) => colors.boxShadowPrimary};
   `,
@@ -208,7 +214,9 @@ export const ResultsArea = () => {
           <S.ResultsText data-testid="results-text">{ResultTextMap[result]}</S.ResultsText>
           <S.PlayAgainButtonContainer>
             {showPlayAgainBtn && (
-              <S.PlayAgainButton onClick={playAgain}>Play again</S.PlayAgainButton>
+              <S.PlayAgainButton onClick={playAgain} {...buttonTap}>
+                Play again
+              </S.PlayAgainButton>
             )}
           </S.PlayAgainButtonContainer>
         </S.ResultsAndPlayAgainContainer>

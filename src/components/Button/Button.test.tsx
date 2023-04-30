@@ -29,7 +29,7 @@ describe('Button', () => {
 
   it.each`
     color                  | property              | value
-    ${ButtonColor.Primary} | ${'background'}       | ${`linear-gradient( 0deg, ${theme.colors.buttonContainedBg1} 0%, ${theme.colors.buttonContainedBg2} 100% )`}
+    ${ButtonColor.Primary} | ${'background-image'} | ${`linear-gradient( 0deg, ${theme.colors.buttonContainedBg1} 0%, ${theme.colors.buttonContainedBg2} 100% )`}
     ${ButtonColor.Danger}  | ${'background-color'} | ${theme.colors.buttonDangerContainedBg}
   `(
     'sets appropriate styles to button when `color` prop is $color',
@@ -44,9 +44,9 @@ describe('Button', () => {
   )
 
   it.each`
-    variant                    | property          | value
-    ${ButtonVariant.Contained} | ${'background'}   | ${`linear-gradient( 0deg, ${theme.colors.buttonContainedBg1} 0%, ${theme.colors.buttonContainedBg2} 100% )`}
-    ${ButtonVariant.Outlined}  | ${'border-color'} | ${theme.colors.buttonOutlinedBorder}
+    variant                    | property              | value
+    ${ButtonVariant.Contained} | ${'background-image'} | ${`linear-gradient( 0deg, ${theme.colors.buttonContainedBg1} 0%, ${theme.colors.buttonContainedBg2} 100% )`}
+    ${ButtonVariant.Outlined}  | ${'border-color'}     | ${theme.colors.buttonOutlinedBorder}
   `(
     `sets appropriate styles to button when \`variant\` prop is $variant`,
     ({ variant, property, value }) => {
