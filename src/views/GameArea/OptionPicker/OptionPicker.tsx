@@ -1,4 +1,5 @@
 import { FormEvent } from 'react'
+import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
 import { OptionChip } from 'components'
@@ -14,9 +15,15 @@ const optionChipHover = css`
   }
 `
 
-const StyledOptionChip = styled(OptionChip)`
+const optionChipTap = {
+  whileHover: { scale: 1.1 },
+  whileTap: { scale: 0.9 },
+  transition: { type: 'spring', stiffness: 400, damping: 25 },
+}
+
+const StyledOptionChip = styled(motion(OptionChip))`
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease;
 
   &:hover,
   :focus {
@@ -160,7 +167,7 @@ export const OptionPicker = ({
           value={MoveOption.Paper}
           aria-label={MoveOption.Paper}
         />
-        <StyledOptionChip option={MoveOption.Paper} />
+        <StyledOptionChip option={MoveOption.Paper} {...optionChipTap} />
       </SM.PaperOptionContainer>
       <SM.ScissorsOptionContainer htmlFor={MoveOption.Scissors}>
         <S.OptionPickerItemRadioInput
@@ -170,7 +177,7 @@ export const OptionPicker = ({
           value={MoveOption.Scissors}
           aria-label={MoveOption.Scissors}
         />
-        <StyledOptionChip option={MoveOption.Scissors} />
+        <StyledOptionChip option={MoveOption.Scissors} {...optionChipTap} />
       </SM.ScissorsOptionContainer>
       <SM.RockOptionContainer htmlFor={MoveOption.Rock}>
         <S.OptionPickerItemRadioInput
@@ -180,7 +187,7 @@ export const OptionPicker = ({
           value={MoveOption.Rock}
           aria-label={MoveOption.Rock}
         />
-        <StyledOptionChip option={MoveOption.Rock} />
+        <StyledOptionChip option={MoveOption.Rock} {...optionChipTap} />
       </SM.RockOptionContainer>
       {mode === Mode.RockPaperScissorsLizardSpock && (
         <>
@@ -192,7 +199,7 @@ export const OptionPicker = ({
               value={MoveOption.Lizard}
               aria-label={MoveOption.Lizard}
             />
-            <StyledOptionChip option={MoveOption.Lizard} />
+            <StyledOptionChip option={MoveOption.Lizard} {...optionChipTap} />
           </SM.LizardOptionContainer>
           <SM.SpockOptionContainer htmlFor={MoveOption.Spock}>
             <S.OptionPickerItemRadioInput
@@ -202,7 +209,7 @@ export const OptionPicker = ({
               value={MoveOption.Spock}
               aria-label={MoveOption.Spock}
             />
-            <StyledOptionChip option={MoveOption.Spock} />
+            <StyledOptionChip option={MoveOption.Spock} {...optionChipTap} />
           </SM.SpockOptionContainer>
         </>
       )}

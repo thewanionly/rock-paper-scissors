@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import styled, { DefaultTheme, css } from 'styled-components'
 
 import { Icon, IconName } from 'components/Icon'
@@ -101,13 +102,23 @@ type OptionChipOuterCircleProps = {
   option: MoveOption
 }
 
-export const OptionChip = ({ className = '', option }: OptionChipProps) => (
-  <S.OptionChip className={className} data-testid={`${option}-option-chip`} title={option}>
-    <S.OptionChipOuterCircleShadow option={option} data-testid="outer-circle-shadow" />
-    <S.OptionChipOuterCircle option={option} data-testid="outer-circle" />
-    <S.OptionChipOuterCircleOverlay />
-    <S.OptionChipInnerCircle>
-      <S.OptionChipIcon className="option-chip-icon" name={OptionIconmap[option]} />
-    </S.OptionChipInnerCircle>
-  </S.OptionChip>
-)
+export const OptionChip = forwardRef<HTMLDivElement, OptionChipProps>(function OptionChip(
+  { className = '', option },
+  ref
+) {
+  return (
+    <S.OptionChip
+      className={className}
+      ref={ref}
+      data-testid={`${option}-option-chip`}
+      title={option}
+    >
+      <S.OptionChipOuterCircleShadow option={option} data-testid="outer-circle-shadow" />
+      <S.OptionChipOuterCircle option={option} data-testid="outer-circle" />
+      <S.OptionChipOuterCircleOverlay />
+      <S.OptionChipInnerCircle>
+        <S.OptionChipIcon className="option-chip-icon" name={OptionIconmap[option]} />
+      </S.OptionChipInnerCircle>
+    </S.OptionChip>
+  )
+})
