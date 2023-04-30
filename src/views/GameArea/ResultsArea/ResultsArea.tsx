@@ -1,33 +1,12 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { Button, OptionChip } from 'components'
+import { Button } from 'components'
 import { useGameContext } from 'context'
 import { Result } from 'types'
 import { useEffect, useState } from 'react'
-import { HOUSE_PICK_DELAY, PLAY_AGAIN_BUTTON_DELAY } from '../GameArea.constants'
-
-const housePickMount = {
-  initial: { opacity: 0, scale: 0.5 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { duration: 0.2, ease: 'easeOut' },
-}
-
-const optionChipRingsMount = {
-  initial: { opacity: 0, scale: 0.5 },
-  animate: { opacity: [1, 1, 1], scale: [1, 1.2, 1] },
-  transition: { duration: 0.4 },
-}
-
-const optionChipPlaceholder = {
-  animate: {
-    scale: [1, 1.25, 1, 1.25, 1],
-    opacity: [1, 0.4, 1, 0.4, 1],
-  },
-  transition: {
-    duration: HOUSE_PICK_DELAY / 1000,
-  },
-}
+import { PLAY_AGAIN_BUTTON_DELAY } from '../GameArea.constants'
+import { PickedOptionChip } from './PickedOptionChip'
 
 const resultsTextMount = {
   initial: { opacity: 0, scale: 0.5 },
@@ -92,58 +71,6 @@ const S = {
     ${pickContainer}
 
     grid-area: house-picked;
-  `,
-  OptionChipContainer: styled.div`
-    width: 13rem;
-    height: 13.3rem;
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    position: relative;
-
-    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
-      width: 29.3rem;
-      height: 30rem;
-    }
-  `,
-  OptionChipRings: styled(motion.div)`
-    position: absolute;
-    z-index: -1;
-    background-image: ${({ theme: { colors } }) =>
-      `radial-gradient(circle, ${colors.resultsOptionChipRingBg1} 0 43%, ${colors.resultsOptionChipRingBg2} 43% 56%, ${colors.resultsOptionChipRingBg3} 56% 100%)`};
-    opacity: 0.5;
-    border-radius: 50%;
-    width: 221.5%;
-    height: 221.5%;
-  `,
-  OptionChipContainerPlaceholder: styled(motion.div)`
-    grid-column: 1;
-    grid-row: 1;
-    background-color: ${({ theme: { colors } }) => colors.resultsOptionChipPlaceholderBg};
-    border-radius: 50%;
-    width: 11rem;
-    height: 11rem;
-
-    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
-      width: 22.5rem;
-      height: 22.5rem;
-    }
-  `,
-  OptionChip: styled(motion(OptionChip))`
-    grid-column: 1;
-    grid-row: 1;
-
-    @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
-      width: 29.3rem;
-      height: 30rem;
-    }
-
-    .option-chip-icon {
-      @media only screen and ${({ theme: { breakPoints } }) => breakPoints.tabletLandscape} {
-        width: 10.8rem;
-        height: 12.5rem;
-      }
-    }
   `,
   PickedText: styled.span`
     line-height: 3.2rem;
@@ -215,18 +142,16 @@ export const ResultsArea = () => {
   return (
     <S.ResultsArea>
       <S.PlayerPickContainer>
-        <S.OptionChipContainer>
-          {playerPick && <S.OptionChip option={playerPick} />}
-          {result === Result.UserWins && <S.OptionChipRings {...optionChipRingsMount} />}
-        </S.OptionChipContainer>
+        <PickedOptionChip pickedOption={playerPick} showRings={result === Result.UserWins} />
         <S.PickedText>You picked</S.PickedText>
       </S.PlayerPickContainer>
       <S.HousePickContainer>
-        <S.OptionChipContainer>
-          <S.OptionChipContainerPlaceholder {...optionChipPlaceholder} />
-          {housePick && <S.OptionChip option={housePick} {...housePickMount} />}
-          {result === Result.UserLoses && <S.OptionChipRings {...optionChipRingsMount} />}
-        </S.OptionChipContainer>
+        <PickedOptionChip
+          pickedOption={housePick}
+          showRings={result === Result.UserLoses}
+          showPickedOptionAnimation
+          showPlaceholder
+        />
         <S.PickedText>The house picked</S.PickedText>
       </S.HousePickContainer>
       {result && (
