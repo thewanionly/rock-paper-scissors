@@ -86,7 +86,6 @@ const S = {
     }
   `,
   OptionChipContainerPlaceholder: styled(motion.div)`
-    content: '';
     grid-column: 1;
     grid-row: 1;
     background-color: ${({ theme: { colors } }) => colors.resultsOptionChipPlaceholderBg};
