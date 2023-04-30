@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { MoveOption, Result, View } from 'types'
 import { useGameContext } from 'context'
-import useEffectOnUpdate from 'hooks/useEffectOnUpdate'
+import { useEffectOnUpdate } from 'hooks/useEffectOnUpdate'
 
 import { OptionPicker } from './OptionPicker'
 import { ResultsArea } from './ResultsArea'

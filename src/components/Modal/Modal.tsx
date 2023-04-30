@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 import { Icon, IconName } from 'components/Icon'
+import { useMediaQuery } from 'hooks'
+import { theme } from 'styles'
 
 const modalBackdropMount = {
   initial: { opacity: 0 },
@@ -9,10 +11,16 @@ const modalBackdropMount = {
   exit: { opacity: 0 },
 }
 
-const modalMount = {
+const modalMountCenter = {
   initial: { opacity: 0, scale: 0.5 },
-  animate: { y: 0, opacity: 1, scale: 1 },
+  animate: { opacity: 1, scale: 1 },
   exit: { opacity: 0, scale: 0.5, transition: { duration: 0.2 } },
+}
+
+const modalMountFullScreen = {
+  initial: { y: '50%', opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  exit: { opacity: 0, transition: { duration: 0.2 } },
 }
 
 const S = {
@@ -105,6 +113,10 @@ type ModalProps = {
 }
 
 export const Modal = ({ className = '', title, children, onClose }: ModalProps) => {
+  const isTabletPortrait = useMediaQuery(theme.breakPoints.tabletPortrait)
+
+  const modalMount = isTabletPortrait ? modalMountCenter : modalMountFullScreen
+
   return (
     <S.ModalBackdrop className={className} {...modalBackdropMount}>
       <S.Modal {...modalMount}>

@@ -1,6 +1,6 @@
 import { DependencyList, EffectCallback, useEffect, useRef } from 'react'
 
-function useEffectOnUpdate(effect: EffectCallback, deps?: DependencyList) {
+export const useEffectOnUpdate = (effect: EffectCallback, deps?: DependencyList) => {
   const isMounted = useRef(false)
 
   useEffect(() => {
@@ -14,5 +14,3 @@ function useEffectOnUpdate(effect: EffectCallback, deps?: DependencyList) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps)
 }
-
-export default useEffectOnUpdate

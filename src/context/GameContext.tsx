@@ -1,4 +1,4 @@
-import useEffectOnUpdate from 'hooks/useEffectOnUpdate'
+import { useEffectOnUpdate } from 'hooks/useEffectOnUpdate'
 import { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { Mode, MoveOption, Result, Score, StorageKeys, View } from 'types'
 
