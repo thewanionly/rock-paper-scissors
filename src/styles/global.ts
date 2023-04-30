@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   html {
-    background: ${({ theme: { colors } }) =>
+    background-image: ${({ theme: { colors } }) =>
       `radial-gradient(134.34% 134.34% at 50% 0%, ${colors.bgPrimaryLight} 0%, ${colors.bgPrimary} 100%)`};
     background-attachment: fixed;
     color: ${({ theme: { colors } }) => colors.textPrimary};

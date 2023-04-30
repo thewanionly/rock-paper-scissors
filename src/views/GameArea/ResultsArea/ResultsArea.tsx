@@ -76,7 +76,7 @@ const S = {
       content: '';
       position: absolute;
       z-index: -1;
-      background: ${({ theme: { colors } }) =>
+      background-image: ${({ theme: { colors } }) =>
         `radial-gradient(circle, ${colors.resultsOptionChipRingBg1} 0 43%, ${colors.resultsOptionChipRingBg2} 43% 56%, ${colors.resultsOptionChipRingBg3} 56% 100%)`};
       opacity: 0.5;
       border-radius: 50%;

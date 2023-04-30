@@ -62,7 +62,7 @@ const S = {
   OptionChipOuterCircleOverlay: styled.span`
     ${outerCircle}
     height: 95%;
-    background: ${({ theme: { colors } }) =>
+    background-image: ${({ theme: { colors } }) =>
       `linear-gradient(180deg, ${colors.optionChipOuterCircleOverlay1} 0%, ${colors.optionChipOuterCircleOverlay2} 100%)`};
   `,
   OptionChipInnerCircle: styled.span`
@@ -73,7 +73,7 @@ const S = {
     width: 76%;
     height: 75%;
     border-radius: 50%;
-    background: ${({ theme: { colors } }) =>
+    background-image: ${({ theme: { colors } }) =>
       `linear-gradient(0deg, ${colors.optionChipInnerCircleBg1} 0%, ${colors.optionChipInnerCircleBg2} 98.34%)`};
     box-shadow: inset 0px 5.23px 0px
       ${({ theme: { colors } }) => colors.optionChipInnerCircleShadow};
