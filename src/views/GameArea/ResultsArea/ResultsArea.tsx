@@ -26,6 +26,15 @@ const buttonTap = {
   transition: { type: 'spring', stiffness: 400, damping: 25 },
 }
 
+const pickContainerLayout = {
+  layout: true,
+  transition: {
+    type: 'spring',
+    stiffness: 650,
+    damping: 30,
+  },
+}
+
 const pickContainer = css`
   display: flex;
   flex-direction: column;
@@ -62,12 +71,12 @@ const S = {
       column-gap: 8rem;
     }
   `,
-  PlayerPickContainer: styled.div`
+  PlayerPickContainer: styled(motion.div)`
     ${pickContainer}
 
     grid-area: player-picked;
   `,
-  HousePickContainer: styled.div`
+  HousePickContainer: styled(motion.div)`
     ${pickContainer}
 
     grid-area: house-picked;
@@ -141,11 +150,11 @@ export const ResultsArea = () => {
 
   return (
     <S.ResultsArea>
-      <S.PlayerPickContainer>
+      <S.PlayerPickContainer {...pickContainerLayout}>
         <PickedOptionChip pickedOption={playerPick} showRings={result === Result.UserWins} />
         <S.PickedText>You picked</S.PickedText>
       </S.PlayerPickContainer>
-      <S.HousePickContainer>
+      <S.HousePickContainer {...pickContainerLayout}>
         <PickedOptionChip
           pickedOption={housePick}
           showRings={result === Result.UserLoses}
