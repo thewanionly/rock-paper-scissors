@@ -6,8 +6,9 @@ import { MoveOption, RPSOption } from 'types'
 import { GameProvider, ModalProvider } from 'context'
 
 import App from './App'
-import { HOUSE_PICK_DELAY, RESULTS_TEXT_DELAY } from './GameArea'
+
 import { IconName } from 'components'
+import { HOUSE_PICK_DELAY, RESULTS_TEXT_DELAY } from './GameArea/GameArea.constants'
 
 const mockPlayerPick = MoveOption.Paper
 

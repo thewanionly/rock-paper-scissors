@@ -8,6 +8,7 @@ import useEffectOnUpdate from 'hooks/useEffectOnUpdate'
 import { OptionPicker } from './OptionPicker'
 import { ResultsArea } from './ResultsArea'
 import { pickHouseOption, playGame } from './services'
+import { HOUSE_PICK_DELAY, RESULTS_TEXT_DELAY } from './GameArea.constants'
 
 const S = {
   GameArea: styled.main`
@@ -22,10 +23,6 @@ const S = {
     }
   `,
 }
-
-export const HOUSE_PICK_DELAY = 3000
-export const RESULTS_TEXT_DELAY = 600
-export const PLAY_AGAIN_BUTTON_DELAY = 500
 
 export const GameArea = () => {
   const {

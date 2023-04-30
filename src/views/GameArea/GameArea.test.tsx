@@ -5,7 +5,8 @@ import { render, screen } from 'test'
 import { MoveOption, RPSOption } from 'types'
 import { GameProvider } from 'context'
 
-import { GameArea, HOUSE_PICK_DELAY, PLAY_AGAIN_BUTTON_DELAY, RESULTS_TEXT_DELAY } from './GameArea'
+import { GameArea } from './GameArea'
+import { HOUSE_PICK_DELAY, RESULTS_TEXT_DELAY, PLAY_AGAIN_BUTTON_DELAY } from './GameArea.constants'
 
 const setup = () => {
   render(

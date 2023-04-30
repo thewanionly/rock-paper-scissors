@@ -5,7 +5,41 @@ import { Button, OptionChip } from 'components'
 import { useGameContext } from 'context'
 import { Result } from 'types'
 import { useEffect, useState } from 'react'
-import { HOUSE_PICK_DELAY, PLAY_AGAIN_BUTTON_DELAY } from '../GameArea'
+import { HOUSE_PICK_DELAY, PLAY_AGAIN_BUTTON_DELAY } from '../GameArea.constants'
+
+const housePickMount = {
+  initial: { opacity: 0, scale: 0.5 },
+  animate: { opacity: 1, scale: 1 },
+  transition: { duration: 0.2, ease: 'easeOut' },
+}
+
+const optionChipRingsMount = {
+  initial: { opacity: 0, scale: 0.5 },
+  animate: { opacity: [1, 1, 1], scale: [1, 1.2, 1] },
+  transition: { duration: 0.4 },
+}
+
+const optionChipPlaceholder = {
+  animate: {
+    scale: [1, 1.25, 1, 1.25, 1],
+    opacity: [1, 0.4, 1, 0.4, 1],
+  },
+  transition: {
+    duration: HOUSE_PICK_DELAY / 1000,
+  },
+}
+
+const resultsTextMount = {
+  initial: { opacity: 0, scale: 0.5 },
+  animate: { opacity: [1, 1, 1], scale: [1, 1.2, 1] },
+  transition: { duration: 0.4, ease: 'easeOut' },
+}
+
+const resultsButtonMount = {
+  initial: { opacity: 0, scale: 0.5 },
+  animate: { opacity: 1, scale: 1 },
+  transition: { duration: 0.2, ease: 'easeOut' },
+}
 
 const buttonTap = {
   whileHover: { scale: 1.1 },
@@ -59,7 +93,7 @@ const S = {
 
     grid-area: house-picked;
   `,
-  OptionChipContainer: styled.div<OptionChipContainerProps>`
+  OptionChipContainer: styled.div`
     width: 13rem;
     height: 13.3rem;
     display: grid;
@@ -71,19 +105,16 @@ const S = {
       width: 29.3rem;
       height: 30rem;
     }
-
-    &::after {
-      content: '';
-      position: absolute;
-      z-index: -1;
-      background-image: ${({ theme: { colors } }) =>
-        `radial-gradient(circle, ${colors.resultsOptionChipRingBg1} 0 43%, ${colors.resultsOptionChipRingBg2} 43% 56%, ${colors.resultsOptionChipRingBg3} 56% 100%)`};
-      opacity: 0.5;
-      border-radius: 50%;
-      width: 221.5%;
-      height: 221.5%;
-      visibility: ${({ showRings }) => (showRings ? 'visible' : 'hidden')};
-    }
+  `,
+  OptionChipRings: styled(motion.div)`
+    position: absolute;
+    z-index: -1;
+    background-image: ${({ theme: { colors } }) =>
+      `radial-gradient(circle, ${colors.resultsOptionChipRingBg1} 0 43%, ${colors.resultsOptionChipRingBg2} 43% 56%, ${colors.resultsOptionChipRingBg3} 56% 100%)`};
+    opacity: 0.5;
+    border-radius: 50%;
+    width: 221.5%;
+    height: 221.5%;
   `,
   OptionChipContainerPlaceholder: styled(motion.div)`
     grid-column: 1;
@@ -98,7 +129,7 @@ const S = {
       height: 22.5rem;
     }
   `,
-  OptionChip: styled(OptionChip)`
+  OptionChip: styled(motion(OptionChip))`
     grid-column: 1;
     grid-row: 1;
 
@@ -142,7 +173,7 @@ const S = {
       margin-bottom: 10.4rem;
     }
   `,
-  ResultsText: styled.span`
+  ResultsText: styled(motion.span)`
     line-height: 6.7rem;
     font-size: ${({ theme: { fontSizes } }) => fontSizes.xl};
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
@@ -161,10 +192,6 @@ const S = {
     padding: 1.5rem 6rem;
     box-shadow: 0px 3px 3px ${({ theme: { colors } }) => colors.boxShadowPrimary};
   `,
-}
-
-type OptionChipContainerProps = {
-  showRings?: boolean
 }
 
 export const ResultTextMap = {
@@ -188,32 +215,28 @@ export const ResultsArea = () => {
   return (
     <S.ResultsArea>
       <S.PlayerPickContainer>
-        <S.OptionChipContainer showRings={result === Result.UserWins}>
+        <S.OptionChipContainer>
           {playerPick && <S.OptionChip option={playerPick} />}
+          {result === Result.UserWins && <S.OptionChipRings {...optionChipRingsMount} />}
         </S.OptionChipContainer>
         <S.PickedText>You picked</S.PickedText>
       </S.PlayerPickContainer>
       <S.HousePickContainer>
-        <S.OptionChipContainer showRings={result === Result.UserLoses}>
-          <S.OptionChipContainerPlaceholder
-            animate={{
-              scale: [1, 1.25, 1, 1.25, 1],
-              opacity: [1, 0.4, 1, 0.4, 1],
-            }}
-            transition={{
-              duration: HOUSE_PICK_DELAY / 1000,
-            }}
-          />
-          {housePick && <S.OptionChip option={housePick} />}
+        <S.OptionChipContainer>
+          <S.OptionChipContainerPlaceholder {...optionChipPlaceholder} />
+          {housePick && <S.OptionChip option={housePick} {...housePickMount} />}
+          {result === Result.UserLoses && <S.OptionChipRings {...optionChipRingsMount} />}
         </S.OptionChipContainer>
         <S.PickedText>The house picked</S.PickedText>
       </S.HousePickContainer>
       {result && (
         <S.ResultsAndPlayAgainContainer>
-          <S.ResultsText data-testid="results-text">{ResultTextMap[result]}</S.ResultsText>
+          <S.ResultsText data-testid="results-text" {...resultsTextMount}>
+            {ResultTextMap[result]}
+          </S.ResultsText>
           <S.PlayAgainButtonContainer>
             {showPlayAgainBtn && (
-              <S.PlayAgainButton onClick={playAgain} {...buttonTap}>
+              <S.PlayAgainButton onClick={playAgain} {...buttonTap} {...resultsButtonMount}>
                 Play again
               </S.PlayAgainButton>
             )}

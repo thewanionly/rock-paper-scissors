@@ -2,8 +2,9 @@ import { render, screen } from 'test'
 import { MoveOption, Result } from 'types'
 
 import { ResultTextMap, ResultsArea } from './ResultsArea'
-import { RESULTS_TEXT_DELAY } from '../GameArea'
+
 import { act } from 'react-dom/test-utils'
+import { RESULTS_TEXT_DELAY } from '../GameArea.constants'
 
 const mockGameContextValue = {
   playerPick: MoveOption.Paper,
