@@ -2,6 +2,15 @@ import { ChangeEvent, useState } from 'react'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
+const switchHandleLayout = {
+  layout: true,
+  transition: {
+    type: 'spring',
+    stiffness: 650,
+    damping: 30,
+  },
+}
+
 const S = {
   Switch: styled.label<SwitchStylesProps>`
     cursor: pointer;
@@ -64,14 +73,7 @@ export const Switch = ({ id, className = '', checked = false, onChange }: Switch
         checked={isTicked}
         onChange={handleChange}
       />
-      <S.SwitchHandle
-        layout
-        transition={{
-          type: 'spring',
-          stiffness: 650,
-          damping: 30,
-        }}
-      />
+      <S.SwitchHandle {...switchHandleLayout} />
     </S.Switch>
   )
 }
